@@ -5,9 +5,13 @@ void destroy_win(WINDOW *local_win);
 void draw_stats(WINDOW *stats_win, int health, int mana, int stamina);
 
 int main() {
-	WINDOW *my_win;
-	int height = 5;
-	int width = 27;
+	WINDOW *stats_win;
+	int stats_height = 5;
+	int stats_width = 36;
+	
+	int health = 100;
+	int mana = 42;
+	int stamina = 79;
 
 	initscr();
 	start_color();
@@ -19,10 +23,10 @@ int main() {
 
 	refresh();
 	
-	my_win = create_newwin(height, width, (LINES-height)/2, (COLS-width)/2);
-	draw_stats(my_win, 100, 100, 100);
+	stats_win = create_newwin(stats_height, stats_width, 10, 20);
+	draw_stats(stats_win, health, mana, stamina);
 
-	getch();
+	getch();	
 	endwin();
 	return 0;
 }
@@ -44,20 +48,32 @@ void destroy_win(WINDOW *local_win) {
 }
 
 void draw_stats(WINDOW *stats_win, int health, int mana, int stamina) {
-	wmove(stats_win, 1, 1);
+	// Print health
+	mvwprintw(stats_win, 1, 1, "HLTH ");
 	wattron(stats_win, COLOR_PAIR(1));
-	waddch(stats_win, ACS_CKBOARD);
+	for(int i = 1; i <= health; i += 4) {
+		waddch(stats_win, ACS_CKBOARD);
+	}
 	wattroff(stats_win, COLOR_PAIR(1));
-	
-	wmove(stats_win, 2, 1);
-	wattron(stats_win, COLOR_PAIR(2));
-	waddch(stats_win, ACS_CKBOARD);
-	wattroff(stats_win, COLOR_PAIR(2));
+	mvwprintw(stats_win, 1, 31, "%3d%%", health);
 
-	wmove(stats_win, 3, 1);
+	// Print mana
+	mvwprintw(stats_win, 2, 1, "MANA ");
+	wattron(stats_win, COLOR_PAIR(2));
+	for(int i = 1; i <= mana; i += 4) {
+		waddch(stats_win, ACS_CKBOARD);
+	}
+	wattroff(stats_win, COLOR_PAIR(2));
+	mvwprintw(stats_win, 2, 31, "%3d%%", mana);
+
+	// Print stamina
+	mvwprintw(stats_win, 3, 1, "STAM ");
 	wattron(stats_win, COLOR_PAIR(3));
-	waddch(stats_win, ACS_CKBOARD);
+	for(int i = 1; i <= stamina; i += 4) {
+		waddch(stats_win, ACS_CKBOARD);
+	}
 	wattroff(stats_win, COLOR_PAIR(3));
+	mvwprintw(stats_win, 3, 31, "%3d%%", stamina);
 
 	wrefresh(stats_win);
 }
