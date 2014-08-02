@@ -1,34 +1,6 @@
 #include <ncurses.h>
 #include "gui.h"
 
-int main() {
-	WINDOW *stats_win;
-	int stats_height = 5;
-	int stats_width = 36;
-
-	/* Temporary until player class is created */
-	int health = 100;
-	int mana = 42;
-	int stamina = 79;
-
-	initscr();
-	start_color();
-	curs_set(0);
-
-	init_pair(1, COLOR_RED, COLOR_BLACK);
-	init_pair(2, COLOR_BLUE, COLOR_BLACK);
-	init_pair(3, COLOR_GREEN, COLOR_BLACK);
-
-	refresh();
-
-	stats_win = create_newwin(stats_height, stats_width, 10, 20);
-	draw_stats(stats_win, health, mana, stamina);
-
-	getch();
-	endwin();
-	return 0;
-}
-
 /*
  * Function: create_newwin
  * -----------------------
