@@ -1,13 +1,16 @@
-CC=g++
-CFLAGS=-Wall
-LDFLAGS=-lncurses
-SOURCES=health.cpp
-EXECUTABLE=health
+CC = g++
+CFLAGS = -Wall -c
+LFLAGS = -lncurses
+EXECUTABLE = GUI
+OBJS = gui.o
 
-all: $(SOURCES) $(EXECUTABLE)
+all: $(EXECUTABLE)
 
-$(EXECUTABLE):
-	$(CC) $(CFLAGS) $(LDFLAGS) $(SOURCES) -o $@
+$(EXECUTABLE): $(OBJS)
+	$(CC) $(LFLAGS) $(OBJS) -o $@
+
+gui.o: gui.h gui.cpp
+	$(CC) $(CFLAGS) gui.cpp
 
 clean:
-	rm -rf $(EXECUTABLE)
+	rm -rf $(OBJS) $(EXECUTABLE)

@@ -1,14 +1,12 @@
 #include <ncurses.h>
-
-WINDOW *create_newwin(int height, int width, int starty, int startx);
-void destroy_win(WINDOW *local_win);
-void draw_stats(WINDOW *stats_win, int health, int mana, int stamina);
+#include "gui.h"
 
 int main() {
 	WINDOW *stats_win;
 	int stats_height = 5;
 	int stats_width = 36;
 
+	/* Temporary until player class is created */
 	int health = 100;
 	int mana = 42;
 	int stamina = 79;
@@ -31,6 +29,18 @@ int main() {
 	return 0;
 }
 
+/*
+ * Function: create_newwin
+ * -----------------------
+ *   Creates new window
+ *
+ *   height: height of the new window
+ *   width: width of the new window
+ *   starty: y coordinate of the window's top left corner
+ *   startx: x coordinate of the window's top left corner
+ *
+ *   Returns newly created window
+ */
 WINDOW *create_newwin(int height, int width, int starty, int startx) {
 	WINDOW *local_win;
 
@@ -41,12 +51,29 @@ WINDOW *create_newwin(int height, int width, int starty, int startx) {
 	return local_win;
 }
 
+/*
+ * Function: destroy_win
+ * ---------------------
+ *   Destroys window
+ *
+ *   local_win: window to destroy
+ */
 void destroy_win(WINDOW *local_win) {
 	wborder(local_win, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 	wrefresh(local_win);
 	delwin(local_win);
 }
 
+/*
+ * Function: draw_stats
+ * --------------------
+ *   Draws player's stats (health, mana, stamina)
+ *
+ *   stats_win: window to write stats on
+ *   health: player's health
+ *   mana: player's mana
+ *   stamina: player's stamina
+ */
 void draw_stats(WINDOW *stats_win, int health, int mana, int stamina) {
 	// Print health
 	mvwprintw(stats_win, 1, 1, "HLTH ");
