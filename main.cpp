@@ -1,15 +1,16 @@
 #include <ncurses.h>
 #include "gui.h"
+#include "player.h"
 
 int main() {
 	WINDOW *win_stats;
 	int win_stats_height = 5;
 	int win_stats_width = 36;
 
-	/* Temporary until player class is created */
-	int health = 100;
-	int mana = 49;;
-	int stamina = 73;
+	Player player;
+	player.set_health(92);
+	player.set_mana(37);
+	player.set_stamina(59);
 
 	initscr();
 	start_color();
@@ -22,7 +23,7 @@ int main() {
 	refresh();
 
 	win_stats = create_newwin(win_stats_height, win_stats_width, 5, 10);
-	draw_stats(win_stats, health, mana, stamina);
+	draw_stats(win_stats, player.get_health(), player.get_mana(), player.get_stamina());
 
 	getch();
 	endwin();
