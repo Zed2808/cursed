@@ -1,22 +1,36 @@
+#
+# 'make'	build executable file 'GUI'
+# 'make clean'	removes all object and executable files
+#
+
+
+
 CC = g++
 CFLAGS = -Wall -c
-LFLAGS = -lncurses
-EXECUTABLE = GUI
-OBJS = main.o gui.o player.o
+INCLUDES =
+LFLAGS =
+LIBS = -lncurses
+EXECUTABLE = cursed
 
-all: $(EXECUTABLE)
+# Object files needed by the executable
+OBJS = obj/main.o obj/gui.o obj/player.o
+
+
+
+all:	$(EXECUTABLE)
+	@echo Executable $(EXECUTABLE) has been successfully compiled.
 
 $(EXECUTABLE): $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o $@
+	$(CC) $(LFLAGS) $(LIBS) $(OBJS) -o $@
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp
+obj/main.o: src/main.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
-gui.o: gui.h gui.cpp
-	$(CC) $(CFLAGS) gui.cpp
+obj/gui.o: src/gui.cpp src/gui.h
+	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
-player.o: player.h player.cpp
-	$(CC) $(CFLAGS) player.cpp
+obj/player.o: src/player.cpp src/player.h
+	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 clean:
 	rm -rf $(OBJS) $(EXECUTABLE)
