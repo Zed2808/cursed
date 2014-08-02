@@ -8,8 +8,9 @@ int main() {
 	int win_stats_width = 36;
 
 	Player player;
-	player.set_health(92);
-	player.set_mana(37);
+	//player.set_name("Default Player");
+	player.set_health(87);
+	player.set_mana(9);
 	player.set_stamina(59);
 
 	initscr();
@@ -23,7 +24,7 @@ int main() {
 	refresh();
 
 	win_stats = create_newwin(win_stats_height, win_stats_width, 5, 10);
-	draw_stats(win_stats, player.get_health(), player.get_mana(), player.get_stamina());
+	draw_stats(win_stats, player.get_name(), player.get_health(), player.get_mana(), player.get_stamina());
 
 	getch();
 	endwin();
