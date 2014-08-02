@@ -1,7 +1,7 @@
-CC=gcc
-CFLAGS=-Wall -std=c99
+CC=g++
+CFLAGS=-Wall
 LDFLAGS=-lncurses
-SOURCES=health.c
+SOURCES=health.cpp
 EXECUTABLE=health
 
 all: $(SOURCES) $(EXECUTABLE)

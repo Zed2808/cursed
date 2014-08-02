@@ -8,7 +8,7 @@ int main() {
 	WINDOW *stats_win;
 	int stats_height = 5;
 	int stats_width = 36;
-	
+
 	int health = 100;
 	int mana = 42;
 	int stamina = 79;
@@ -22,11 +22,11 @@ int main() {
 	init_pair(3, COLOR_GREEN, COLOR_BLACK);
 
 	refresh();
-	
+
 	stats_win = create_newwin(stats_height, stats_width, 10, 20);
 	draw_stats(stats_win, health, mana, stamina);
 
-	getch();	
+	getch();
 	endwin();
 	return 0;
 }
