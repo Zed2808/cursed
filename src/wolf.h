@@ -3,7 +3,7 @@
 
 #include "monster.h"
 
-class Wolf : Monster {
+class Wolf : public Monster {
 	public:
 		Wolf(int l);
 };

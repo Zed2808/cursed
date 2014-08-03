@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include "gui.h"
 #include "player.h"
+#include "monster.h"
 
 /*
  * Function: create_newwin
@@ -38,71 +39,151 @@ void destroy_win(WINDOW *local_win) {
 }
 
 /*
- * Function: draw_stats
+ * Function: draw_player_stats
  * --------------------
  *   Draws player's stats (health, mana, stamina)
  *
- *   stats_win: window to write stats on
- *   health: player's health
- *   mana: player's mana
- *   stamina: player's stamina
+ *   win_player_stats: window to write stats on
+ *   player: player whose stats should be drawn
  */
-void draw_stats(WINDOW *stats_win, Player player) {
+void draw_player_stats(WINDOW *win_player_stats, Player player) {
 	// Print name
-	wattron(stats_win, A_BOLD);
-	mvwprintw(stats_win, 0, 1, player.get_name().c_str());
-	wattroff(stats_win, A_BOLD);
+	wattron(win_player_stats, A_BOLD);
+	mvwprintw(win_player_stats, 0, 1, player.get_name().c_str());
+	wattroff(win_player_stats, A_BOLD);
 
 	// Print health
-	mvwprintw(stats_win, 1, 1, "HLTH ");
+	mvwprintw(win_player_stats, 1, 1, "HLTH ");
 
-	wattron(stats_win, COLOR_PAIR(1));
+	wattron(win_player_stats, COLOR_PAIR(1));
 	for(int i = 1; i <= player.get_health(); i += 4) {	/* Print 1 block for every 4 health, plus 1 */
-		waddch(stats_win, ACS_CKBOARD);
+		waddch(win_player_stats, ACS_CKBOARD);
 	}
-	wattroff(stats_win, COLOR_PAIR(1));
+	wattroff(win_player_stats, COLOR_PAIR(1));
 
 	if(player.get_health() <= 10) {				/* If health is 10 or less, print percent in red */
-		wattron(stats_win, COLOR_PAIR(1));
-		mvwprintw(stats_win, 1, 31, "%3d%%", player.get_health());
-		wattroff(stats_win, COLOR_PAIR(1));
+		wattron(win_player_stats, COLOR_PAIR(1));
+		mvwprintw(win_player_stats, 1, 31, "%3d", player.get_health());
+		wattroff(win_player_stats, COLOR_PAIR(1));
 	} else {
-		mvwprintw(stats_win, 1, 31, "%3d%%", player.get_health());
+		mvwprintw(win_player_stats, 1, 31, "%3d", player.get_health());
 	}
+	wprintw(win_player_stats, "/%3d", player.get_maxhealth());
 
 	// Print mana
-	mvwprintw(stats_win, 2, 1, "MANA ");
+	mvwprintw(win_player_stats, 2, 1, "MANA ");
 
-	wattron(stats_win, COLOR_PAIR(2));
+	wattron(win_player_stats, COLOR_PAIR(2));
 	for(int i = 1; i <= player.get_mana(); i += 4) {	/* Print 1 block for every 4 mana, plus 1 */
-		waddch(stats_win, ACS_CKBOARD);
+		waddch(win_player_stats, ACS_CKBOARD);
 	}
-	wattroff(stats_win, COLOR_PAIR(2));
+	wattroff(win_player_stats, COLOR_PAIR(2));
 
 	if(player.get_mana() <= 10) {				/* If mana is 10 or less, print percent in red */
-		wattron(stats_win, COLOR_PAIR(1));
-		mvwprintw(stats_win, 2, 31, "%3d%%", player.get_mana());
-		wattroff(stats_win, COLOR_PAIR(1));
+		wattron(win_player_stats, COLOR_PAIR(1));
+		mvwprintw(win_player_stats, 2, 31, "%3d", player.get_mana());
+		wattroff(win_player_stats, COLOR_PAIR(1));
 	} else {
-		mvwprintw(stats_win, 2, 31, "%3d%%", player.get_mana());
+		mvwprintw(win_player_stats, 2, 31, "%3d", player.get_mana());
 	}
+	wprintw(win_player_stats, "/%3d", player.get_maxmana());
 
 	// Print stamina
-	mvwprintw(stats_win, 3, 1, "STAM ");
+	mvwprintw(win_player_stats, 3, 1, "STAM ");
 
-	wattron(stats_win, COLOR_PAIR(3));
+	wattron(win_player_stats, COLOR_PAIR(3));
 	for(int i = 1; i <= player.get_stamina(); i += 4) {	/* Print 1 block for every 4 stamina, plus 1 */
-		waddch(stats_win, ACS_CKBOARD);
+		waddch(win_player_stats, ACS_CKBOARD);
 	}
-	wattroff(stats_win, COLOR_PAIR(3));
+	wattroff(win_player_stats, COLOR_PAIR(3));
 
 	if(player.get_stamina() <= 10) {			/* If stamina is 10 or less, print percent in red */
-		wattron(stats_win, COLOR_PAIR(1));
-		mvwprintw(stats_win, 3, 31, "%3d%%", player.get_stamina());
-		wattroff(stats_win, COLOR_PAIR(1));
+		wattron(win_player_stats, COLOR_PAIR(1));
+		mvwprintw(win_player_stats, 3, 31, "%3d", player.get_stamina());
+		wattroff(win_player_stats, COLOR_PAIR(1));
 	} else {
-		mvwprintw(stats_win, 3, 31, "%3d%%", player.get_stamina());
+		mvwprintw(win_player_stats, 3, 31, "%3d", player.get_stamina());
 	}
+	wprintw(win_player_stats, "/%3d", player.get_maxstamina());
 
-	wrefresh(stats_win);
+	// Print level
+	mvwprintw(win_player_stats, 0, 29, "Level %3d", player.get_level());
+
+	// Refresh window
+	wrefresh(win_player_stats);
+}
+
+/*
+ * Function: draw_monster_stats
+ * ----------------------------
+ *   Draws monster's stats (level, health, mana, stamina)
+ * 
+ *   win_monster_stats: window to write stats on
+ *   monster: monster whose stats should be drawn
+ */
+void draw_monster_stats(WINDOW *win_monster_stats, Monster monster) {
+	// Print name
+	wattron(win_monster_stats, A_BOLD);
+	mvwprintw(win_monster_stats, 0, 1, monster.get_name().c_str());
+	wattroff(win_monster_stats, A_BOLD);
+
+	// Print health
+	mvwprintw(win_monster_stats, 1, 1, "HLTH ");
+
+	wattron(win_monster_stats, COLOR_PAIR(1));
+	for(int i = 1; i <= monster.get_health(); i += 4) {	/* Print 1 block for every 4 health, plus 1 */
+		waddch(win_monster_stats, ACS_CKBOARD);
+	}
+	wattroff(win_monster_stats, COLOR_PAIR(1));
+
+	if(monster.get_health() <= 10) {				/* If health is 10 or less, print percent in red */
+		wattron(win_monster_stats, COLOR_PAIR(1));
+		mvwprintw(win_monster_stats, 1, 31, "%3d", monster.get_health());
+		wattroff(win_monster_stats, COLOR_PAIR(1));
+	} else {
+		mvwprintw(win_monster_stats, 1, 31, "%3d", monster.get_health());
+	}
+	wprintw(win_monster_stats, "/%3d", monster.get_maxhealth());
+
+	// Print mana
+	mvwprintw(win_monster_stats, 2, 1, "MANA ");
+
+	wattron(win_monster_stats, COLOR_PAIR(2));
+	for(int i = 1; i <= monster.get_mana(); i += 4) {	/* Print 1 block for every 4 mana, plus 1 */
+		waddch(win_monster_stats, ACS_CKBOARD);
+	}
+	wattroff(win_monster_stats, COLOR_PAIR(2));
+
+	if(monster.get_mana() <= 10) {				/* If mana is 10 or less, print percent in red */
+		wattron(win_monster_stats, COLOR_PAIR(1));
+		mvwprintw(win_monster_stats, 2, 31, "%3d", monster.get_mana());
+		wattroff(win_monster_stats, COLOR_PAIR(1));
+	} else {
+		mvwprintw(win_monster_stats, 2, 31, "%3d", monster.get_mana());
+	}
+	wprintw(win_monster_stats, "/%3d", monster.get_maxmana());
+
+	// Print stamina
+	mvwprintw(win_monster_stats, 3, 1, "STAM ");
+
+	wattron(win_monster_stats, COLOR_PAIR(3));
+	for(int i = 1; i <= monster.get_stamina(); i += 4) {	/* Print 1 block for every 4 stamina, plus 1 */
+		waddch(win_monster_stats, ACS_CKBOARD);
+	}
+	wattroff(win_monster_stats, COLOR_PAIR(3));
+
+	if(monster.get_stamina() <= 10) {			/* If stamina is 10 or less, print percent in red */
+		wattron(win_monster_stats, COLOR_PAIR(1));
+		mvwprintw(win_monster_stats, 3, 31, "%3d", monster.get_stamina());
+		wattroff(win_monster_stats, COLOR_PAIR(1));
+	} else {
+		mvwprintw(win_monster_stats, 3, 31, "%3d", monster.get_stamina());
+	}
+	wprintw(win_monster_stats, "/%3d", monster.get_maxstamina());
+
+	// Print level
+	mvwprintw(win_monster_stats, 0, 29, "Level %3d", monster.get_level());
+
+	// Refresh window
+	wrefresh(win_monster_stats);
 }

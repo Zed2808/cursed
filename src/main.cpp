@@ -1,13 +1,14 @@
 #include <ncurses.h>
 #include "gui.h"
 #include "player.h"
+#include "wolf.h"
 
 int main() {
 	char name[34];
 
 	WINDOW *win_stats;
 	int win_stats_height = 5;
-	int win_stats_width = 36;
+	int win_stats_width = 39;
 
 	initscr();
 	start_color();
@@ -35,7 +36,14 @@ int main() {
 
 	/* Display player stats window */
 	win_stats = create_newwin(win_stats_height, win_stats_width, 5, 10);
-	draw_stats(win_stats, player);
+	draw_player_stats(win_stats, player);
+
+	/* Create wolf object that's level 4 */
+	Wolf wolf1(4);
+
+	/* Display wolf stats window */
+	WINDOW *win_wolf1 = create_newwin(win_stats_height, win_stats_width, 15, 10);
+	draw_monster_stats(win_wolf1, wolf1);
 
 	getch();
 	endwin();

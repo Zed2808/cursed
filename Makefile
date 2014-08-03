@@ -18,7 +18,7 @@ OBJS = obj/main.o obj/gui.o obj/player.o obj/monster.o obj/wolf.o
 
 
 all:	$(EXECUTABLE)
-	@echo Executable $(EXECUTABLE) has been successfully compiled.
+	@echo -= Executable $(EXECUTABLE) has been successfully compiled. =-
 
 $(EXECUTABLE): $(OBJS)
 	$(CC) $(LFLAGS) $(LIBS) $(OBJS) -o $@
@@ -40,3 +40,4 @@ obj/wolf.o: src/wolf.cpp src/wolf.h
 
 clean:
 	rm -rf $(OBJS) $(EXECUTABLE)
+	@echo -= Objects files and executable successfully removed. =-

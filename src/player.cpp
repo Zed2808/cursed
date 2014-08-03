@@ -3,12 +3,17 @@
 
 Player::Player(std::string n) {
 	name = n;
+	level = 1;
 	maxhealth = 100;
 	health = 100;
 	maxmana = 100;
 	mana = 100;
 	maxstamina = 100;
 	stamina = 100;
+}
+
+void Player::set_level(int l) {
+	level = l;
 }
 
 void Player::set_maxhealth(int h) {
@@ -37,6 +42,10 @@ void Player::set_stamina(int s) {
 
 std::string Player::get_name() {
 	return name;
+}
+
+int Player::get_level() {
+	return level;
 }
 
 int Player::get_maxhealth() {
