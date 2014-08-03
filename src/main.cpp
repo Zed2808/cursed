@@ -30,7 +30,7 @@ int main() {
 
 	/* Create player object and set example stats values*/
 	Player player(name);
-	player.set_health(86);
+	player.set_health(78);
 	player.set_mana(9);
 	player.set_stamina(43);
 
