@@ -29,6 +29,10 @@ std::string Monster::get_name() {
 	return name;
 }
 
+int Monster::get_level() {
+	return level;
+}
+
 int Monster::get_maxhealth() {
 	return maxhealth;
 }

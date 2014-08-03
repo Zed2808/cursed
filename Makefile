@@ -13,7 +13,7 @@ LIBS = -lncurses
 EXECUTABLE = cursed
 
 # Object files needed by the executable
-OBJS = obj/main.o obj/gui.o obj/player.o obj/monster.o
+OBJS = obj/main.o obj/gui.o obj/player.o obj/monster.o obj/wolf.o
 
 
 
@@ -33,6 +33,9 @@ obj/player.o: src/player.cpp src/player.h
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 obj/monster.o: src/monster.cpp src/monster.h
+	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
+
+obj/wolf.o: src/wolf.cpp src/wolf.h
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 clean:

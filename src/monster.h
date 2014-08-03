@@ -6,6 +6,7 @@
 class Monster {
 	protected:
 		std::string name;
+		int level;
 		int maxhealth;
 		int health;
 		int maxmana;
@@ -20,6 +21,7 @@ class Monster {
 		void set_maxstamina(int s);
 		void set_stamina(int s);
 		std::string get_name();
+		int get_level();
 		int get_maxhealth();
 		int get_health();
 		int get_maxmana();
