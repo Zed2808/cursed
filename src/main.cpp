@@ -6,7 +6,6 @@
 int main() {
 	char name[34];
 
-	WINDOW *win_stats;
 	int win_stats_height = 5;
 	int win_stats_width = 39;
 
@@ -16,11 +15,11 @@ int main() {
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, COLOR_BLUE, COLOR_BLACK);
 	init_pair(3, COLOR_GREEN, COLOR_BLACK);
-
+	
 	refresh();
 
 	/* Get player's name */
-	WINDOW *win_name = create_newwin(4, 36, 0, 10);
+	WINDOW *win_name = create_newwin(4, 36, 5, 10);
 	wattron(win_name, A_BOLD);
 	mvwprintw(win_name, 1, 1, "Enter your name (up to 34 chars).");
 	wattroff(win_name, A_BOLD);
@@ -34,15 +33,18 @@ int main() {
 	player.set_mana(9);
 	player.set_stamina(43);
 
+	border(0, 0, 0, 0, 0, 0, 0, 0);
+	refresh();
+
 	/* Display player stats window */
-	win_stats = create_newwin(win_stats_height, win_stats_width, 5, 10);
-	draw_player_stats(win_stats, player);
+	WINDOW *win_player = create_newwin(win_stats_height, win_stats_width, 5, 10);
+	draw_player_stats(win_player, player);
 
 	/* Create wolf object that's level 4 */
 	Wolf wolf1(4);
 
 	/* Display wolf stats window */
-	WINDOW *win_wolf1 = create_newwin(win_stats_height, win_stats_width, 15, 10);
+	WINDOW *win_wolf1 = create_newwin(win_stats_height, win_stats_width, 11, 10);
 	draw_monster_stats(win_wolf1, wolf1);
 
 	getch();
