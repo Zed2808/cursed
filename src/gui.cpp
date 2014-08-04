@@ -117,7 +117,7 @@ void draw_player_stats(WINDOW *win_player_stats, Player player) {
  * Function: draw_monster_stats
  * ----------------------------
  *   Draws monster's stats (level, health, mana, stamina)
- * 
+ *
  *   win_monster_stats: window to write stats on
  *   monster: monster whose stats should be drawn
  */

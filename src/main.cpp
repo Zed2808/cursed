@@ -1,4 +1,6 @@
 #include <ncurses.h>
+#include <unistd.h>
+#include <ctime>
 #include "gui.h"
 #include "player.h"
 #include "wolf.h"
@@ -15,8 +17,27 @@ int main() {
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, COLOR_BLUE, COLOR_BLACK);
 	init_pair(3, COLOR_GREEN, COLOR_BLACK);
-	
+
 	refresh();
+	curs_set(0);
+
+	/* Draw splash thingy */
+	attron(COLOR_PAIR(2));
+	for(int i = 0; i < LINES; i++) {
+		for(int j = 0; j < COLS; j++) {
+			mvaddch(i, j, ACS_CKBOARD);
+		}
+		refresh();
+		usleep(20000);
+	}
+	attroff(COLOR_PAIR(2));
+
+	for(int i = 0; i < LINES; i++) {
+		move(i, 0);
+		clrtoeol();
+		refresh();
+		usleep(20000);
+	}
 
 	/* Get player's name */
 	WINDOW *win_name = create_newwin(4, 36, (LINES-4)/2, (COLS-36)/2);
