@@ -21,7 +21,7 @@ all:	$(EXECUTABLE)
 	@echo -= Executable $(EXECUTABLE) has been successfully compiled. =-
 
 $(EXECUTABLE): $(OBJS)
-	$(CC) $(LFLAGS) $(LIBS) $(OBJS) -o $@
+	$(CC) $(LFLAGS) -o $@ $(OBJS) $(LIBS)
 
 obj/main.o: src/main.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
