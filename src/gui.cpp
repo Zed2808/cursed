@@ -1,4 +1,11 @@
+#ifdef __MINGW32__
+#include <curses.h>
+#endif
+
+#ifdef __linux__
 #include <ncurses.h>
+#endif
+
 #include "gui.h"
 #include "player.h"
 #include "monster.h"

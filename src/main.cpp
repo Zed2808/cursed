@@ -1,4 +1,11 @@
+#ifdef __MINGW32__
+#include <curses.h>
+#endif
+
+#ifdef __linux__
 #include <ncurses.h>
+#endif
+
 #include <unistd.h>
 #include <ctime>
 #include "gui.h"

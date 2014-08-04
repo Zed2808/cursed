@@ -9,13 +9,15 @@ CC = g++
 CFLAGS = -Wall -c
 INCLUDES =
 LFLAGS =
-LIBS = -lncurses
+LIBS =
 EXECUTABLE = cursed
-
-# Object files needed by the executable
 OBJS = obj/main.o obj/gui.o obj/player.o obj/monster.o obj/wolf.o
 
-
+ifeq ($(OS),Windows_NT)
+	LIBS += -lpdcurses
+else
+	LIBS += -lncurses
+endif
 
 all:	$(EXECUTABLE)
 	@echo -= Executable $(EXECUTABLE) has been successfully compiled. =-
