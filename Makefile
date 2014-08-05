@@ -13,6 +13,7 @@ LIBS =
 OBJS = obj/main.o obj/gui.o obj/player.o obj/monster.o obj/wolf.o
 
 ifeq ($(OS),Windows_NT)
+	LFLAGS += -static-libgcc -static-libstdc++
 	LIBS += -lpdcurses
 	EXECUTABLE += cursed.exe
 else
