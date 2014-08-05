@@ -10,13 +10,14 @@ CFLAGS = -Wall -c
 INCLUDES =
 LFLAGS =
 LIBS =
-EXECUTABLE = cursed
 OBJS = obj/main.o obj/gui.o obj/player.o obj/monster.o obj/wolf.o
 
 ifeq ($(OS),Windows_NT)
 	LIBS += -lpdcurses
+	EXECUTABLE += cursed.exe
 else
 	LIBS += -lncurses
+	EXECUTABLE += cursed
 endif
 
 all:	$(EXECUTABLE)
