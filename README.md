@@ -16,3 +16,7 @@ Building
     git clone https://github.com/zed2808/cursed.git
     cd cursed
     make
+
+Download
+--------
+The latest pre-compiled version of **Cursed** for Windows can be downloaded [here](http://raspi.servehttp.com/cursed/).
