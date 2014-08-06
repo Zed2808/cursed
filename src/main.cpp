@@ -6,7 +6,6 @@
 #include <ncurses.h>
 #endif
 
-#include <unistd.h>
 #include <ctime>
 #include "gui.h"
 #include "player.h"
@@ -29,22 +28,7 @@ int main() {
 	curs_set(0);
 
 	/* Draw splash thingy */
-	attron(COLOR_PAIR(2));
-	for(int i = 0; i < LINES; i++) {
-		for(int j = 0; j < COLS; j++) {
-			mvaddch(i, j, ACS_CKBOARD);
-		}
-		refresh();
-		usleep(20000);
-	}
-	attroff(COLOR_PAIR(2));
-
-	for(int i = 0; i < LINES; i++) {
-		move(i, 0);
-		clrtoeol();
-		refresh();
-		usleep(20000);
-	}
+	splash();
 
 	/* Get player's name */
 	WINDOW *win_name = create_newwin(4, 36, (LINES-4)/2, (COLS-36)/2);
@@ -61,8 +45,7 @@ int main() {
 	player.set_mana(9);
 	player.set_stamina(43);
 
-	border(0, 0, 0, 0, 0, 0, 0, 0);
-	refresh();
+	clear_border();
 
 	/* Display player stats window */
 	WINDOW *win_player = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, 0);

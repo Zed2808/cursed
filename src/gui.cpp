@@ -6,9 +6,34 @@
 #include <ncurses.h>
 #endif
 
+#include <unistd.h>
 #include "gui.h"
 #include "player.h"
 #include "monster.h"
+
+/*
+ * Function: splash
+ * ----------------
+ *   Draws splash screen
+ */
+void splash() {
+	attron(COLOR_PAIR(2));
+	for(int i = 0; i < LINES; i++) {
+		for(int j = 0; j < COLS; j++) {
+			mvaddch(i, j, ACS_CKBOARD);
+		}
+		refresh();
+		usleep(20000);
+	}
+	attroff(COLOR_PAIR(2));
+
+	for(int i = 0; i < LINES; i++) {
+		move(i, 0);
+		clrtoeol();
+		refresh();
+		usleep(20000);
+	}
+}
 
 /*
  * Function: create_newwin
@@ -43,6 +68,16 @@ void destroy_win(WINDOW *local_win) {
 	wborder(local_win, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 	wrefresh(local_win);
 	delwin(local_win);
+}
+
+/*
+ * Function: clear_border
+ * ----------------------
+ *   Clears the screen to just a border
+ */
+void clear_border() {
+	border(0, 0, 0, 0, 0, 0, 0, 0);
+	refresh();
 }
 
 /*
