@@ -1,9 +1,9 @@
 #ifndef WOLF_H
 #define WOLF_H
 
-#include "enemy.h"
+#include "character.h"
 
-class Wolf : public Enemy {
+class Wolf : public Character {
 	public:
 		Wolf(int l);
 };

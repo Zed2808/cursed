@@ -49,14 +49,14 @@ int main() {
 
 	/* Display player stats window */
 	WINDOW *win_player = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, 0);
-	draw_player_stats(win_player, player);
+	draw_character_stats(win_player, player);
 
 	/* Create wolf object that's level 4 */
 	Wolf wolf1(4);
 
 	/* Display wolf stats window */
 	WINDOW *win_wolf1 = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, COLS-win_stats_width);
-	draw_enemy_stats(win_wolf1, wolf1);
+	draw_character_stats(win_wolf1, wolf1);
 
 	getch();
 	endwin();

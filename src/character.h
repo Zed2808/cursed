@@ -1,9 +1,9 @@
-#ifndef MONSTER_H
-#define MONSTER_H
+#ifndef CHARACTER_H
+#define CHARACTER_H
 
 #include <string>
 
-class Monster {
+class Character {
 	protected:
 		std::string name;
 		int level;
@@ -14,6 +14,8 @@ class Monster {
 		int maxstamina;
 		int stamina;
 	public:
+		void set_name(std::string n);
+		void set_level(int l);
 		void set_maxhealth(int h);
 		void set_health(int h);
 		void set_maxmana(int m);
