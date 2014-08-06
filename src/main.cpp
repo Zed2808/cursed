@@ -56,7 +56,7 @@ int main() {
 
 	/* Display wolf stats window */
 	WINDOW *win_wolf1 = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, COLS-win_stats_width);
-	draw_monster_stats(win_wolf1, wolf1);
+	draw_enemy_stats(win_wolf1, wolf1);
 
 	getch();
 	endwin();
