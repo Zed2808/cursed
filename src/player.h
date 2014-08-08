@@ -6,7 +6,7 @@
 
 class Player : public Character {
 	public:
-		Player(std::string n);
+		Player();
 };
 
 #endif

@@ -70,11 +70,11 @@ void destroy_win(WINDOW *local_win) {
 }
 
 /*
- * Function: clear_border
+ * Function: clear_to_border
  * ----------------------
  *   Clears the screen to just a border
  */
-void clear_border() {
+void clear_to_border() {
 	border(0, 0, 0, 0, 0, 0, 0, 0);
 	refresh();
 }
@@ -158,4 +158,13 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
 
 	// Refresh window
 	wrefresh(win_character_stats);
+}
+
+/* Function: set_main_attributes
+ * -----------------------------
+ *   Input window for Character's main attributes
+ */
+void set_main_attributes(Character character) {
+	WINDOW *win = create_newwin(9, 19, (LINES-9)/2, (COLS-19)/2);
+	
 }

@@ -40,12 +40,10 @@ int main() {
 	curs_set(0);
 
 	/* Create player object and set example stats values*/
-	Player player(name);
-	player.set_health(78);
-	player.set_mana(9);
-	player.set_stamina(43);
+	Player player;
+	player.set_name(name);
 
-	clear_border();
+	clear_to_border();
 
 	/* Display player stats window */
 	WINDOW *win_player = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, 0);

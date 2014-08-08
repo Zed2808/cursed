@@ -48,6 +48,8 @@ class Character {
 		int get_intelligence();
 		void set_agility(int a);
 		int get_agility();
+		void set_strength(int s);
+		int get_strength();
 		void set_personality(int p);
 		int get_personality();
 		void set_perception(int p);
@@ -55,14 +57,10 @@ class Character {
 		void set_luck(int l);
 		int get_luck();
 
-		/* Sets & Gets for derived attributes */
-		void set_maxhealth(int h);
+		/* Gets for derived attributes */
 		int get_maxhealth();
-		void set_maxmana(int m);
 		int get_maxmana();
-		void set_maxstamina(int s);
 		int get_maxstamina();
-		void set_carryweight(int c);
 		int get_carryweight();
 };
 
