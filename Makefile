@@ -6,7 +6,7 @@
 
 
 CC = g++
-CFLAGS = -Wall -c
+CFLAGS = -Wall -c -std=c++11
 INCLUDES =
 LFLAGS =
 LIBS =

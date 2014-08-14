@@ -28,9 +28,12 @@ int main() {
 	curs_set(0);
 
 	/* Draw splash thingy */
-	splash();
+	//splash();
 
-	/* Get player's name */
+	/* Create player object */
+	Player player;
+
+	/* Get and set player's name */
 	WINDOW *win_name = create_newwin(4, 36, (LINES-4)/2, (COLS-36)/2);
 	wattron(win_name, A_BOLD);
 	mvwprintw(win_name, 1, 1, "Enter your name (up to 24 chars).");
@@ -38,10 +41,11 @@ int main() {
 	curs_set(1);
 	mvwgetstr(win_name, 2, 1, name);
 	curs_set(0);
-
-	/* Create player object and set example stats values*/
-	Player player;
 	player.set_name(name);
+
+	clear_to_border();
+
+	set_main_attributes(player);
 
 	clear_to_border();
 
