@@ -167,7 +167,7 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
  *
  *   character: character whose main attrs should be set
  */
-void set_main_attributes(Character character) {
+void set_main_attributes(Character &character) {
 	WINDOW *win = create_newwin(11, 19, (LINES-9)/2, (COLS-19)/2);
 	int input;
 	int index = 0;
@@ -258,7 +258,7 @@ void set_main_attributes(Character character) {
 				if(index < 0) index = 6;
 				break;
 			case KEY_LEFT:
-				if(attributes[index] > 0) {
+				if(attributes[index] > 1) {
 					attributes[index]--;
 					points++;
 				}
@@ -271,7 +271,7 @@ void set_main_attributes(Character character) {
 				break;
 		}
 	}
-	
+
 	character.set_endurance(attributes[0]);
 	character.set_intelligence(attributes[1]);
 	character.set_agility(attributes[2]);

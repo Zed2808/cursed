@@ -15,11 +15,11 @@ void Character::set_stamina(int s) { stamina = s; }
 int Character::get_stamina() { return stamina; }
 
 /* Sets & Gets for main attributes */
-void Character::set_endurance(int e) { endurance = e; maxhealth = endurance * 10; }
+void Character::set_endurance(int e) { endurance = e; maxhealth = endurance * 10; health = maxhealth; }
 int Character::get_endurance() { return endurance; }
-void Character::set_intelligence(int i) { intelligence = i; maxmana = intelligence * 10; }
+void Character::set_intelligence(int i) { intelligence = i; maxmana = intelligence * 10; mana = maxmana; }
 int Character::get_intelligence() { return intelligence; }
-void Character::set_agility(int a) { agility = a; maxstamina = agility * 10; }
+void Character::set_agility(int a) { agility = a; maxstamina = agility * 10; stamina = maxstamina; }
 int Character::get_agility() { return agility; }
 void Character::set_strength(int s) { strength = s; carryweight = strength * 10; }
 int Character::get_strength() { return strength; }

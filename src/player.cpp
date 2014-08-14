@@ -2,7 +2,7 @@
 #include <string>
 
 Player::Player() {
-	name = "Default Player";
+	name = "Default";
 	level = 1;
 	set_endurance(5);
 	set_intelligence(5);
@@ -11,7 +11,4 @@ Player::Player() {
 	set_personality(5);
 	set_perception(5);
 	set_luck(5);
-	health = maxhealth;
-	mana = maxmana;
-	stamina = maxstamina;
 }
