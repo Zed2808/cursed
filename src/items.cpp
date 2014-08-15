@@ -1,4 +1,4 @@
-#include "items.h"
+#include "items.hpp"
 
 /* Base Item */
 int Item::get_weight() {

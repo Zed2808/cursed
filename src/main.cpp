@@ -7,9 +7,9 @@
 #endif
 
 #include <ctime>
-#include "gui.h"
-#include "player.h"
-#include "wolf.h"
+#include "gui.hpp"
+#include "player.hpp"
+#include "wolf.hpp"
 
 int main() {
 	char name[24];

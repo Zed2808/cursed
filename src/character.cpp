@@ -1,5 +1,5 @@
 #include <string>
-#include "character.h"
+#include "character.hpp"
 
 /* Sets & Gets for current stats */
 void Character::set_name(std::string n) { name = n; }

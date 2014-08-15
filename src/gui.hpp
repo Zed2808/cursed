@@ -2,7 +2,7 @@
 #define GUI_H
 
 #include <string>
-#include "character.h"
+#include "character.hpp"
 
 void splash();
 WINDOW *create_newwin(int height, int width, int starty, int startx);

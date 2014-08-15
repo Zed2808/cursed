@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "inventory.h"
+#include "inventory.hpp"
 
 Inventory::Inventory() {
 	totalweight = 0;

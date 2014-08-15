@@ -30,22 +30,22 @@ $(EXECUTABLE): $(OBJS)
 obj/main.o: src/main.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
-obj/gui.o: src/gui.cpp src/gui.h
+obj/gui.o: src/gui.cpp src/gui.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
-obj/inventory.o: src/inventory.cpp src/inventory.h
+obj/inventory.o: src/inventory.cpp src/inventory.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
-obj/items.o: src/items.cpp src/items.h
+obj/items.o: src/items.cpp src/items.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
-obj/character.o: src/character.cpp src/character.h
+obj/character.o: src/character.cpp src/character.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
-obj/player.o: src/player.cpp src/player.h
+obj/player.o: src/player.cpp src/player.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
-obj/wolf.o: src/wolf.cpp src/wolf.h
+obj/wolf.o: src/wolf.cpp src/wolf.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 clean:

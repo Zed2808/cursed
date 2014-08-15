@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include <string>
-#include "character.h"
+#include "character.hpp"
 
 class Player : public Character {
 	public:

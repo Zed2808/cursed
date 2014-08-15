@@ -1,7 +1,7 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
 
-#include "items.h"
+#include "items.hpp"
 
 class Inventory {
 	private:

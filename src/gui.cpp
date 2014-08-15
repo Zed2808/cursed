@@ -8,8 +8,8 @@
 
 #include <unistd.h>
 #include <string>
-#include "gui.h"
-#include "character.h"
+#include "gui.hpp"
+#include "character.hpp"
 
 /*
  * Function: splash

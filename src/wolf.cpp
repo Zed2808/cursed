@@ -1,5 +1,5 @@
 #include <string>
-#include "wolf.h"
+#include "wolf.hpp"
 
 Wolf::Wolf(int l) {
 	name = "Wolf";
