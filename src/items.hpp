@@ -1,10 +1,15 @@
 #ifndef ITEMS_H
 #define ITEMS_H
 
+#include <string>
+
 class Item {
 	protected:
+		std::string name;
 		int weight;
 	public:
+		Item();
+		std::string get_name();
 		int get_weight();
 };
 

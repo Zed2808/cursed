@@ -2,6 +2,7 @@
 #define CHARACTER_H
 
 #include <string>
+#include "inventory.hpp"
 
 class Character {
 	protected:
@@ -28,6 +29,9 @@ class Character {
 		int maxstamina;
 		int carryweight;
 	public:
+		/* Character's inventory */
+		Inventory inventory;
+
 		/* Sets & Gets for current stats */
 		void set_name(std::string n);
 		std::string get_name();

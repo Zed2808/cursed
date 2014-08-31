@@ -89,12 +89,12 @@ void clear_to_border() {
  *   character: character whose stats should be drawn
  */
 void draw_character_stats(WINDOW *win_character_stats, Character character) {
-	// Print name
+	/* Print name */
 	wattron(win_character_stats, A_BOLD);
 	mvwprintw(win_character_stats, 0, 1, character.get_name().c_str());
 	wattroff(win_character_stats, A_BOLD);
 
-	// Print health only if maxhealth > 0
+	/* Print health only if maxhealth > 0 */
 	if(character.get_maxhealth() > 0) {
 		mvwprintw(win_character_stats, 1, 1, "HLTH ");
 
@@ -114,7 +114,7 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
 		wprintw(win_character_stats, "/%3d", character.get_maxhealth());
 	}
 
-	// Print mana only if maxmana > 0
+	/* Print mana only if maxmana > 0 */
 	if(character.get_maxmana() > 0) {
 		mvwprintw(win_character_stats, 2, 1, "MANA ");
 
@@ -134,7 +134,7 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
 		wprintw(win_character_stats, "/%3d", character.get_maxmana());
 	}
 
-	// Print stamina only if maxhealth > 0
+	/* Print stamina only if maxhealth > 0 */
 		if(character.get_maxstamina() > 0) {
 		mvwprintw(win_character_stats, 3, 1, "STAM ");
 
@@ -154,11 +154,32 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
 		wprintw(win_character_stats, "/%3d", character.get_maxstamina());
 	}
 
-	// Print level
+	/* Print level */
 	mvwprintw(win_character_stats, 0, 29, "Level %3d", character.get_level());
 
-	// Refresh window
+	/* Refresh window */
 	wrefresh(win_character_stats);
+}
+
+/* Function: draw_character_inventory
+ *
+ *   Draw's inventory of character or storage container
+ *
+ *   win_character_inventory: window on which to draw character's inventory
+ *   character: character whose stats should be drawn
+ */
+void draw_character_inventory(WINDOW *win_character_inventory, Character character) {
+	/* Print name of character */
+	wattron(win_character_inventory, A_BOLD);
+	mvwprintw(win_character_inventory, 0, 1, "Inventory");
+	wattroff(win_character_inventory, A_BOLD);
+
+	mvwprintw(win_character_inventory, 1, 1, "SLOT 1");
+	mvwprintw(win_character_inventory, 2, 1, "Name: %s", character.inventory.slots[0].get_name().c_str());
+	mvwprintw(win_character_inventory, 3, 1, "Quantity: %d", character.inventory.quantity[0]);
+
+	/* Refresh window */
+	wrefresh(win_character_inventory);
 }
 
 /* Function: set_main_attributes
@@ -195,56 +216,56 @@ void set_main_attributes(Character &character) {
 	mvwprintw(win, 7, 1, "Luck");
 
 	while(input != '\n') {
-		// Endurance
+		/* Endurance */
 		if(attributes[0] > 0)  mvwprintw(win, 1, 14, "<");
 		if(attributes[0] < 10) mvwprintw(win, 1, 17, ">");
 		if(index == 0) wattron(win, A_REVERSE);
 		mvwprintw(win, 1, 15, "%2d", attributes[0]);
 		wattroff(win, A_REVERSE);
 
-		// Intelligence
+		/* Intelligence */
 		if(attributes[1] > 0)  mvwprintw(win, 2, 14, "<");
 		if(attributes[1] < 10) mvwprintw(win, 2, 17, ">");
 		if(index == 1) wattron(win, A_REVERSE);
 		mvwprintw(win, 2, 15, "%2d", attributes[1]);
 		wattroff(win, A_REVERSE);
 
-		// Agility
+		/* Agility */
 		if(attributes[2] > 0)  mvwprintw(win, 3, 14, "<");
 		if(attributes[2] < 10) mvwprintw(win, 3, 17, ">");
 		if(index == 2) wattron(win, A_REVERSE);
 		mvwprintw(win, 3, 15, "%2d", attributes[2]);
 		wattroff(win, A_REVERSE);
 
-		// Strength
+		/* Strength */
 		if(attributes[3] > 0)  mvwprintw(win, 4, 14, "<");
 		if(attributes[3] < 10) mvwprintw(win, 4, 17, ">");
 		if(index == 3) wattron(win, A_REVERSE);
 		mvwprintw(win, 4, 15, "%2d", attributes[3]);
 		wattroff(win, A_REVERSE);
 
-		// Personality
+		/* Personality */
 		if(attributes[4] > 0)  mvwprintw(win, 5, 14, "<");
 		if(attributes[4] < 10) mvwprintw(win, 5, 17, ">");
 		if(index == 4) wattron(win, A_REVERSE);
 		mvwprintw(win, 5, 15, "%2d", attributes[4]);
 		wattroff(win, A_REVERSE);
 
-		// Perception
+		/* Perception */
 		if(attributes[5] > 0)  mvwprintw(win, 6, 14, "<");
 		if(attributes[5] < 10) mvwprintw(win, 6, 17, ">");
 		if(index == 5) wattron(win, A_REVERSE);
 		mvwprintw(win, 6, 15, "%2d", attributes[5]);
 		wattroff(win, A_REVERSE);
 
-		// Luck
+		/* Luck */
 		if(attributes[6] > 0)  mvwprintw(win, 7, 14, "<");
 		if(attributes[6] < 10) mvwprintw(win, 7, 17, ">");
 		if(index == 6) wattron(win, A_REVERSE);
 		mvwprintw(win, 7, 15, "%2d", attributes[6]);
 		wattroff(win, A_REVERSE);
 
-		// Points Remaining
+		/* Points Remaining */
 		mvwprintw(win, 9, 1, "%s %2d", "Points left:", points);
 
 		input = wgetch(win);

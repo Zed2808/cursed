@@ -49,16 +49,24 @@ int main() {
 
 	clear_to_border();
 
+	/* Create wolf object that's level 4 */
+	Wolf wolf1(4);
+
 	/* Display player stats window */
 	WINDOW *win_player = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, 0);
 	draw_character_stats(win_player, player);
 
-	/* Create wolf object that's level 4 */
-	Wolf wolf1(4);
-
 	/* Display wolf stats window */
 	WINDOW *win_wolf1 = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, COLS-win_stats_width);
 	draw_character_stats(win_wolf1, wolf1);
+
+
+	/* Add item to player inventory */
+	player.inventory.additem(Shortsword(), 7);
+
+	/* Display player inventory */
+	WINDOW *win_player_inventory = create_newwin(7, 18, (LINES-7)/2, (COLS-18)/2);
+	draw_character_inventory(win_player_inventory, player);
 
 	getch();
 	endwin();
