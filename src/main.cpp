@@ -60,12 +60,24 @@ int main() {
 	WINDOW *win_wolf1 = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, COLS-win_stats_width);
 	draw_character_stats(win_wolf1, wolf1);
 
-
-	/* Add item to player inventory */
-	player.inventory.additem(Shortsword(), 7);
-
 	/* Display player inventory */
-	WINDOW *win_player_inventory = create_newwin(7, 18, (LINES-7)/2, (COLS-18)/2);
+	WINDOW *win_player_inventory = create_newwin(9, 18, (LINES-9)/2, (COLS-18)/2);
+	draw_character_inventory(win_player_inventory, player);
+	getch();
+
+	player.inventory.additem(Shortsword(), 19);
+	draw_character_inventory(win_player_inventory, player);
+	getch();
+
+	player.inventory.additem(Longsword(), 7);
+	draw_character_inventory(win_player_inventory, player);
+	getch();
+
+	player.inventory.additem(Shortsword(), 3);
+	draw_character_inventory(win_player_inventory, player);
+	getch();
+
+	player.inventory.removeitem(Shortsword(), 7);
 	draw_character_inventory(win_player_inventory, player);
 
 	getch();

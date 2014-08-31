@@ -178,6 +178,10 @@ void draw_character_inventory(WINDOW *win_character_inventory, Character charact
 	mvwprintw(win_character_inventory, 2, 1, "Name: %s", character.inventory.slots[0].get_name().c_str());
 	mvwprintw(win_character_inventory, 3, 1, "Quantity: %d", character.inventory.quantity[0]);
 
+	mvwprintw(win_character_inventory, 5, 1, "SLOT 2");
+	mvwprintw(win_character_inventory, 6, 1, "Name: %s", character.inventory.slots[1].get_name().c_str());
+	mvwprintw(win_character_inventory, 7, 1, "Quantity: %d", character.inventory.quantity[1]);
+
 	/* Refresh window */
 	wrefresh(win_character_inventory);
 }

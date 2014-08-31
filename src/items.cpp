@@ -31,3 +31,15 @@ Shortsword::Shortsword() {
 int Shortsword::get_damage() {
 	return damage;
 }
+
+/* 2 - Longsword */
+Longsword::Longsword() {
+	name = "Longsword";
+	itemid = 2;
+	weight = 7;
+	damage = 9;
+}
+
+int Longsword::get_damage() {
+	return damage;
+}

@@ -23,4 +23,12 @@ class Shortsword : public Item {
 		int get_damage();
 };
 
+class Longsword : public Item {
+	private:
+		int damage;
+	public:
+		Longsword();
+		int get_damage();
+};
+
 #endif
