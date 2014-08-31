@@ -17,23 +17,22 @@ Inventory::Inventory() {
  *   Returns slot in inventory item was added to
  */
 int Inventory::additem(Item item, int n) {
-	bool exit = false;
-	int i = 0;
-	while(!exit && i <= 255) { /* Loop to search for first open slot */
-		if(slots[i].get_name() == "") { /* If item name in slot is "" (slot is not occupied) */
-			slots[i] = item;
-			quantity[i] = n;
-			exit = true;
-		} else { /* Slot is occupied */
-			i++; /* Move on to the next slot */
+	for(int i = 0; i <= 255; i++) { /* Loop to search for matching itemid */
+		if(slots[i].get_itemid() == item.get_itemid()) { /* If itemid in slot matches that of the item we're trying to add */
+			quantity[i] += n; /* Don't change item in slot, just add n to quantity of that slot */
+			return i; /* Return index of slot of which the quantity was increased */
 		}
 	}
 
-	if(i > 255) { /* Open slot could not be found */
-		return -1;
-	} else {
-		return i; /* Return slot item was added to */
+	for(int i = 0; i <= 255; i++) { /* Loop to search for empty slot */
+		if(quantity[i] == 0) { /* Slot is empty */
+			slots[i] = item;
+			quantity[i] = n;
+			return i;
+		}
 	}
+
+	return -1; /* Return -1 if item could not be added to a slot */
 }
 
 /* Function: removeitem
