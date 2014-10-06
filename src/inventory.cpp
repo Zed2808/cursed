@@ -2,6 +2,9 @@
 #include "inventory.hpp"
 #include "items.hpp"
 
+/*
+ * Inventory
+ */
 Inventory::Inventory() {
 	totalweight = 0;
 	std::fill_n(slots, 256, Item());
@@ -55,4 +58,32 @@ int Inventory::removeitem(Item item, int n) {
 		}
 	}
 	return -1; /* Return -1 if item could not be removed */
+}
+
+/*
+ * EquipSlot
+ */
+EquipSlot::EquipSlot() {
+	equipped = Item();
+}
+
+/* Function: equip
+ *   Moves 1 of specified item from inventory to equip slot
+ *
+ *   inventory: inventory to remove item from
+ *   item: item to equip from inventory
+ */
+void EquipSlot::equip(Inventory &inventory, Item item) {
+	inventory.removeitem(item, 1);
+	equipped = item;
+}
+
+/* Function: unequip
+ *   Moves item from equip slot back into inventory
+ *
+ *   inventory: inventory to move item back into
+ */
+void EquipSlot::unequip(Inventory &inventory) {
+	inventory.additem(equipped, 1);
+	equipped = Item();
 }

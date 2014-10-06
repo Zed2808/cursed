@@ -14,4 +14,13 @@ class Inventory {
 		int removeitem(Item item, int quantity); /* Returns slot item was removed from */
 };
 
+class EquipSlot {
+	public:
+		Item equipped;
+
+		EquipSlot();
+		void equip(Inventory &inventory, Item item); /* Moves 1 of item from inventory to EquipSlot */
+		void unequip(Inventory &inventory);          /* Moves item in equip slot back to inventory */
+};
+
 #endif

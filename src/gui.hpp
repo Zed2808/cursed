@@ -10,6 +10,7 @@ void destroy_win(WINDOW *local_win);
 void clear_to_border();
 void draw_character_stats(WINDOW *win_character_stats, Character character);
 void draw_character_inventory(WINDOW *win_character_inventory, Character character);
+void draw_character_equipslot(WINDOW *win_character_equipslot, Character character);
 void set_main_attributes(Character &character);
 
 #endif

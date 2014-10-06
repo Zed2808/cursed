@@ -13,7 +13,7 @@
 
 /*
  * Function: splash
- * ----------------
+ *
  *   Draws splash screen
  */
 void splash() {
@@ -37,7 +37,7 @@ void splash() {
 
 /*
  * Function: create_newwin
- * -----------------------
+ *
  *   Creates new window
  *
  *   height: height of the new window
@@ -59,7 +59,7 @@ WINDOW *create_newwin(int height, int width, int starty, int startx) {
 
 /*
  * Function: destroy_win
- * ---------------------
+ *
  *   Destroys window
  *
  *   local_win: window to destroy
@@ -72,7 +72,7 @@ void destroy_win(WINDOW *local_win) {
 
 /*
  * Function: clear_to_border
- * ----------------------
+ *
  *   Clears the screen to just a border
  */
 void clear_to_border() {
@@ -82,7 +82,7 @@ void clear_to_border() {
 
 /*
  * Function: draw_character_stats
- * --------------------
+ *
  *   Draws character's stats (health, mana, stamina)
  *
  *   win_character_stats: window to write stats on
@@ -163,10 +163,10 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
 
 /* Function: draw_character_inventory
  *
- *   Draw's inventory of character or storage container
+ *   Draws inventory of character
  *
  *   win_character_inventory: window on which to draw character's inventory
- *   character: character whose stats should be drawn
+ *   character: character whose inventory should be drawn
  */
 void draw_character_inventory(WINDOW *win_character_inventory, Character character) {
 	/* Print name of character */
@@ -186,8 +186,29 @@ void draw_character_inventory(WINDOW *win_character_inventory, Character charact
 	wrefresh(win_character_inventory);
 }
 
+/* Function: draw_character_equipslot
+ *
+ *   Draws equipslot of character
+ *
+ *   win_character_equipslot: window on which to draw character's equipslot
+ *   character: character whose equipslot should be drawn
+ */
+void draw_character_equipslot(WINDOW *win_character_equipslot, Character character) {
+	werase(win_character_equipslot);
+	box(win_character_equipslot, 0, 0);
+
+	wattron(win_character_equipslot, A_BOLD);
+	mvwprintw(win_character_equipslot, 0, 1, "Equip Slot");
+	wattroff(win_character_equipslot, A_BOLD);
+
+	mvwprintw(win_character_equipslot, 1, 1, "%s", character.equipslot.equipped.get_name().c_str());
+
+	/* Refresh window */
+	wrefresh(win_character_equipslot);
+}
+
 /* Function: set_main_attributes
- * -----------------------------
+ *
  *   Input window for Character's main attributes
  *
  *   character: character whose main attrs should be set

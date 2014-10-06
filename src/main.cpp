@@ -28,7 +28,7 @@ int main() {
 	curs_set(0);
 
 	/* Draw splash thingy */
-	//splash();
+	splash();
 
 	/* Create player object */
 	Player player;
@@ -79,8 +79,24 @@ int main() {
 
 	player.inventory.removeitem(Shortsword(), 7);
 	draw_character_inventory(win_player_inventory, player);
-
 	getch();
+
+	player.inventory.removeitem(Longsword(), 9);
+	draw_character_inventory(win_player_inventory, player);
+	getch();
+
+	/* Display player equipslot */
+	WINDOW *win_player_equipslot = create_newwin(3, 18, (LINES-3), (COLS-18)/2);
+	player.equipslot.equip(player.inventory, Shortsword());
+	draw_character_equipslot(win_player_equipslot, player);
+	draw_character_inventory(win_player_inventory, player);
+	getch();
+
+	player.equipslot.unequip(player.inventory);
+	draw_character_equipslot(win_player_equipslot, player);
+	draw_character_inventory(win_player_inventory, player);
+	getch();
+
 	endwin();
 	return 0;
 }

@@ -29,8 +29,9 @@ class Character {
 		int maxstamina;
 		int carryweight;
 	public:
-		/* Character's inventory */
+		/* Inventory stuff */
 		Inventory inventory;
+		EquipSlot equipslot;
 
 		/* Sets & Gets for current stats */
 		void set_name(std::string n);
