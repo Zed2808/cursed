@@ -9,6 +9,10 @@ Taken from different computers with different fonts and stuff.
 ![](https://i.imgur.com/reth6TU.png)
 ![](https://i.imgur.com/bMqUIK8.png)
 
+And on [cool-retro-term](https://github.com/swordfish90/cool-retro-term).
+![](https://i.imgur.com/EBDqJgL.png)
+![](https://i.imgur.com/ZifkAyA.png)
+
 Building
 --------
 **Cursed** can currently be built on Linux or Windows with the included makefile.
