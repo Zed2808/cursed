@@ -1,0 +1,14 @@
+Player selects class in GUI
+	int classid = classselectgui;
+
+Any time player uses a skill-specific class
+	player.classes[classid] // Something like this? Maybe?
+
+Generic skill for each weapon type (blade, blunt, pole, ranged), each maybe has different unique effect
+Pass weapon to skill for damage calculations and stuff
+
+Create seperate inventory to hold equipped weapon
+
+Add Character::equip & Character::unequip
+
+Calculate inventory weight
