@@ -169,10 +169,16 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
  *   character: character whose inventory should be drawn
  */
 void draw_character_inventory(WINDOW *win_character_inventory, Character character) {
+	/* Reset window */
+	werase(win_character_inventory);
+	box(win_character_inventory, 0, 0);
+
 	/* Print name of character */
 	wattron(win_character_inventory, A_BOLD);
 	mvwprintw(win_character_inventory, 0, 1, "Inventory");
 	wattroff(win_character_inventory, A_BOLD);
+
+	mvwprintw(win_character_inventory, 0, 11, "%6d", character.inventory.totalweight);
 
 	mvwprintw(win_character_inventory, 1, 1, "SLOT 1");
 	mvwprintw(win_character_inventory, 2, 1, "Name: %s", character.inventory.slots[0].get_name().c_str());
@@ -194,6 +200,7 @@ void draw_character_inventory(WINDOW *win_character_inventory, Character charact
  *   character: character whose equipslot should be drawn
  */
 void draw_character_equipslot(WINDOW *win_character_equipslot, Character character) {
+	/* Reset window */
 	werase(win_character_equipslot);
 	box(win_character_equipslot, 0, 0);
 

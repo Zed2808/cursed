@@ -20,18 +20,20 @@ Inventory::Inventory() {
  *   Returns slot in inventory item was added to
  */
 int Inventory::additem(Item item, int n) {
-	for(int i = 0; i <= 255; i++) { /* Loop to search for matching itemid */
+	for(int i = 0; i <= 255; i++) {                      /* Loop to search for matching itemid */
 		if(slots[i].get_itemid() == item.get_itemid()) { /* If itemid in slot matches that of the item we're trying to add */
-			quantity[i] += n; /* Don't change item in slot, just add n to quantity of that slot */
-			return i; /* Return index of slot of which the quantity was increased */
+			quantity[i] += n;                            /* Don't change item in slot, just add n to quantity of that slot */
+			totalweight += item.get_weight() * n;        /* Add item's weight * n to inventory weight */
+			return i;                                    /* Return index of slot of which the quantity was increased */
 		}
 	}
 
-	for(int i = 0; i <= 255; i++) { /* Loop to search for empty slot */
-		if(quantity[i] == 0) { /* Slot is empty */
-			slots[i] = item;
-			quantity[i] = n;
-			return i;
+	for(int i = 0; i <= 255; i++) {               /* Loop to search for empty slot */
+		if(quantity[i] == 0) {                    /* Slot is empty */
+			slots[i] = item;                      /* Set empty slot to item */
+			quantity[i] = n;                      /* Set quantity of the slot to n */
+			totalweight += item.get_weight() * n; /* Add item's weight * n to inventory weight */
+			return i;                             /* Return index of slot that item was added to */
 		}
 	}
 
@@ -49,12 +51,15 @@ int Inventory::additem(Item item, int n) {
 int Inventory::removeitem(Item item, int n) {
 	for(int i = 0; i <= 255; i++) { /* Loop to search for matching itemid */
 		if(slots[i].get_itemid() == item.get_itemid()) { /* If itemid in slot matches that of the item we're trying to remove */
-			quantity[i] -= n;
-			if(quantity[i] <= 0) { /* If removing items emptied that slot */
+			if(n >= quantity[i]) {
+				totalweight -= item.get_weight() * quantity[i];
 				quantity[i] = 0; /* Set quantity to 0 to avoid negative quantities */
-				slots[i] = Item(); /* Set item in slot to "empty" */
-				return i; /* Return slot item was removed from */
+				slots[i] = Item(); /* Set item in slot to empty item */
+			} else {
+				totalweight -= item.get_weight() * n;
+				quantity[i] -= n;
 			}
+			return i; /* Return index item was removed from */
 		}
 	}
 	return -1; /* Return -1 if item could not be removed */
