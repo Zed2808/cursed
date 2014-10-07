@@ -15,20 +15,28 @@ class Item {
 		int get_weight();
 };
 
-class Shortsword : public Item {
-	private:
+class Weapon : public Item {
+	protected:
 		int damage;
 	public:
-		Shortsword();
+		Weapon();
 		int get_damage();
 };
 
-class Longsword : public Item {
-	private:
-		int damage;
-	public:
-		Longsword();
-		int get_damage();
+class BladedWeapon : public Weapon {
+	
+};
+
+class BluntWeapon : public Weapon {
+	
+};
+
+class PoleWeapon : public Weapon {
+	
+};
+
+class RangedWeapon : public Weapon {
+	
 };
 
 #endif

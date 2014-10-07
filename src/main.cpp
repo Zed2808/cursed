@@ -8,6 +8,7 @@
 
 #include <ctime>
 #include "gui.hpp"
+#include "weapons.hpp"
 #include "player.hpp"
 #include "wolf.hpp"
 
@@ -69,7 +70,7 @@ int main() {
 	draw_character_inventory(win_player_inventory, player);
 	getch();
 
-	player.inventory.additem(Longsword(), 7);
+	player.inventory.additem(BattleAxe(), 7);
 	draw_character_inventory(win_player_inventory, player);
 	getch();
 
@@ -81,7 +82,7 @@ int main() {
 	draw_character_inventory(win_player_inventory, player);
 	getch();
 
-	player.inventory.removeitem(Longsword(), 9);
+	player.inventory.removeitem(BattleAxe(), 9);
 	draw_character_inventory(win_player_inventory, player);
 	getch();
 

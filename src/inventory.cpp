@@ -49,12 +49,12 @@ int Inventory::additem(Item item, int n) {
  *   Returns slot in inventory item was removed from
  */
 int Inventory::removeitem(Item item, int n) {
-	for(int i = 0; i <= 255; i++) { /* Loop to search for matching itemid */
+	for(int i = 0; i <= 255; i++) {                      /* Loop to search for matching itemid */
 		if(slots[i].get_itemid() == item.get_itemid()) { /* If itemid in slot matches that of the item we're trying to remove */
 			if(n >= quantity[i]) {
 				totalweight -= item.get_weight() * quantity[i];
-				quantity[i] = 0; /* Set quantity to 0 to avoid negative quantities */
-				slots[i] = Item(); /* Set item in slot to empty item */
+				quantity[i] = 0;                         /* Set quantity to 0 to avoid negative quantities */
+				slots[i] = Item();                       /* Set item in slot to empty item */
 			} else {
 				totalweight -= item.get_weight() * n;
 				quantity[i] -= n;
