@@ -19,8 +19,3 @@ int Item::get_itemid() {
 int Item::get_weight() {
 	return weight;
 }
-
-/* Weapon */
-Weapon::Weapon() {
-	damage = 0;
-}
