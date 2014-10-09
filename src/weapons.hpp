@@ -13,35 +13,12 @@ class Weapon : public Item {
 		/* Get weapon's attacks */
 };
 
-class BladedWeapon : public Weapon {
-	public:
-		void swing(Character &target);
-		void stab(Character &target);
-};
-
-class BluntWeapon : public Weapon {
-	public:
-		void swing(Character &target);
-		void push(Character &target);
-};
-
-class PoleWeapon : public Weapon {
-	public:
-		void swing(Character &target);
-		void push(Character &target);
-};
-
-class RangedWeapon : public Weapon {
-	public:
-		void shoot(Character &target);
-};
-
-class Shortsword : public BladedWeapon {
+class Shortsword : public Weapon {
 	public:
 		Shortsword();
 };
 
-class BattleAxe : public BluntWeapon {
+class BattleAxe : public Weapon {
 	public:
 		BattleAxe();
 };

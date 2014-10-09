@@ -10,8 +10,7 @@ CFLAGS = -Wall -c
 INCLUDES =
 LFLAGS =
 LIBS =
-OBJS = obj/main.o obj/gui.o obj/inventory.o obj/items.o obj/weapons.o obj/character.o obj/player.o obj/wolf.o
-
+OBJS = obj/character.o obj/gui.o obj/inventory.o obj/items.o obj/main.o obj/player.o obj/weapons.o obj/wolf.o
 ifeq ($(OS),Windows_NT)
 	LFLAGS += -static-libgcc -static-libstdc++
 	LIBS += -lpdcurses
@@ -27,7 +26,7 @@ all:	$(EXECUTABLE)
 $(EXECUTABLE): $(OBJS)
 	$(CC) $(LFLAGS) -o $@ $(OBJS) $(LIBS)
 
-obj/main.o: src/main.cpp
+obj/character.o: src/character.cpp src/character.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 obj/gui.o: src/gui.cpp src/gui.hpp
@@ -39,13 +38,13 @@ obj/inventory.o: src/inventory.cpp src/inventory.hpp
 obj/items.o: src/items.cpp src/items.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
-obj/weapons.o: src/weapons.cpp src/weapons.hpp
-	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
-
-obj/character.o: src/character.cpp src/character.hpp
+obj/main.o: src/main.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 obj/player.o: src/player.cpp src/player.hpp
+	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
+
+obj/weapons.o: src/weapons.cpp src/weapons.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 obj/wolf.o: src/wolf.cpp src/wolf.hpp
