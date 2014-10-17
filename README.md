@@ -6,12 +6,12 @@ Screenshots
 -----------
 Taken from different computers with different fonts and stuff.
 
-![](https://i.imgur.com/reth6TU.png)
-![](https://i.imgur.com/bMqUIK8.png)
+![](http://raspi.servehttp.com/cursed/images/enter_name.png)
+![](http://raspi.servehttp.com/cursed/images/stats.png)
 
 And on [cool-retro-term](https://github.com/swordfish90/cool-retro-term).
-![](https://i.imgur.com/EBDqJgL.png)
-![](https://i.imgur.com/ZifkAyA.png)
+![](http://raspi.servehttp.com/cursed/images/cot-attrs.png)
+![](http://raspi.servehttp.com/cursed/images/cot-stats.png)
 
 Building
 --------
