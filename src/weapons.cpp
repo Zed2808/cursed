@@ -7,6 +7,10 @@ Weapon::Weapon() {
 	damage = 0;
 }
 
+int Weapon::get_damage() {
+	return damage;
+}
+
 /* 1 - Shortsword */
 Shortsword::Shortsword() {
 	name = "Shortsword";
