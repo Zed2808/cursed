@@ -1,5 +1,5 @@
-#ifndef WOLF_H
-#define WOLF_H
+#ifndef NPCS_H
+#define NPCS_H
 
 #include "character.hpp"
 

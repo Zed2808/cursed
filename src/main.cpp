@@ -10,7 +10,7 @@
 #include "gui.hpp"
 #include "weapons.hpp"
 #include "player.hpp"
-#include "wolf.hpp"
+#include "npcs.hpp"
 
 int main() {
 	char name[24];

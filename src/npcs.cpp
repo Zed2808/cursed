@@ -1,6 +1,9 @@
 #include <string>
-#include "wolf.hpp"
+#include "npcs.hpp"
 
+/*
+ * Wolf
+ */
 Wolf::Wolf(int l) {
 	name = "Wolf";
 	level = l;
