@@ -50,16 +50,25 @@ int main() {
 
 	clear_to_border();
 
-	/* Create wolf object that's level 4 */
-	Wolf wolf1(4);
-
 	/* Display player stats window */
 	WINDOW *win_player = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, 0);
 	draw_character_stats(win_player, player);
 
-	/* Display wolf stats window */
+	getch();
+
+	/* Create wolf object and display its stats */
+	Wolf wolf1(6);
 	WINDOW *win_wolf1 = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, COLS-win_stats_width);
 	draw_character_stats(win_wolf1, wolf1);
+
+	getch();
+
+	/* Create rat object and display its stats */
+	Rat rat1(19);
+	WINDOW *win_rat1 = create_newwin(win_stats_height, win_stats_width, LINES-win_stats_height, COLS-win_stats_width);
+	draw_character_stats(win_rat1, rat1);
+
+	getch();
 
 	/* Display player inventory */
 	WINDOW *win_player_inventory = create_newwin(9, 18, (LINES-9)/2, (COLS-18)/2);

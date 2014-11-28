@@ -8,4 +8,9 @@ class Wolf : public Character {
 		Wolf(int l);
 };
 
+class Rat : public Character {
+	public:
+		Rat(int l);
+};
+
 #endif
