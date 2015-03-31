@@ -18,20 +18,54 @@
  */
 void splash() {
 	attron(COLOR_PAIR(2));
+
+	bool offset = false;
 	for(int i = 0; i < LINES; i++) {
-		for(int j = 0; j < COLS; j++) {
+		int j = 0;
+		if(offset) j++;
+		while(j < COLS) {
 			mvaddch(i, j, ACS_CKBOARD);
+			j += 2;
 		}
+		offset = !offset;
 		refresh();
-		usleep(20000);
+		usleep(5000);
 	}
+
 	attroff(COLOR_PAIR(2));
 
-	for(int i = 0; i < LINES; i++) {
-		move(i, 0);
-		clrtoeol();
+	for(int i = 0; i < COLS; i++) {
+		for(int j = 0; j < LINES; j++) {
+			mvaddch(j, i, ' ');
+		}
 		refresh();
-		usleep(20000);
+		usleep(2500);
+	}
+
+
+	attron(COLOR_PAIR(3));
+
+	offset = false;
+	for(int i = LINES; i >= 0; i--) {
+		int j = COLS;
+		if(offset) j--;
+		while(j >= 0) {
+			mvaddch(i, j, ACS_CKBOARD);
+			j -= 2;
+		}
+		offset = !offset;
+		refresh();
+		usleep(5000);
+	}
+
+	attroff(COLOR_PAIR(3));
+
+	for(int i = COLS; i >= 0; i--) {
+		for(int j = LINES; j >= 0; j--) {
+			mvaddch(j, i, ' ');
+		}
+		refresh();
+		usleep(2500);
 	}
 }
 
