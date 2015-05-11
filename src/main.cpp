@@ -11,6 +11,7 @@
 #include "weapons.hpp"
 #include "player.hpp"
 #include "npcs.hpp"
+#include "map.hpp"
 
 int main() {
 	char name[24];
@@ -106,6 +107,11 @@ int main() {
 	draw_character_equipslot(win_player_equipslot, player);
 	draw_character_inventory(win_player_inventory, player);
 	getch();
+
+    /* Load map */
+    Map current_map();
+    //load_map("map001", current_map);
+    load_map();
 
 	endwin();
 	return 0;
