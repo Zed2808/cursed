@@ -108,10 +108,9 @@ int main() {
 	draw_character_inventory(win_player_inventory, player);
 	getch();
 
-    /* Load map */
-    Map current_map();
-    //load_map("map001", current_map);
-    load_map();
+	/* Load map */
+	Map current_map();
+	load_map("map001", current_map);
 
 	endwin();
 	return 0;
