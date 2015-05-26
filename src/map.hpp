@@ -3,10 +3,9 @@
 
 
 class Map {
-    protected:
-        unsigned char tiles[8][8];
     public:
         Map();
+        unsigned char tiles[8][8];
 };
 
 void load_map(const char *mapname, Map &map);

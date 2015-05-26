@@ -12,7 +12,7 @@
 Map::Map() {
     for (int row = 0; row < 8; row++) {
         for (int col = 0; col < 8; col++) {
-            tiles[row][col] = NULL;
+            tiles[row][col] = 0;
         }
     }
 }
@@ -31,6 +31,14 @@ void load_map(const char *mapname, Map &map) {
     buffer = new unsigned char[64];
 
     fread(buffer, 64, 1, file);
+
+    int index = 0;
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            map.tiles[row][col] = buffer[index];
+            index++;
+        }
+    }
 
     delete[]buffer;
     fclose(file);
