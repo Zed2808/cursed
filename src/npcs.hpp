@@ -4,13 +4,13 @@
 #include "character.hpp"
 
 class Wolf : public Character {
-	public:
-		Wolf(int l);
+    public:
+        Wolf(int l);
 };
 
 class Rat : public Character {
-	public:
-		Rat(int l);
+    public:
+        Rat(int l);
 };
 
 #endif

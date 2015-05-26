@@ -5,8 +5,8 @@
 #include "character.hpp"
 
 class Player : public Character {
-	public:
-		Player();
+    public:
+        Player();
 };
 
 #endif

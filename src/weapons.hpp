@@ -5,22 +5,22 @@
 #include "character.hpp"
 
 class Weapon : public Item {
-	protected:
-		int damage;
-	public:
-		Weapon();
-		int get_damage();
-		/* Get weapon's attacks */
+    protected:
+        int damage;
+    public:
+        Weapon();
+        int get_damage();
+        /* Get weapon's attacks */
 };
 
 class Shortsword : public Weapon {
-	public:
-		Shortsword();
+    public:
+        Shortsword();
 };
 
 class BattleAxe : public Weapon {
-	public:
-		BattleAxe();
+    public:
+        BattleAxe();
 };
 
 #endif
