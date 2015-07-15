@@ -1,4 +1,4 @@
-#include "map.hpp"
+#include "maps.hpp"
 #include "tile.hpp"
 
 // TODO: Variable sized maps

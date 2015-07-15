@@ -3,7 +3,7 @@
 
 #include <string>
 #include "character.hpp"
-#include "map.hpp"
+#include "maps.hpp"
 
 void splash();
 WINDOW *create_newwin(int height, int width, int starty, int startx);

@@ -11,7 +11,7 @@
 #include "weapons.hpp"
 #include "player.hpp"
 #include "npcs.hpp"
-#include "map.hpp"
+#include "maps.hpp"
 
 int main() {
     char name[24];

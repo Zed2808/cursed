@@ -1,5 +1,5 @@
-#ifndef MAP_H
-#define MAP_H
+#ifndef MAPS_H
+#define MAPS_H
 
 #include "tile.hpp"
 
