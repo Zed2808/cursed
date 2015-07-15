@@ -367,3 +367,28 @@ void set_main_attributes(Character &character) {
     character.set_perception(attributes[5]);
     character.set_luck(attributes[6]);
 }
+
+/* Function: draw_map
+ *
+ *   Draws map to window
+ *
+ *   win_map: window to draw map to
+ *   map: map to draw to win_map
+ */
+void draw_map(WINDOW *win_map, Map map) {
+    /* Reset window */
+    werase(win_map);
+    box(win_map, 0, 0);
+
+    /* Draw tiles */
+    for(int row = 0; row < 16; row++) {
+        for(int col = 0; col < 16; col++) {
+            wattron(win_map, COLOR_PAIR(map.tiles[row][col].color_pair));
+            mvwaddch(win_map, row+1, col+1, map.tiles[row][col].symbol);
+            wattroff(win_map, COLOR_PAIR(map.tiles[row][col].color_pair));
+        }
+    }
+
+    /* Refresh window */
+    wrefresh(win_map);
+}

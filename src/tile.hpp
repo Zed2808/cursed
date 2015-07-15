@@ -8,8 +8,7 @@ class Tile {
         Tile();
         std::string name;
         char symbol;
-        int fgcolor;
-        int bgcolor;
+        int color_pair;
 };
 
 class Grass : public Tile {

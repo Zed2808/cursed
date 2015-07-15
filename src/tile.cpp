@@ -13,20 +13,17 @@
 Tile::Tile() {
     name = "empty";
     symbol = '.';
-    fgcolor = COLOR_WHITE;
-    bgcolor = COLOR_BLACK;
+    color_pair = 4;
 }
 
 Grass::Grass() {
     name = "grass";
     symbol = '.';
-    fgcolor = COLOR_GREEN;
-    bgcolor = COLOR_BLACK;
+    color_pair = 3;
 }
 
 Stone::Stone() {
     name = "stone";
     symbol = '.';
-    fgcolor = COLOR_WHITE;
-    bgcolor = COLOR_BLACK;
+    color_pair = 4;
 }

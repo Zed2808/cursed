@@ -25,6 +25,7 @@ int main() {
     init_pair(1, COLOR_RED, COLOR_BLACK);
     init_pair(2, COLOR_BLUE, COLOR_BLACK);
     init_pair(3, COLOR_GREEN, COLOR_BLACK);
+    init_pair(4, COLOR_WHITE, COLOR_BLACK);
 
     refresh();
     curs_set(0);
@@ -106,6 +107,14 @@ int main() {
     player.equipslot.unequip(player.inventory);
     draw_character_equipslot(win_player_equipslot, player);
     draw_character_inventory(win_player_inventory, player);
+    getch();
+
+    /* Create new empty map */
+    Map blankmap = Map();
+
+    /* Display new map */
+    WINDOW *win_map = create_newwin(18, 18, (LINES/2)-9, (COLS/2)-9);
+    draw_map(win_map, blankmap);
     getch();
 
     endwin();
