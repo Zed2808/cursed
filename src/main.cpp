@@ -108,20 +108,7 @@ int main() {
     draw_character_inventory(win_player_inventory, player);
     getch();
 
-    /* Load map001 into current_map buffer */
-    Map current_map;
-    load_map("data/maps/map001", current_map);
-
     endwin();
-
-    /* Print current_map to console */
-    printf("current_map:\n");
-    for (int row = 0; row < 8; row++) {
-        for (int col = 0; col < 8; col++) {
-            printf("%X", current_map.tiles[row][col]);
-        }
-        printf("\n");
-    }
 
     return 0;
 }
