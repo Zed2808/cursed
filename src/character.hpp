@@ -5,7 +5,11 @@
 #include "inventory.hpp"
 
 class Character {
-    protected:
+    public:
+        /* Inventory Stuff */
+        Inventory inventory;
+        EquipSlot equipslot;
+
         /* Current Stats */
         std::string name;
         int level;
@@ -28,45 +32,6 @@ class Character {
         int maxmana;
         int maxstamina;
         int carryweight;
-    public:
-        /* Inventory stuff */
-        Inventory inventory;
-        EquipSlot equipslot;
-
-        /* Sets & Gets for current stats */
-        void set_name(std::string n);
-        std::string get_name();
-        void set_level(int l);
-        int get_level();
-
-        void set_health(int h);
-        int get_health();
-        void set_mana(int m);
-        int get_mana();
-        void set_stamina(int s);
-        int get_stamina();
-
-        /* Sets & Gets for main attributes */
-        void set_endurance(int e);
-        int get_endurance();
-        void set_intelligence(int i);
-        int get_intelligence();
-        void set_agility(int a);
-        int get_agility();
-        void set_strength(int s);
-        int get_strength();
-        void set_personality(int p);
-        int get_personality();
-        void set_perception(int p);
-        int get_perception();
-        void set_luck(int l);
-        int get_luck();
-
-        /* Gets for derived attributes */
-        int get_maxhealth();
-        int get_maxmana();
-        int get_maxstamina();
-        int get_carryweight();
 };
 
 #endif
