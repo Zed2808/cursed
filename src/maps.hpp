@@ -3,10 +3,14 @@
 
 #include "tile.hpp"
 
+// TODO: Variable sized maps
+
 class Map {
     public:
         Map();
-        Tile tiles[16][16]; // TODO: Variable sized maps
+        Tile tiles[16][16];
 };
+
+void load_map(Map &map, const char *name);
 
 #endif

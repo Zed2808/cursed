@@ -31,7 +31,7 @@ int main() {
     curs_set(0);
 
     /* Draw splash thingy */
-    splash();
+    //splash();
 
     /* Create player object */
     Player player;
@@ -109,15 +109,24 @@ int main() {
     draw_character_inventory(win_player_inventory, player);
     getch();
 
-    /* Create new empty map */
-    Map blankmap = Map();
+    /* Load map */
+    Map current_map = Map();
+    load_map(current_map, "testmap");
 
-    /* Display new map */
+    /* Display current_map */
     WINDOW *win_map = create_newwin(18, 18, (LINES/2)-9, (COLS/2)-9);
-    draw_map(win_map, blankmap);
+    draw_map(win_map, current_map);
     getch();
 
     endwin();
+
+    // Some debug thingies
+    for(int row = 0; row < 16; row++) {
+        for(int col = 0; col < 16; col++) {
+            printf("%s(%i) ", current_map.tiles[row][col].name.c_str(), current_map.tiles[row][col].id);
+        }
+        printf("\n");
+    }
 
     return 0;
 }

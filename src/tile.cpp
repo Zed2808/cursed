@@ -6,24 +6,52 @@
 #include <ncurses.h>
 #endif
 
+#include <string>
 #include "tile.hpp"
 
-#include <string>
-
 Tile::Tile() {
+    id = 0;
     name = "empty";
-    symbol = '.';
+    symbol = ' ';
     color_pair = 4;
 }
 
 Grass::Grass() {
+    id = 1;
     name = "grass";
     symbol = '.';
     color_pair = 3;
 }
 
 Stone::Stone() {
+    id = 2;
     name = "stone";
     symbol = '.';
     color_pair = 4;
+}
+
+Wall::Wall() {
+    id = 3;
+    name = "wall";
+    symbol = '#';
+    color_pair = 2;
+}
+
+Tile get_tile_from_id(int id) {
+    switch (id) {
+        case 0:
+            return Tile();
+            break;
+        case 1:
+            return Grass();
+            break;
+        case 2:
+            return Stone();
+            break;
+        case 3:
+            return Wall();
+            break;
+        default:
+            return Tile();
+    }
 }
