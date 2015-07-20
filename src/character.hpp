@@ -5,11 +5,7 @@
 #include "inventory.hpp"
 
 class Character {
-    public:
-        /* Inventory Stuff */
-        Inventory inventory;
-        EquipSlot equipslot;
-
+    protected:
         /* Current Stats */
         std::string name;
         int level;
@@ -32,7 +28,6 @@ class Character {
         int maxmana;
         int maxstamina;
         int carryweight;
-<<<<<<< HEAD
 
     public:
         Character();
@@ -80,8 +75,6 @@ class Character {
         int get_maxmana();
         int get_maxstamina();
         int get_carryweight();
-=======
->>>>>>> 3a0370a7a7d06260531435654a87968f168a7423
 };
 
 #endif
