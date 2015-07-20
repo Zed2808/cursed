@@ -11,6 +11,12 @@ Map::Map() {
             tiles[row][col] = Tile();
         }
     }
+
+    for(int row = 0; row < 16; row++) {
+        for(int col = 0; col < 16; col++) {
+            characters[row][col] = Character();
+        }
+    }
 }
 
 void load_map(Map &map, const char *name) {

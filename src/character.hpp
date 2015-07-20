@@ -28,10 +28,18 @@ class Character {
         int maxmana;
         int maxstamina;
         int carryweight;
+
     public:
+        Character();
+
+        /* Visual stuff */
+        char symbol;
+        int color_pair;
+
         /* Inventory stuff */
         Inventory inventory;
         EquipSlot equipslot;
+
 
         /* Sets & Gets for current stats */
         void set_name(std::string n);

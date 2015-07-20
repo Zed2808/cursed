@@ -4,6 +4,8 @@
 Player::Player() {
     name = "Default";
     level = 1;
+    symbol = '@';
+    color_pair = 5;
     set_endurance(5);
     set_intelligence(5);
     set_agility(5);

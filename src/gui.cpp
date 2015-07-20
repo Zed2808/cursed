@@ -389,6 +389,17 @@ void draw_map(WINDOW *win_map, Map map) {
         }
     }
 
+    /* Draw characters */
+    for(int row = 0; row < 16; row++) {
+        for(int col = 0; col < 16; col++) {
+            wattron(win_map, COLOR_PAIR(map.characters[row][col].color_pair));
+            if(map.characters[row][col].get_name() != "") {
+                mvwaddch(win_map, row+1, col+1, map.characters[row][col].symbol);
+            }
+            wattroff(win_map, COLOR_PAIR(map.characters[row][col].color_pair));
+        }
+    }
+
     /* Refresh window */
     wrefresh(win_map);
 }

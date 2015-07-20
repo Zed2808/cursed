@@ -26,6 +26,7 @@ int main() {
     init_pair(2, COLOR_BLUE, COLOR_BLACK);
     init_pair(3, COLOR_GREEN, COLOR_BLACK);
     init_pair(4, COLOR_WHITE, COLOR_BLACK);
+    init_pair(5, COLOR_YELLOW, COLOR_BLACK);
 
     refresh();
     curs_set(0);
@@ -115,6 +116,17 @@ int main() {
 
     /* Display current_map */
     WINDOW *win_map = create_newwin(18, 18, (LINES/2)-9, (COLS/2)-9);
+    draw_map(win_map, current_map);
+    getch();
+
+    /* Place player onto map */
+    current_map.characters[2][2] = player;
+    draw_map(win_map, current_map);
+    getch();
+
+    /* Place NPCs onto map */
+    current_map.characters[4][8] = wolf1;
+    current_map.characters[8][4] = rat1;
     draw_map(win_map, current_map);
     getch();
 

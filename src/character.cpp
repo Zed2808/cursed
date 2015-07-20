@@ -1,6 +1,19 @@
 #include <string>
 #include "character.hpp"
 
+Character::Character() {
+    name = "";
+    level = 0;
+    symbol = ' ';
+    color_pair = 0;
+    maxhealth = 0;
+    health = 0;
+    maxmana = 0;
+    mana = 0;
+    maxstamina = 0;
+    stamina = 0;
+}
+
 /* Sets & Gets for current stats */
 void Character::set_name(std::string n) { name = n; }
 std::string Character::get_name() {	return name; }
