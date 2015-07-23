@@ -10,6 +10,7 @@ class Tile {
         std::string name;
         char symbol;
         int color_pair;
+        bool walkable;
 };
 
 class Grass : public Tile {

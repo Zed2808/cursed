@@ -6,6 +6,8 @@ Character::Character() {
     level = 0;
     symbol = ' ';
     color_pair = 0;
+    row = 0;
+    col = 0;
     maxhealth = 0;
     health = 0;
     maxmana = 0;

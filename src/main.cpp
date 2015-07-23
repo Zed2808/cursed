@@ -119,16 +119,27 @@ int main() {
     draw_map(win_map, current_map);
     getch();
 
-    /* Place player onto map */
-    current_map.characters[2][2] = player;
+    /* Place Player & NPCs onto map */
+    current_map.place_character(2, 2, player);
+    current_map.place_character(4, 8, wolf1);
+    current_map.place_character(8, 4, rat1);
     draw_map(win_map, current_map);
     getch();
 
-    /* Place NPCs onto map */
-    current_map.characters[4][8] = wolf1;
-    current_map.characters[8][4] = rat1;
-    draw_map(win_map, current_map);
-    getch();
+    /* Get player input */
+    keypad(stdscr, true);
+    int input = getch();
+
+    /* Do stuff with player input */
+    while(input != 27) { // 27 - escape key
+        if(input == KEY_UP || input == KEY_DOWN || input == KEY_LEFT || input == KEY_RIGHT) {
+            current_map.move_character(player, input);
+        }
+
+        draw_map(win_map, current_map);
+
+        input = getch();
+    }
 
     endwin();
 

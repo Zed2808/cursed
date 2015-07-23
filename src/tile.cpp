@@ -14,6 +14,7 @@ Tile::Tile() {
     name = "empty";
     symbol = ' ';
     color_pair = 4;
+    walkable = true;
 }
 
 Grass::Grass() {
@@ -21,6 +22,7 @@ Grass::Grass() {
     name = "grass";
     symbol = '.';
     color_pair = 3;
+    walkable = true;
 }
 
 Stone::Stone() {
@@ -28,6 +30,7 @@ Stone::Stone() {
     name = "stone";
     symbol = '.';
     color_pair = 4;
+    walkable = true;
 }
 
 Wall::Wall() {
@@ -35,6 +38,7 @@ Wall::Wall() {
     name = "wall";
     symbol = '#';
     color_pair = 2;
+    walkable = false;
 }
 
 Tile get_tile_from_id(int id) {

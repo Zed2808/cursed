@@ -32,9 +32,11 @@ class Character {
     public:
         Character();
 
-        /* Visual stuff */
+        /* Map stuff */
         char symbol;
         int color_pair;
+        int row;
+        int col;
 
         /* Inventory stuff */
         Inventory inventory;
