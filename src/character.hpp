@@ -6,14 +6,6 @@
 
 class Character {
     protected:
-        /* Current Stats */
-        std::string name;
-        int level;
-
-        int health;
-        int mana;
-        int stamina;
-
         /* Main Attributes */
         int endurance;		/* Affects health */
         int intelligence;	/* Affects mana */
@@ -31,6 +23,14 @@ class Character {
 
     public:
         Character();
+
+        /* Current Stats */
+        std::string name;
+        int level;
+
+        int health;
+        int mana;
+        int stamina;
 
         /* Map stuff */
         char symbol;

@@ -16,19 +16,6 @@ Character::Character() {
     stamina = 0;
 }
 
-/* Sets & Gets for current stats */
-void Character::set_name(std::string n) { name = n; }
-std::string Character::get_name() {	return name; }
-void Character::set_level(int l) { level = l; }
-int Character::get_level() { return level; }
-
-void Character::set_health(int h) { health = h; }
-int Character::get_health() { return health; }
-void Character::set_mana(int m) { mana = m; }
-int Character::get_mana() { return mana; }
-void Character::set_stamina(int s) { stamina = s; }
-int Character::get_stamina() { return stamina; }
-
 /* Sets & Gets for main attributes */
 void Character::set_endurance(int e) { endurance = e; maxhealth = endurance * 20; health = maxhealth; }
 int Character::get_endurance() { return endurance; }

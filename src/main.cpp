@@ -45,7 +45,7 @@ int main() {
     curs_set(1);
     mvwgetstr(win_name, 2, 1, name);
     curs_set(0);
-    player.set_name(name);
+    player.name = name;
 
     clear_to_border();
 

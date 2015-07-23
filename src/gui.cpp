@@ -125,7 +125,7 @@ void clear_to_border() {
 void draw_character_stats(WINDOW *win_character_stats, Character character) {
     /* Print name */
     wattron(win_character_stats, A_BOLD);
-    mvwprintw(win_character_stats, 0, 1, character.get_name().c_str());
+    mvwprintw(win_character_stats, 0, 1, character.name.c_str());
     wattroff(win_character_stats, A_BOLD);
 
     /* Print health only if maxhealth > 0 */
@@ -133,17 +133,17 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
         mvwprintw(win_character_stats, 1, 1, "HLTH ");
 
         wattron(win_character_stats, COLOR_PAIR(1));
-        for(double i = 0; i <= character.get_health(); i += character.get_maxhealth()/25.0) { /* Print 1 block for every full 4% of health, plus 1 */
+        for(double i = 0; i <= character.health; i += character.get_maxhealth()/25.0) { /* Print 1 block for every full 4% of health, plus 1 */
             waddch(win_character_stats, ACS_CKBOARD);
         }
         wattroff(win_character_stats, COLOR_PAIR(1));
 
-        if(character.get_health() <= character.get_maxhealth()/10) { /* If health is 10% or less, print percent in red */
+        if(character.health <= character.get_maxhealth()/10) { /* If health is 10% or less, print percent in red */
             wattron(win_character_stats, COLOR_PAIR(1));
-            mvwprintw(win_character_stats, 1, 31, "%3d", character.get_health());
+            mvwprintw(win_character_stats, 1, 31, "%3d", character.health);
             wattroff(win_character_stats, COLOR_PAIR(1));
         } else {
-            mvwprintw(win_character_stats, 1, 31, "%3d", character.get_health());
+            mvwprintw(win_character_stats, 1, 31, "%3d", character.health);
         }
         wprintw(win_character_stats, "/%3d", character.get_maxhealth());
     }
@@ -153,17 +153,17 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
         mvwprintw(win_character_stats, 2, 1, "MANA ");
 
         wattron(win_character_stats, COLOR_PAIR(2));
-        for(double i = 0; i <= character.get_mana(); i += character.get_maxmana()/25.0) { /* Print 1 block for every full 4% of mana, plus 1 */
+        for(double i = 0; i <= character.mana; i += character.get_maxmana()/25.0) { /* Print 1 block for every full 4% of mana, plus 1 */
             waddch(win_character_stats, ACS_CKBOARD);
         }
         wattroff(win_character_stats, COLOR_PAIR(2));
 
-        if(character.get_mana() <= character.get_maxmana()/10) { /* If mana is 10% or less, print percent in red */
+        if(character.mana <= character.get_maxmana()/10) { /* If mana is 10% or less, print percent in red */
             wattron(win_character_stats, COLOR_PAIR(1));
-            mvwprintw(win_character_stats, 2, 31, "%3d", character.get_mana());
+            mvwprintw(win_character_stats, 2, 31, "%3d", character.mana);
             wattroff(win_character_stats, COLOR_PAIR(1));
         } else {
-            mvwprintw(win_character_stats, 2, 31, "%3d", character.get_mana());
+            mvwprintw(win_character_stats, 2, 31, "%3d", character.mana);
         }
         wprintw(win_character_stats, "/%3d", character.get_maxmana());
     }
@@ -173,23 +173,23 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
         mvwprintw(win_character_stats, 3, 1, "STAM ");
 
         wattron(win_character_stats, COLOR_PAIR(3));
-        for(double i = 0; i <= character.get_stamina(); i += character.get_maxstamina()/25.0) { /* Print 1 block for every full 4% of stamina, plus 1 */
+        for(double i = 0; i <= character.stamina; i += character.get_maxstamina()/25.0) { /* Print 1 block for every full 4% of stamina, plus 1 */
             waddch(win_character_stats, ACS_CKBOARD);
         }
         wattroff(win_character_stats, COLOR_PAIR(3));
 
-        if(character.get_stamina() <= character.get_maxstamina()/10) { /* If stamina is 10% or less, print percent in red */
+        if(character.stamina <= character.get_maxstamina()/10) { /* If stamina is 10% or less, print percent in red */
             wattron(win_character_stats, COLOR_PAIR(1));
-            mvwprintw(win_character_stats, 3, 31, "%3d", character.get_stamina());
+            mvwprintw(win_character_stats, 3, 31, "%3d", character.stamina);
             wattroff(win_character_stats, COLOR_PAIR(1));
         } else {
-            mvwprintw(win_character_stats, 3, 31, "%3d", character.get_stamina());
+            mvwprintw(win_character_stats, 3, 31, "%3d", character.stamina);
         }
         wprintw(win_character_stats, "/%3d", character.get_maxstamina());
     }
 
     /* Print level */
-    mvwprintw(win_character_stats, 0, 29, "Level %3d", character.get_level());
+    mvwprintw(win_character_stats, 0, 29, "Level %3d", character.level);
 
     /* Refresh window */
     wrefresh(win_character_stats);
@@ -393,7 +393,7 @@ void draw_map(WINDOW *win_map, Map map) {
     for(int row = 0; row < 16; row++) {
         for(int col = 0; col < 16; col++) {
             wattron(win_map, COLOR_PAIR(map.characters[row][col].color_pair));
-            if(map.characters[row][col].get_name() != "") {
+            if(map.characters[row][col].name != "") {
                 mvwaddch(win_map, row+1, col+1, map.characters[row][col].symbol);
             }
             wattroff(win_map, COLOR_PAIR(map.characters[row][col].color_pair));
