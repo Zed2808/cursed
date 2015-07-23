@@ -39,25 +39,33 @@ void Map::place_character(int row, int col, Character &character) {
 void Map::move_character(Character &character, int key) {
     switch(key) {
         case KEY_UP:
-            if(character.row > 0 && tiles[character.row - 1][character.col].walkable) {
+            if(characters[character.row - 1][character.col].name != "") {
+                // Interact
+            } else if(character.row > 0 && tiles[character.row - 1][character.col].walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row - 1, character.col, character);
             }
             break;
         case KEY_DOWN:
-            if(character.row < MAPHEIGHT - 1 && tiles[character.row + 1][character.col].walkable) {
+            if(characters[character.row + 1][character.col].name != "") {
+                // Interact
+            } else if(character.row < MAPHEIGHT - 1 && tiles[character.row + 1][character.col].walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row + 1, character.col, character);
             }
             break;
         case KEY_LEFT:
-            if(character.col > 0 && tiles[character.row][character.col - 1].walkable) {
+            if(characters[character.row][character.col - 1].name != "") {
+                // Interact
+            } else if(character.col > 0 && tiles[character.row][character.col - 1].walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row, character.col - 1, character);
             }
             break;
         case KEY_RIGHT:
-            if(character.col < MAPWIDTH - 1 && tiles[character.row][character.col + 1].walkable) {
+            if(characters[character.row][character.col + 1].name != "") {
+                // Interact
+            } else if(character.col < MAPWIDTH - 1 && tiles[character.row][character.col + 1].walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row, character.col + 1, character);
             }
