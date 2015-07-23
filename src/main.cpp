@@ -110,6 +110,8 @@ int main() {
     draw_character_inventory(win_player_inventory, player);
     getch();
 
+    clear_to_border();
+
     /* Load map */
     Map current_map = Map();
     load_map(current_map, "testmap");
