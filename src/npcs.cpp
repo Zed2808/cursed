@@ -7,6 +7,7 @@
 Wolf::Wolf(int l) {
     name = "Wolf";
     level = l;
+    hostile = true;
     symbol = 'w';
     color_pair = 1;
     maxhealth = 10;
@@ -20,6 +21,7 @@ Wolf::Wolf(int l) {
 Rat::Rat(int l) {
     name = "Rat";
     level = l;
+    hostile = true;
     symbol = 'r';
     color_pair = 1;
     maxhealth = 5;

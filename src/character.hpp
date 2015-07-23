@@ -27,6 +27,7 @@ class Character {
         /* Current Stats */
         std::string name;
         int level;
+        bool hostile;
 
         int health;
         int mana;

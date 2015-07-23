@@ -4,6 +4,7 @@
 Character::Character() {
     name = "";
     level = 0;
+    hostile = false;
     symbol = ' ';
     color_pair = 0;
     row = 0;
