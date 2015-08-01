@@ -1,0 +1,29 @@
+LAYOUT
+
+ 32 bytes   Name
+  1 byte    Height
+  1 byte    Width
+  1 byte    Start section (0xFF)
+  ? bytes   TILES
+0-1 bytes   Start section (0xFF)
+0-? bytes   CHARACTERS
+
+
+TILES
+
+  1 byte    Start tile (0xFE)
+  1 byte    Tile ID
+
+
+CHARACTERS
+
+  1 byte    Start character (0xFE)
+  1 byte    Character ID
+
+
+
+
+CODES
+
+  FE  Start tile/character
+  FF  Start section
