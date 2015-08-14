@@ -152,5 +152,9 @@ int main() {
 
     endwin();
 
+    printf("Map name: <%s>\n", current_map.name);
+    printf("Map height: %u\n", current_map.height);
+    printf("Map width: %u\n", current_map.width);
+
     return 0;
 }

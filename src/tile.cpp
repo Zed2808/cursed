@@ -10,7 +10,7 @@
 #include "tile.hpp"
 
 Tile::Tile() {
-    id = 0;
+    id = 0x00;
     name = "empty";
     symbol = ' ';
     color_pair = 4;
@@ -18,7 +18,7 @@ Tile::Tile() {
 }
 
 Grass::Grass() {
-    id = 1;
+    id = 0x01;
     name = "grass";
     symbol = '.';
     color_pair = 3;
@@ -26,7 +26,7 @@ Grass::Grass() {
 }
 
 Stone::Stone() {
-    id = 2;
+    id = 0x02;
     name = "stone";
     symbol = '.';
     color_pair = 4;
@@ -34,25 +34,25 @@ Stone::Stone() {
 }
 
 Wall::Wall() {
-    id = 3;
+    id = 0x03;
     name = "wall";
     symbol = '#';
     color_pair = 2;
     walkable = false;
 }
 
-Tile get_tile_from_id(int id) {
+Tile get_tile_from_id(unsigned char id) {
     switch (id) {
-        case 0:
+        case 0x00:
             return Tile();
             break;
-        case 1:
+        case 0x01:
             return Grass();
             break;
-        case 2:
+        case 0x02:
             return Stone();
             break;
-        case 3:
+        case 0x03:
             return Wall();
             break;
         default:

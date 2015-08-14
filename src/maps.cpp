@@ -74,12 +74,8 @@ void Map::move_character(Character &character, int key) {
 }
 
 void load_map(Map &map, const char *name) {
-    unsigned char *buffer; // Pointer to buffered data
-    FILE *file = NULL;      // File pointer
-
-    char mapname[32];
-    char mapheight[1];
-    char mapwidth[1];
+    unsigned char buffer[1024]; // Buffer to hold entire map file
+    FILE *file = NULL;          // Pointer to actual map file
 
     char dir[32];
     strcpy(dir, "data/maps/");
@@ -87,9 +83,14 @@ void load_map(Map &map, const char *name) {
 
     file = fopen(dir, "rb");
 
-    buffer = new unsigned char[1024];
-
     fread(buffer, TEMPMAPHEIGHT * TEMPMAPWIDTH, 1, file);
+
+    /* Read name */
+    strncpy(map.name, reinterpret_cast<const char*>(buffer), 32);
+
+    /* Read map dimensions */
+    map.height = buffer[32];
+    map.width = buffer[33];
 
     int index = 0;
     for(int row = 0; row < TEMPMAPHEIGHT; row++) {
@@ -99,6 +100,5 @@ void load_map(Map &map, const char *name) {
         }
     }
 
-    delete[]buffer;
     fclose(file);
 }

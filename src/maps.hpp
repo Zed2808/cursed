@@ -9,6 +9,9 @@
 class Map {
     public:
         Map();
+        char name[32];
+        unsigned char height;
+        unsigned char width;
         Tile tiles[16][16];
         Character characters[16][16];
         void place_character(int row, int col, Character &character);

@@ -6,7 +6,7 @@
 class Tile {
     public:
         Tile();
-        int id;
+        unsigned char id;
         std::string name;
         char symbol;
         int color_pair;
@@ -28,6 +28,6 @@ class Wall : public Tile {
         Wall();
 };
 
-Tile get_tile_from_id(int id);
+Tile get_tile_from_id(unsigned char id);
 
 #endif
