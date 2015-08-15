@@ -74,16 +74,25 @@ void Map::move_character(Character &character, int key) {
 }
 
 void load_map(Map &map, const char *name) {
-    unsigned char buffer[1024]; // Buffer to hold entire map file
-    FILE *file = NULL;          // Pointer to actual map file
+    int buffersize = 1024;            // Size of buffer
+    unsigned char buffer[buffersize]; // Buffer to read map file into
+    FILE *file = NULL;                // Pointer to actual map file
 
+    /* Section buffers */
+    unsigned char tilebuffer[1024];
+    unsigned char charbuffer[1024];
+
+    /* Store path to map file in dir */
     char dir[32];
+
     strcpy(dir, "data/maps/");
     strcat(dir, name);
 
+    /* Open map file */
     file = fopen(dir, "rb");
 
-    fread(buffer, TEMPMAPHEIGHT * TEMPMAPWIDTH, 1, file);
+    /* Read map file into buffer */
+    fread(buffer, buffersize, 1, file);
 
     /* Read name */
     strncpy(map.name, reinterpret_cast<const char*>(buffer), 32);
@@ -92,11 +101,41 @@ void load_map(Map &map, const char *name) {
     map.height = buffer[32];
     map.width = buffer[33];
 
-    int index = 0;
-    for(int row = 0; row < TEMPMAPHEIGHT; row++) {
-        for(int col = 0; col < TEMPMAPWIDTH; col++) {
-            map.tiles[row][col] = get_tile_from_id(buffer[index]);
-            index++;
+    /* Prepare to read sections */
+    bool reading = false;
+    int index = 34; /* Start at first byte after name and dimensions */
+    int start;      /* First byte of section */
+    int end;        /* Last byte of section */
+
+    /* Read entire tile section */
+    if(buffer[index] == 0xff) { /* Byte at index matches section start byte */
+        index++;
+        start = index;
+        reading = true;
+
+        while(reading) {
+            if(buffer[index] == 0xfd) { /* Byte at index matches section end byte */
+                end = index;     /* Set end point of section to the section end */
+                index++;         /* Increment index to prepare to read next section */
+                reading = false;
+            } else {
+                index++;
+            }
+        }
+
+        memcpy(tilebuffer, buffer + start, end - start);
+    }
+
+    /* Load individual tiles */
+    int tileindex = 0; /* Start reading from first byte of tilebuffer */
+
+    for(int row = 0; row < map.height; row++) {
+        for(int col = 0; col < map.width; col++) {
+            if(tilebuffer[tileindex] == 0xfe) { /* Byte at tileindex matches tile start byte */
+                tileindex++;
+                map.tiles[row][col] = get_tile_from_id(tilebuffer[tileindex]);
+                tileindex++;
+            }
         }
     }
 
