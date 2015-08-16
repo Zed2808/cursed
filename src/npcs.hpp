@@ -13,4 +13,6 @@ class Rat : public Character {
         Rat(int l);
 };
 
+Character get_npc_from_id(unsigned char id, unsigned char level);
+
 #endif

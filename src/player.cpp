@@ -3,6 +3,7 @@
 
 Player::Player() {
     name = "Default";
+    id = 0x00;
     level = 1;
     symbol = '@';
     color_pair = 5;

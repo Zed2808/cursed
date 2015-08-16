@@ -24,11 +24,13 @@ class Character {
     public:
         Character();
 
-        /* Current Stats */
+        /* Basic Info */
         std::string name;
+        unsigned char id;
         int level;
         bool hostile;
 
+        /* Current Stats */
         int health;
         int mana;
         int stamina;

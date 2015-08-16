@@ -21,6 +21,9 @@ CHARACTERS
 
   1 byte    Start character (0xFE)
   1 byte    Character ID
+  1 byte    Character level
+  1 byte    Row
+  1 byte    Column
 
 
 

@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "maps.hpp"
+#include "npcs.hpp"
 #include "tile.hpp"
 
 #define TEMPMAPHEIGHT 16
@@ -115,8 +116,8 @@ void load_map(Map &map, const char *name) {
 
         while(reading) {
             if(buffer[index] == 0xfd) { /* Byte at index matches section end byte */
-                end = index;     /* Set end point of section to the section end */
-                index++;         /* Increment index to prepare to read next section */
+                end = index;            /* Set end point of section read to the section end byte*/
+                index++;                /* Increment index to prepare to read next section */
                 reading = false;
             } else {
                 index++;
@@ -136,6 +137,51 @@ void load_map(Map &map, const char *name) {
                 map.tiles[row][col] = get_tile_from_id(tilebuffer[tileindex]);
                 tileindex++;
             }
+        }
+    }
+
+    /* Read entire character section */
+    if(buffer[index] == 0xff) { /* Byte at index where we left off matches section start byte */
+        index++;
+        start = index;
+        reading = true;
+
+        while(reading) {
+            if(buffer[index] == 0xfd) { /* Byte at index matches section end byte */
+                end = index;            /* Set end point of section read to the section end byte */
+                reading = false;
+            } else {
+                index++;
+            }
+        }
+
+        memcpy(charbuffer, buffer + start, end - start);
+    }
+
+    /* Load individual characters */
+    reading = true;
+    int charindex = 0; /* Start reading from the first byte of charbuffer */
+    unsigned char charid;
+    unsigned char charlevel;
+    unsigned char charrow;
+    unsigned char charcol;
+
+    while(reading) {
+        if(charbuffer[charindex] == 0xfe) { /* Byte at charindex matches character start byte */
+            charindex++;
+            charid = charbuffer[charindex];
+            charindex++;
+            charlevel = charbuffer[charindex];
+            charindex++;
+            charrow = charbuffer[charindex];
+            charindex++;
+            charcol = charbuffer[charindex];
+            charindex++;
+
+            Character newchar = get_npc_from_id(charid, charlevel);
+            map.place_character(charrow, charcol, newchar);
+        } else {
+            reading = false;
         }
     }
 

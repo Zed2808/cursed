@@ -116,18 +116,12 @@ int main() {
 
     */ //END OLD TESTING STUFF
 
-    // Create new NPCs
-    Wolf wolf2(4);
-    Rat rat2(2);
-
     // Load map
     Map current_map = Map();
     load_map(current_map, "testmap");
 
-    // Place Player & NPCs onto map
+    // Place Player onto map
     current_map.place_character(2, 2, player);
-    current_map.place_character(4, 8, wolf2);
-    current_map.place_character(8, 4, rat2);
 
     // Display current_map
     WINDOW *win_map = create_newwin(18, 18, (LINES/2)-9, (COLS/2)-9);
