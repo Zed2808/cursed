@@ -24,6 +24,11 @@ Map::Map() {
         }
     }
 
+    characters = new Character*[TEMPMAPHEIGHT];
+    for(int i = 0; i < TEMPMAPHEIGHT; i++) {
+        characters[i] = new Character[TEMPMAPWIDTH];
+    }
+
     for(int row = 0; row < TEMPMAPHEIGHT; row++) {
         for(int col = 0; col < TEMPMAPWIDTH; col++) {
             characters[row][col] = Character();
