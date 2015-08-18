@@ -380,6 +380,9 @@ void draw_map(WINDOW *win_map, Map map) {
     werase(win_map);
     box(win_map, 0, 0);
 
+    /* Draw map name */
+    mvwprintw(win_map, 0, 1, "%s", map.name);
+
     /* Draw tiles */
     for(int row = 0; row < 16; row++) {
         for(int col = 0; col < 16; col++) {
