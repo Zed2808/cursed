@@ -13,7 +13,7 @@ class Map {
         unsigned char height;
         unsigned char width;
         Tile tiles[16][16];
-        Character characters[16][16];
+        Character **characters;
         void place_character(int row, int col, Character &character);
         void move_character(Character &character, int key);
 };
