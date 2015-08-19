@@ -4,7 +4,7 @@
 /* Base Item */
 Item::Item() {
     name = "";
-    id = 0;
+    id = 0x00;
     weight = 0;
 }
 

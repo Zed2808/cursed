@@ -7,7 +7,7 @@ class Item {
     public:
         Item();
         std::string name;
-        int id;
+        unsigned char id;
         int weight;
 };
 
