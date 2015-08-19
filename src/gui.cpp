@@ -215,11 +215,11 @@ void draw_character_inventory(WINDOW *win_character_inventory, Character charact
     mvwprintw(win_character_inventory, 0, 11, "%6d", character.inventory.totalweight);
 
     mvwprintw(win_character_inventory, 1, 1, "SLOT 1");
-    mvwprintw(win_character_inventory, 2, 1, "Name: %s", character.inventory.slots[0].get_name().c_str());
+    mvwprintw(win_character_inventory, 2, 1, "Name: %s", character.inventory.slots[0].name.c_str());
     mvwprintw(win_character_inventory, 3, 1, "Quantity: %d", character.inventory.quantity[0]);
 
     mvwprintw(win_character_inventory, 5, 1, "SLOT 2");
-    mvwprintw(win_character_inventory, 6, 1, "Name: %s", character.inventory.slots[1].get_name().c_str());
+    mvwprintw(win_character_inventory, 6, 1, "Name: %s", character.inventory.slots[1].name.c_str());
     mvwprintw(win_character_inventory, 7, 1, "Quantity: %d", character.inventory.quantity[1]);
 
     /* Refresh window */
@@ -242,7 +242,7 @@ void draw_character_equipslot(WINDOW *win_character_equipslot, Character charact
     mvwprintw(win_character_equipslot, 0, 1, "Equip Slot");
     wattroff(win_character_equipslot, A_BOLD);
 
-    mvwprintw(win_character_equipslot, 1, 1, "%s", character.equipslot.equipped.get_name().c_str());
+    mvwprintw(win_character_equipslot, 1, 1, "%s", character.equipslot.equipped.name.c_str());
 
     /* Refresh window */
     wrefresh(win_character_equipslot);

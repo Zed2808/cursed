@@ -4,15 +4,11 @@
 #include <string>
 
 class Item {
-    protected:
-        std::string name;
-        int itemid;
-        int weight;
     public:
         Item();
-        std::string get_name();
-        int get_itemid();
-        int get_weight();
+        std::string name;
+        int id;
+        int weight;
 };
 
 #endif
