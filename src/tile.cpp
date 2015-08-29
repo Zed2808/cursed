@@ -36,8 +36,8 @@ Stone::Stone() {
 Wall::Wall() {
     id = 0x03;
     name = "wall";
-    symbol = '#';
-    color_pair = 2;
+    symbol = ' ';
+    color_pair = 6;
     walkable = false;
 }
 
