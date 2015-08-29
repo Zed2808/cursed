@@ -8,7 +8,6 @@
 
 #include <ctime>
 #include "gui.hpp"
-#include "weapons.hpp"
 #include "player.hpp"
 #include "npcs.hpp"
 #include "maps.hpp"
