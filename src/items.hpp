@@ -2,6 +2,7 @@
 #define ITEMS_H
 
 #include <string>
+#include "attacks.hpp"
 
 /* Item */
 class Item {
@@ -18,6 +19,8 @@ class Item {
 class Weapon : public Item {
     public:
         Weapon();
+        Attack primary;
+        Attack secondary;
 };
 
 /* Shortsword */
