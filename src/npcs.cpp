@@ -6,7 +6,8 @@
  */
 Wolf::Wolf(int l) {
     name = "Wolf";
-    id = 0x01;
+    num_id = 0x01;
+    str_id = "wolf";
     level = l;
     hostile = true;
     symbol = 'w';
@@ -19,9 +20,13 @@ Wolf::Wolf(int l) {
     stamina = maxstamina;
 }
 
+/*
+ * Rat
+ */
 Rat::Rat(int l) {
     name = "Rat";
-    id = 0x02;
+    num_id = 0x02;
+    str_id = "rat";
     level = l;
     hostile = true;
     symbol = 'r';

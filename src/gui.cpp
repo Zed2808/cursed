@@ -215,7 +215,8 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
     wrefresh(win_character_stats);
 }
 
-/* Function: draw_character_inventory
+/*
+ * Function: draw_character_inventory
  *
  *   Draws inventory of character
  *
@@ -246,7 +247,8 @@ void draw_character_inventory(WINDOW *win_character_inventory, Character charact
     wrefresh(win_character_inventory);
 }
 
-/* Function: draw_character_equipslot
+/*
+ * Function: draw_character_equipslot
  *
  *   Draws equipslot of character
  *
@@ -268,14 +270,35 @@ void draw_character_equipslot(WINDOW *win_character_equipslot, Character charact
     wrefresh(win_character_equipslot);
 }
 
-/* Function: set_main_attributes
+/*
+ * Function: set_character_name
  *
- *   Input window for Character's main attributes
+ *   Input window for character's name
+ *
+ *   character: character whose name should be set
+ */
+void set_character_name(Character &character) {
+    char name[24];
+
+    WINDOW *win_name = create_newwin(4, 39, (LINES-4)/2, (COLS-36)/2);
+    wattron(win_name, A_BOLD);
+    mvwprintw(win_name, 1, 1, "Enter %s's name (up to 24 chars).", character.str_id.c_str());
+    wattroff(win_name, A_BOLD);
+    curs_set(1);
+    mvwgetnstr(win_name, 2, 1, name, 24);
+    curs_set(0);
+    character.name = name;
+}
+
+/* 
+ * Function: set_main_attributes
+ *
+ *   Input window for character's main attributes
  *
  *   character: character whose main attrs should be set
  */
 void set_main_attributes(Character &character) {
-    WINDOW *win = create_newwin(11, 19, (LINES-9)/2, (COLS-19)/2);
+    WINDOW *win = create_newwin(11, 26, (LINES-9)/2, (COLS-19)/2);
     int input;
     int index = 0;
     int points = 10;
@@ -293,6 +316,8 @@ void set_main_attributes(Character &character) {
     keypad(win, true);
     noecho();
 
+    mvwprintw(win, 0, 1, character.name.c_str());
+
     mvwprintw(win, 1, 1, "Endurance");
     mvwprintw(win, 2, 1, "Intelligence");
     mvwprintw(win, 3, 1, "Agility");
@@ -303,52 +328,52 @@ void set_main_attributes(Character &character) {
 
     while(input != '\n') {
         /* Endurance */
-        if(attributes[0] > 0)  mvwprintw(win, 1, 14, "<");
-        if(attributes[0] < 10) mvwprintw(win, 1, 17, ">");
+        if(attributes[0] > 0)  mvwprintw(win, 1, 20, "<");
+        if(attributes[0] < 10) mvwprintw(win, 1, 23, ">");
         if(index == 0) wattron(win, A_REVERSE);
-        mvwprintw(win, 1, 15, "%2d", attributes[0]);
+        mvwprintw(win, 1, 21, "%2d", attributes[0]);
         wattroff(win, A_REVERSE);
 
         /* Intelligence */
-        if(attributes[1] > 0)  mvwprintw(win, 2, 14, "<");
-        if(attributes[1] < 10) mvwprintw(win, 2, 17, ">");
+        if(attributes[1] > 0)  mvwprintw(win, 2, 20, "<");
+        if(attributes[1] < 10) mvwprintw(win, 2, 23, ">");
         if(index == 1) wattron(win, A_REVERSE);
-        mvwprintw(win, 2, 15, "%2d", attributes[1]);
+        mvwprintw(win, 2, 21, "%2d", attributes[1]);
         wattroff(win, A_REVERSE);
 
         /* Agility */
-        if(attributes[2] > 0)  mvwprintw(win, 3, 14, "<");
-        if(attributes[2] < 10) mvwprintw(win, 3, 17, ">");
+        if(attributes[2] > 0)  mvwprintw(win, 3, 20, "<");
+        if(attributes[2] < 10) mvwprintw(win, 3, 23, ">");
         if(index == 2) wattron(win, A_REVERSE);
-        mvwprintw(win, 3, 15, "%2d", attributes[2]);
+        mvwprintw(win, 3, 21, "%2d", attributes[2]);
         wattroff(win, A_REVERSE);
 
         /* Strength */
-        if(attributes[3] > 0)  mvwprintw(win, 4, 14, "<");
-        if(attributes[3] < 10) mvwprintw(win, 4, 17, ">");
+        if(attributes[3] > 0)  mvwprintw(win, 4, 20, "<");
+        if(attributes[3] < 10) mvwprintw(win, 4, 23, ">");
         if(index == 3) wattron(win, A_REVERSE);
-        mvwprintw(win, 4, 15, "%2d", attributes[3]);
+        mvwprintw(win, 4, 21, "%2d", attributes[3]);
         wattroff(win, A_REVERSE);
 
         /* Personality */
-        if(attributes[4] > 0)  mvwprintw(win, 5, 14, "<");
-        if(attributes[4] < 10) mvwprintw(win, 5, 17, ">");
+        if(attributes[4] > 0)  mvwprintw(win, 5, 20, "<");
+        if(attributes[4] < 10) mvwprintw(win, 5, 23, ">");
         if(index == 4) wattron(win, A_REVERSE);
-        mvwprintw(win, 5, 15, "%2d", attributes[4]);
+        mvwprintw(win, 5, 21, "%2d", attributes[4]);
         wattroff(win, A_REVERSE);
 
         /* Perception */
-        if(attributes[5] > 0)  mvwprintw(win, 6, 14, "<");
-        if(attributes[5] < 10) mvwprintw(win, 6, 17, ">");
+        if(attributes[5] > 0)  mvwprintw(win, 6, 20, "<");
+        if(attributes[5] < 10) mvwprintw(win, 6, 23, ">");
         if(index == 5) wattron(win, A_REVERSE);
-        mvwprintw(win, 6, 15, "%2d", attributes[5]);
+        mvwprintw(win, 6, 21, "%2d", attributes[5]);
         wattroff(win, A_REVERSE);
 
         /* Luck */
-        if(attributes[6] > 0)  mvwprintw(win, 7, 14, "<");
-        if(attributes[6] < 10) mvwprintw(win, 7, 17, ">");
+        if(attributes[6] > 0)  mvwprintw(win, 7, 20, "<");
+        if(attributes[6] < 10) mvwprintw(win, 7, 23, ">");
         if(index == 6) wattron(win, A_REVERSE);
-        mvwprintw(win, 7, 15, "%2d", attributes[6]);
+        mvwprintw(win, 7, 21, "%2d", attributes[6]);
         wattroff(win, A_REVERSE);
 
         /* Points Remaining */
@@ -388,7 +413,8 @@ void set_main_attributes(Character &character) {
     character.set_luck(attributes[6]);
 }
 
-/* Function: draw_map
+/*
+ * Function: draw_map
  *
  *   Draws map to window
  *

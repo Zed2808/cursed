@@ -26,7 +26,8 @@ class Character {
 
         /* Basic Info */
         std::string name;
-        unsigned char id;
+        unsigned char num_id;
+        std::string str_id;
         int level;
         bool hostile;
 

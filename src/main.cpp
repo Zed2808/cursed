@@ -13,8 +13,7 @@
 #include "maps.hpp"
 
 int main() {
-    char name[24];
-
+    // Initialize custom GUI stuff
     init_gui();
 
     // Draw splash thingy
@@ -23,20 +22,12 @@ int main() {
     // Create player object
     Player player;
 
-    // Get and set player's name
-    WINDOW *win_name = create_newwin(4, 36, (LINES-4)/2, (COLS-36)/2);
-    wattron(win_name, A_BOLD);
-    mvwprintw(win_name, 1, 1, "Enter your name (up to 24 chars).");
-    wattroff(win_name, A_BOLD);
-    curs_set(1);
-    mvwgetstr(win_name, 2, 1, name);
-    curs_set(0);
-    player.name = name;
-
+    // Set player's name
+    set_character_name(player);
     clear_to_border();
 
+    // Set player's main attributes
     set_main_attributes(player);
-
     clear_to_border();
 
     /* BEGIN OLD TESTING STUFF

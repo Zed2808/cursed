@@ -3,7 +3,8 @@
 
 Character::Character() {
     name = "";
-    id = 0xff;
+    num_id = 0xff;
+    str_id = "void";
     level = 0;
     hostile = false;
     symbol = ' ';
