@@ -127,8 +127,6 @@ int main() {
     WINDOW *win_map = create_newwin(18, 18, (LINES/2)-9, (COLS/2)-9);
     draw_map(win_map, current_map);
 
-    getch();
-
     // Get player input
     keypad(stdscr, true);
     int input = getch();
