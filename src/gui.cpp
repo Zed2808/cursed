@@ -423,10 +423,8 @@ void set_main_attributes(Character &character) {
  *   win_map: window to draw map to
  *   map: map to draw to win_map
  */
-void draw_map(WINDOW *win_map, Map map) {
-    /* Reset window */
-    werase(win_map);
-    box(win_map, 0, 0);
+void draw_map(Map map) {
+    WINDOW *win_map = create_newwin(18, 18, (LINES/2)-9, (COLS/2)-9);
 
     /* Draw map name */
     mvwprintw(win_map, 0, 1, "%s", map.name);

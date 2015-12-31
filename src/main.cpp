@@ -81,8 +81,7 @@ int main() {
     current_map.place_character(2, 2, player);
 
     // Display current_map
-    WINDOW *win_map = create_newwin(18, 18, (LINES/2)-9, (COLS/2)-9);
-    draw_map(win_map, current_map);
+    draw_map(current_map);
 
     // Get player input
     keypad(stdscr, true);
@@ -94,7 +93,7 @@ int main() {
             current_map.move_character(player, input);
         }
 
-        draw_map(win_map, current_map);
+        draw_map(current_map);
 
         input = getch();
     }
