@@ -142,7 +142,9 @@ void clear_to_border() {
  *   win_character_stats: window to write stats on
  *   character: character whose stats should be drawn
  */
-void draw_character_stats(WINDOW *win_character_stats, Character character) {
+void draw_character_stats(Character character) {
+    WINDOW *win_character_stats = create_newwin(5, 39, LINES-5, 0);
+
     /* Print name */
     wattron(win_character_stats, A_BOLD);
     mvwprintw(win_character_stats, 0, 1, character.name.c_str());
@@ -223,10 +225,8 @@ void draw_character_stats(WINDOW *win_character_stats, Character character) {
  *   win_character_inventory: window on which to draw character's inventory
  *   character: character whose inventory should be drawn
  */
-void draw_character_inventory(WINDOW *win_character_inventory, Character character) {
-    /* Reset window */
-    werase(win_character_inventory);
-    box(win_character_inventory, 0, 0);
+void draw_character_inventory(Character character) {
+    WINDOW *win_character_inventory = create_newwin(9, 18, (LINES-9)/2, (COLS-18)/2);
 
     /* Print name of character */
     wattron(win_character_inventory, A_BOLD);
@@ -255,10 +255,8 @@ void draw_character_inventory(WINDOW *win_character_inventory, Character charact
  *   win_character_equipslot: window on which to draw character's equipslot
  *   character: character whose equipslot should be drawn
  */
-void draw_character_equipslot(WINDOW *win_character_equipslot, Character character) {
-    /* Reset window */
-    werase(win_character_equipslot);
-    box(win_character_equipslot, 0, 0);
+void draw_character_equipslot(Character character) {
+    WINDOW *win_character_equipslot = create_newwin(3, 18, (LINES-3), (COLS-18)/2);
 
     wattron(win_character_equipslot, A_BOLD);
     mvwprintw(win_character_equipslot, 0, 1, "Equip Slot");
@@ -288,6 +286,8 @@ void set_character_name(Character &character) {
     mvwgetnstr(win_name, 2, 1, name, 24);
     curs_set(0);
     character.name = name;
+
+    clear_to_border();
 }
 
 /* 
@@ -411,6 +411,8 @@ void set_main_attributes(Character &character) {
     character.set_personality(attributes[4]);
     character.set_perception(attributes[5]);
     character.set_luck(attributes[6]);
+
+    clear_to_border();
 }
 
 /*
