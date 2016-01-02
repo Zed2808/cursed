@@ -10,6 +10,7 @@
 #include <string>
 #include "gui.hpp"
 #include "character.hpp"
+#include "log.hpp"
 
 /*
  * Function: init_gui
@@ -451,4 +452,23 @@ void draw_map(Map map) {
 
     /* Refresh window */
     wrefresh(win_map);
+}
+
+/*
+ * Function: draw_log
+ *
+ *   Draws log window
+ */
+void draw_log(Log log) {
+    WINDOW *win_log_border = newwin(12, COLS, LINES-12, 0);
+    box(win_log_border, 0, 0);
+    WINDOW *win_log = newwin(10, COLS-2, LINES-11, 2);
+
+    for(std::list<std::string>::iterator it = log.log.begin(); it != log.log.end(); it++) {
+        std::string s = *it;
+        wprintw(win_log, "> %s\n", s.c_str());
+    }
+
+    wrefresh(win_log_border);
+    wrefresh(win_log);
 }

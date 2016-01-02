@@ -11,6 +11,9 @@
 #include "player.hpp"
 #include "npcs.hpp"
 #include "maps.hpp"
+#include "log.hpp"
+
+Log log;
 
 int main() {
     // Initialize custom GUI stuff
@@ -76,12 +79,14 @@ int main() {
     // Load map
     Map current_map = Map();
     load_map(current_map, "testmap");
+    log.write("Loaded testmap");
 
     // Place Player onto map
     current_map.place_character(2, 2, player);
 
     // Display current_map
     draw_map(current_map);
+    draw_log(log);
 
     // Get player input
     keypad(stdscr, true);
@@ -94,6 +99,7 @@ int main() {
         }
 
         draw_map(current_map);
+        draw_log(log);
 
         input = getch();
     }

@@ -3,6 +3,7 @@
 
 #include "character.hpp"
 #include "maps.hpp"
+#include "log.hpp"
 
 void init_gui();
 void splash();
@@ -15,5 +16,6 @@ void draw_character_equipslot(Character character);
 void set_character_name(Character &character);
 void set_main_attributes(Character &character);
 void draw_map(Map map);
+void draw_log(Log log);
 
 #endif
