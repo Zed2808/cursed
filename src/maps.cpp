@@ -43,35 +43,45 @@ void Map::place_character(int row, int col, Character &character) {
 }
 
 void Map::move_character(Character &character, int key) {
+    Character char_up    = characters[character.row - 1][character.col];
+    Character char_down  = characters[character.row + 1][character.col];
+    Character char_left  = characters[character.row][character.col - 1];
+    Character char_right = characters[character.row][character.col + 1];
+
+    Tile tile_up    = tiles[character.row - 1][character.col];
+    Tile tile_down  = tiles[character.row + 1][character.col];
+    Tile tile_left  = tiles[character.row][character.col - 1];
+    Tile tile_right = tiles[character.row][character.col + 1];
+
     switch(key) {
         case KEY_UP:
-            if(characters[character.row - 1][character.col].name != "") {
+            if(char_up.name != "") {
                 // Interact
-            } else if(character.row > 0 && tiles[character.row - 1][character.col].walkable) {
+            } else if(character.row > 0 && tile_up.walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row - 1, character.col, character);
             }
             break;
         case KEY_DOWN:
-            if(characters[character.row + 1][character.col].name != "") {
+            if(char_down.name != "") {
                 // Interact
-            } else if(character.row < TEMPMAPHEIGHT - 1 && tiles[character.row + 1][character.col].walkable) {
+            } else if(character.row < TEMPMAPHEIGHT - 1 && tile_down.walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row + 1, character.col, character);
             }
             break;
         case KEY_LEFT:
-            if(characters[character.row][character.col - 1].name != "") {
+            if(char_left.name != "") {
                 // Interact
-            } else if(character.col > 0 && tiles[character.row][character.col - 1].walkable) {
+            } else if(character.col > 0 && tile_left.walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row, character.col - 1, character);
             }
             break;
         case KEY_RIGHT:
-            if(characters[character.row][character.col + 1].name != "") {
+            if(char_right.name != "") {
                 // Interact
-            } else if(character.col < TEMPMAPWIDTH - 1 && tiles[character.row][character.col + 1].walkable) {
+            } else if(character.col < TEMPMAPWIDTH - 1 && tile_right.walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row, character.col + 1, character);
             }
