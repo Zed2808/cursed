@@ -464,9 +464,16 @@ void draw_log(Log log) {
     box(win_log_border, 0, 0);
     WINDOW *win_log = newwin(10, COLS-4, LINES-11, 2);
 
+    int curs_y;
+    int curs_x;
+
     for(std::list<std::string>::iterator it = log.log.begin(); it != log.log.end(); it++) {
         std::string s = *it;
-        wprintw(win_log, "> %s\n", s.c_str());
+        getyx(win_log, curs_y, curs_x);
+
+        if(curs_y <= 9 && curs_x == 0) {
+            wprintw(win_log, "> %s\n", s.c_str());
+        }
     }
 
     wrefresh(win_log_border);
