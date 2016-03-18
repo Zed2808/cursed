@@ -1,6 +1,7 @@
 #
 # 'make'	build executable file 'GUI'
 # 'make clean'	removes all object and executable files
+# 'make run'    make clean && make && ./cursed
 #
 
 
@@ -21,7 +22,7 @@ else
 endif
 
 all:	$(EXECUTABLE)
-	@echo -= Executable $(EXECUTABLE) has been successfully compiled. =-
+	@echo ===== Executable $(EXECUTABLE) has been successfully compiled. =====
 
 $(EXECUTABLE): $(OBJS)
 	$(CC) $(LFLAGS) -o $@ $(OBJS) $(LIBS)
@@ -61,4 +62,9 @@ obj/tile.o: src/tile.cpp src/tile.hpp
 
 clean:
 	rm -rf $(OBJS) $(EXECUTABLE)
-	@echo -= Objects files and executable successfully removed. =-
+	@echo ===== Objects files and executable successfully removed. =====
+
+run:
+	make clean
+	make
+	./cursed
