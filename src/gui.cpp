@@ -462,7 +462,7 @@ void draw_map(Map map) {
 void draw_log(Log log) {
     WINDOW *win_log_border = newwin(12, COLS, LINES-12, 0);
     box(win_log_border, 0, 0);
-    WINDOW *win_log = newwin(10, COLS-2, LINES-11, 2);
+    WINDOW *win_log = newwin(10, COLS-4, LINES-11, 2);
 
     for(std::list<std::string>::iterator it = log.log.begin(); it != log.log.end(); it++) {
         std::string s = *it;
