@@ -1,7 +1,8 @@
 #
-# 'make'	build executable file 'GUI'
-# 'make clean'	removes all object and executable files
-# 'make run'    make clean && make && ./cursed
+# 'make'        build executable file 'GUI'
+# 'make clean'  removes all object and executable files
+# 'make run'    make && ./cursed
+# 'make fresh'  make clean && make && ./cursed
 #
 
 
@@ -65,6 +66,10 @@ clean:
 	@echo ===== Objects files and executable successfully removed. =====
 
 run:
+	make
+	./cursed
+
+fresh:
 	make clean
 	make
 	./cursed
