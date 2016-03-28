@@ -121,6 +121,7 @@ WINDOW *create_newwin(int height, int width, int starty, int startx) {
  */
 void destroy_win(WINDOW *local_win) {
     wborder(local_win, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+    werase(local_win);
     wrefresh(local_win);
     delwin(local_win);
 }
@@ -554,8 +555,10 @@ bool confirm_exit() {
                 exit = false;
                 break;
             case 'y':
+                destroy_win(win_confirm_exit);
                 return true;
             case 'n':
+                destroy_win(win_confirm_exit);
                 return false;
             default:
                 break;
@@ -566,5 +569,6 @@ bool confirm_exit() {
         input = getch();
     }
 
+    destroy_win(win_confirm_exit);
     return exit;
 }
