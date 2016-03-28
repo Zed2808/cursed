@@ -461,17 +461,22 @@ void draw_map(Map map) {
  *   Draws log window
  */
 void draw_log(Log log) {
+    /* Create outer window with border */
     WINDOW *win_log_border = newwin(12, COLS, LINES-12, 0);
     box(win_log_border, 0, 0);
+
+    /* Create inner borderless window to write to */
     WINDOW *win_log = newwin(10, COLS-4, LINES-11, 2);
 
     int curs_y;
     int curs_x;
 
+    /* Iterate through each log entry */
     for(std::list<std::string>::iterator it = log.log.begin(); it != log.log.end(); it++) {
         std::string s = *it;
         getyx(win_log, curs_y, curs_x);
 
+        /* Print log entry only if cursor ended up at the beginning of a blank line after last entry */
         if(curs_y <= 9 && curs_x == 0) {
             wprintw(win_log, "> %s\n", s.c_str());
         }
@@ -489,18 +494,18 @@ void draw_log(Log log) {
  *   Returns true if game should exit, false if not
  */
 bool confirm_exit() {
-    // Create exit confirmation window
+    /* Create exit confirmation window */
     WINDOW *win_confirm_exit = create_newwin(5, 20, LINES/2-3, COLS/2-10);
 
-    // Key pressed by user
+    /* Key pressed by user */
     int input;
 
-    // Whether or not to exit the game (no by default)
+    /* Whether or not to exit the game (no by default) */
     bool exit = false;
 
     mvwprintw(win_confirm_exit, 1, 5, "Exit game?");
 
-    // Draw yes/no, with no highlighted initially
+    /* Draw yes/no, with no highlighted initially */
     mvwprintw(win_confirm_exit, 3, 4, " ");
     wattron(win_confirm_exit, A_UNDERLINE);
     wprintw(win_confirm_exit, "y");
@@ -516,13 +521,13 @@ bool confirm_exit() {
 
     wrefresh(win_confirm_exit);
 
-    // Get user input
+    /* Get user input */
     input = getch();
 
-    // Left and right arrow keys to highlight, enter to select
+    /* Left and right arrow keys to highlight, enter to select */
     while(input != '\n') {
         switch(input) {
-            // Highlight "yes"
+            /* Highlight "yes" */
             case KEY_LEFT:
                 wattron(win_confirm_exit, A_REVERSE);
                 mvwprintw(win_confirm_exit, 3, 4, " ");
@@ -538,7 +543,7 @@ bool confirm_exit() {
                 wprintw(win_confirm_exit, "o ");
                 exit = true;
                 break;
-            // Highlight "no"
+            /* Highlight "no" */
             case KEY_RIGHT:
                 mvwprintw(win_confirm_exit, 3, 4, " ");
                 wattron(win_confirm_exit, A_UNDERLINE);
