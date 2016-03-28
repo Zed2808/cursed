@@ -93,14 +93,22 @@ int main() {
     int input = getch();
 
     // Do stuff with player input
-    while(input != 27) { // 27 - escape key
+    bool exit = false;
+    while(true) {
+        // Escape: exit game confirmation
+        if(input == 27) exit = confirm_exit();
+        if(exit) break;
+
+        // Arrow keys: move player character
         if(input == KEY_UP || input == KEY_DOWN || input == KEY_LEFT || input == KEY_RIGHT) {
             current_map.move_character(player, input);
         }
 
+        // Draw the map and log windows
         draw_map(current_map);
         draw_log(log);
 
+        // Get new input
         input = getch();
     }
 

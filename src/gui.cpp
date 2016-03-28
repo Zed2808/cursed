@@ -479,3 +479,92 @@ void draw_log(Log log) {
     wrefresh(win_log_border);
     wrefresh(win_log);
 }
+
+/*
+ * Function: confirm_exit
+ *
+ *   Window asking user for confirmation to exit game
+ *
+ *   Returns true if game should exit, false if not
+ */
+bool confirm_exit() {
+    // Create exit confirmation window
+    WINDOW *win_confirm_exit = create_newwin(5, 20, LINES/2-3, COLS/2-10);
+
+    // Key pressed by user
+    int input;
+
+    // Whether or not to exit the game (no by default)
+    bool exit = false;
+
+    mvwprintw(win_confirm_exit, 1, 5, "Exit game?");
+
+    // Draw yes/no, with no highlighted initially
+    mvwprintw(win_confirm_exit, 3, 4, " ");
+    wattron(win_confirm_exit, A_UNDERLINE);
+    wprintw(win_confirm_exit, "y");
+    wattroff(win_confirm_exit, A_UNDERLINE);
+    wprintw(win_confirm_exit, "es ");
+    wattron(win_confirm_exit, A_REVERSE);
+    mvwprintw(win_confirm_exit, 3, 12, " ");
+    wattron(win_confirm_exit, A_UNDERLINE);
+    wprintw(win_confirm_exit, "n");
+    wattroff(win_confirm_exit, A_UNDERLINE);
+    wprintw(win_confirm_exit, "o ");
+    wattroff(win_confirm_exit, A_REVERSE);
+
+    wrefresh(win_confirm_exit);
+
+    // Get user input
+    input = getch();
+
+    // Left and right arrow keys to highlight, enter to select
+    while(input != '\n') {
+        switch(input) {
+            // Highlight "yes"
+            case KEY_LEFT:
+                wattron(win_confirm_exit, A_REVERSE);
+                mvwprintw(win_confirm_exit, 3, 4, " ");
+                wattron(win_confirm_exit, A_UNDERLINE);
+                wprintw(win_confirm_exit, "y");
+                wattroff(win_confirm_exit, A_UNDERLINE);
+                wprintw(win_confirm_exit, "es ");
+                wattroff(win_confirm_exit, A_REVERSE);
+                mvwprintw(win_confirm_exit, 3, 12, " ");
+                wattron(win_confirm_exit, A_UNDERLINE);
+                wprintw(win_confirm_exit, "n");
+                wattroff(win_confirm_exit, A_UNDERLINE);
+                wprintw(win_confirm_exit, "o ");
+                exit = true;
+                break;
+            // Highlight "no"
+            case KEY_RIGHT:
+                mvwprintw(win_confirm_exit, 3, 4, " ");
+                wattron(win_confirm_exit, A_UNDERLINE);
+                wprintw(win_confirm_exit, "y");
+                wattroff(win_confirm_exit, A_UNDERLINE);
+                wprintw(win_confirm_exit, "es ");
+                wattron(win_confirm_exit, A_REVERSE);
+                mvwprintw(win_confirm_exit, 3, 12, " ");
+                wattron(win_confirm_exit, A_UNDERLINE);
+                wprintw(win_confirm_exit, "n");
+                wattroff(win_confirm_exit, A_UNDERLINE);
+                wprintw(win_confirm_exit, "o ");
+                wattroff(win_confirm_exit, A_REVERSE);
+                exit = false;
+                break;
+            case 'y':
+                return true;
+            case 'n':
+                return false;
+            default:
+                break;
+        }
+
+        wrefresh(win_confirm_exit);
+
+        input = getch();
+    }
+
+    return exit;
+}
