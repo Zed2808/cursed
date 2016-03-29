@@ -221,14 +221,6 @@ void draw_character_stats(Character character) {
     wrefresh(win_character_stats);
 }
 
-/*
- * draw_character_inventory
- *
- *   Draws inventory of character
- *
- *   win_character_inventory: window on which to draw character's inventory
- *   character: character whose inventory should be drawn
- */
 void draw_player_inventory(Player player) {
     unsigned int INVHEIGHT = LINES - LOGHEIGHT - 2;
     WINDOW *win_inventory = create_newwin(INVHEIGHT, INVWIDTH, 1, 1);
@@ -240,13 +232,25 @@ void draw_player_inventory(Player player) {
     int input;
 
     /* How many entries to write */
-    int limit;
+    unsigned int limit;
+
+    /* Index of item in inventory to highlight */
+    unsigned int highlight = 0;
 
     /* Until user presses escape */
     while(input != 'i') {
-        /* Until all entries are printed OR out of lines */
+        /* Highlight item */
+        if(input == KEY_UP && highlight > 0) {
+            highlight--;
+        }
+
+        if(input == KEY_DOWN && highlight < player.inventory.slots.size() - 1) {
+            highlight++;
+        }
+
+        /* Set scroll offset and limit number of lines to print */
         if(player.inventory.slots.size() > INVHEIGHT-2) {
-            /* Scroll with arrow keys */
+            /* Set scroll offset with arrow keys */
             if(input == KEY_UP && scroll > 0) {
                 scroll--;
             }
@@ -269,8 +273,13 @@ void draw_player_inventory(Player player) {
         mvwprintw(win_inventory, 0, INVWIDTH-12, "%3d/%3d lbs", player.inventory.totalweight, player.get_carryweight());
 
         /* Print until limit is reached */
-        for(int i = 0; i < limit; i++) {
-            mvwprintw(win_inventory, i+1, 2, "%d %s", player.inventory.slots[i+scroll].quantity, player.inventory.slots[i+scroll].item.name.c_str());
+        for(unsigned int i = 0; i < limit; i++) {
+            /* If for loop has reached item index highlight */
+            if(i == highlight - scroll) {
+                wattron(win_inventory, A_REVERSE);
+            }
+            mvwprintw(win_inventory, i+1, 2, "%d %s ", player.inventory.slots[i+scroll].quantity, player.inventory.slots[i+scroll].item.name.c_str());
+            wattroff(win_inventory, A_REVERSE);
         }
 
         /* Refresh window */
