@@ -13,10 +13,10 @@
 #include "log.hpp"
 
 #define LOGHEIGHT 12
-#define INVWIDTH 30
+#define INVWIDTH 34
 
 /*
- * Function: init_gui
+ * init_gui
  *
  *   Sets up misc GUI stuff
  */
@@ -36,7 +36,7 @@ void init_gui() {
 }
 
 /*
- * Function: splash
+ * splash
  *
  *   Draws splash screen
  */
@@ -94,7 +94,7 @@ void splash() {
 }
 
 /*
- * Function: create_newwin
+ * create_newwin
  *
  *   Creates new window
  *
@@ -116,7 +116,7 @@ WINDOW *create_newwin(int height, int width, int starty, int startx) {
 }
 
 /*
- * Function: destroy_win
+ * destroy_win
  *
  *   Destroys window
  *
@@ -129,7 +129,7 @@ void destroy_win(WINDOW *local_win) {
 }
 
 /*
- * Function: clear_to_border
+ * clear_to_border
  *
  *   Clears the screen to just a border
  */
@@ -139,7 +139,7 @@ void clear_to_border() {
 }
 
 /*
- * Function: draw_character_stats
+ * draw_character_stats
  *
  *   Draws character's stats (health, mana, stamina)
  *
@@ -222,7 +222,7 @@ void draw_character_stats(Character character) {
 }
 
 /*
- * Function: draw_character_inventory
+ * draw_character_inventory
  *
  *   Draws inventory of character
  *
@@ -230,7 +230,7 @@ void draw_character_stats(Character character) {
  *   character: character whose inventory should be drawn
  */
 void draw_character_inventory(Character character) {
-    const unsigned int INVHEIGHT = LINES - LOGHEIGHT - 2;
+    unsigned int INVHEIGHT = LINES - LOGHEIGHT - 2;
     WINDOW *win_inventory = create_newwin(INVHEIGHT, INVWIDTH, 1, 1);
 
     /* When scrolling, used as an offset for vector index */
@@ -266,7 +266,7 @@ void draw_character_inventory(Character character) {
         wattron(win_inventory, A_BOLD);
         mvwprintw(win_inventory, 0, 1, "%s", character.name.c_str());
         wattroff(win_inventory, A_BOLD);
-        mvwprintw(win_inventory, 0, INVWIDTH-8, "%3d/%3d", character.inventory.totalweight, character.get_carryweight());
+        mvwprintw(win_inventory, 0, INVWIDTH-12, "%3d/%3d lbs", character.inventory.totalweight, character.get_carryweight());
 
         /* Print until limit is reached */
         for(int i = 0; i < limit; i++) {
@@ -285,7 +285,7 @@ void draw_character_inventory(Character character) {
 }
 
 /*
- * Function: draw_character_equipslot
+ * draw_character_equipslot
  *
  *   Draws equipslot of character
  *
@@ -306,7 +306,7 @@ void draw_character_equipslot(Character character) {
 }
 
 /*
- * Function: set_character_name
+ * set_character_name
  *
  *   Input window for character's name
  *
@@ -333,7 +333,7 @@ void set_character_name(Character &character) {
 }
 
 /* 
- * Function: set_main_attributes
+ * set_main_attributes
  *
  *   Input window for character's main attributes
  *
@@ -458,7 +458,7 @@ void set_main_attributes(Character &character) {
 }
 
 /*
- * Function: draw_map
+ * draw_map
  *
  *   Draws map to window
  *
@@ -496,9 +496,11 @@ void draw_map(Map map) {
 }
 
 /*
- * Function: draw_log
+ * draw_log
  *
  *   Draws log window
+ *
+ *   log: log to write to window
  */
 void draw_log(Log log) {
     /* Create outer window with border */
@@ -527,7 +529,7 @@ void draw_log(Log log) {
 }
 
 /*
- * Function: confirm_exit
+ * confirm_exit
  *
  *   Window asking user for confirmation to exit game
  *
