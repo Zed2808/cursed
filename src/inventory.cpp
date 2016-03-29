@@ -3,12 +3,23 @@
 #include "items.hpp"
 
 /*
+ * Entry
+ */
+Entry::Entry() {
+    item = Item();
+    quantity = 0;
+}
+
+Entry::Entry(Item new_item, int n) {
+    item = new_item;
+    quantity = n;
+}
+
+/*
  * Inventory
  */
 Inventory::Inventory() {
     totalweight = 0;
-    std::fill_n(slots, 256, Item());
-    std::fill_n(quantity, 256, 0);
 }
 
 /* Function: additem
@@ -17,27 +28,26 @@ Inventory::Inventory() {
  *   item: item to add
  *   n: number of item to add
  *
- *   Returns slot in inventory item was added to
  */
-int Inventory::additem(Item item, int n) {
-    for(int i = 0; i <= 255; i++) {         /* Loop to search for matching itemid */
-        if(slots[i].id == item.id) {        /* If itemid in slot matches that of the item we're trying to add */
-            quantity[i] += n;               /* Don't change item in slot, just add n to quantity of that slot */
-            totalweight += item.weight * n; /* Add item's weight * n to inventory weight */
-            return i;                       /* Return index of slot of which the quantity was increased */
+void Inventory::additem(Item item, int n) {
+    bool item_added = false;
+
+    /* Iterate through entries searching for existing entry for item */
+    for(unsigned int i = 0; i < slots.size(); i++) {
+        /* Existing entry found for item at slots[i] */
+        if(slots[i].item.id == item.id) {
+            slots[i].quantity += n;
+            totalweight += item.weight * n;
+
+            item_added = true;
         }
     }
 
-    for(int i = 0; i <= 255; i++) {         /* Loop to search for empty slot */
-        if(quantity[i] == 0) {              /* Slot is empty */
-            slots[i] = item;                /* Set empty slot to item */
-            quantity[i] = n;                /* Set quantity of the slot to n */
-            totalweight += item.weight * n; /* Add item's weight * n to inventory weight */
-            return i;                       /* Return index of slot that item was added to */
-        }
+    /* If existing entry was not found, create new entry for item */
+    if(!item_added) {
+        slots.push_back(Entry(item, n));
+        totalweight += item.weight * n;
     }
-
-    return -1; /* Return -1 if item could not be added to a slot */
 }
 
 /* Function: removeitem
@@ -48,21 +58,21 @@ int Inventory::additem(Item item, int n) {
  *
  *   Returns slot in inventory item was removed from
  */
-int Inventory::removeitem(Item item, int n) {
-    for(int i = 0; i <= 255; i++) {                       /* Loop to search for matching itemid */
-        if(slots[i].id == item.id) {                      /* If itemid in slot matches that of the item we're trying to remove */
-            if(n >= quantity[i]) {
-                totalweight -= item.weight * quantity[i];
-                quantity[i] = 0;                          /* Set quantity to 0 to avoid negative quantities */
-                slots[i] = Item();                        /* Set item in slot to empty item */
+void Inventory::removeitem(Item item, int n) {
+    /* Iterate through entries searching for existing entry for item */
+    for(unsigned int i = 0; i < slots.size(); i++) {
+        /* Existing entry found for item */
+        if(slots[i].item.id == item.id) {
+            /* Removing more of an item than is listed in entry */
+            if(n >= slots[i].quantity) {
+                totalweight -= item.weight * slots[i].quantity; /* Only decrement totalweight by weight of items being removed */
+                slots.erase(slots.begin() + i);                 /* Remove entire entry at */
             } else {
                 totalweight -= item.weight * n;
-                quantity[i] -= n;
+                slots[i].quantity -= n;
             }
-            return i; /* Return index item was removed from */
         }
     }
-    return -1; /* Return -1 if item could not be removed */
 }
 
 /*

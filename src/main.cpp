@@ -31,20 +31,8 @@ int main() {
     // Set player's main attributes
     set_main_attributes(player);
 
-    /* BEGIN OLD TESTING STUFF
-
-    // Display player stats window
-    draw_character_stats(player);
-    getch();
-
     // Display & modify player inventory
-    draw_character_inventory(player);
-    getch();
-
     player.inventory.additem(Shortsword(), 19);
-    draw_character_inventory(player);
-    getch();
-
     player.inventory.additem(BattleAxe(), 7);
     draw_character_inventory(player);
     getch();
@@ -59,6 +47,12 @@ int main() {
 
     player.inventory.removeitem(BattleAxe(), 9);
     draw_character_inventory(player);
+    getch();
+
+    /* BEGIN OLD TESTING STUFF
+
+    // Display player stats window
+    draw_character_stats(player);
     getch();
 
     // Display & modify player equipslot

@@ -1,17 +1,26 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
 
+#include <vector>
 #include "items.hpp"
+
+class Entry {
+    public:
+        Item item;
+        int quantity;
+
+        Entry();
+        Entry(Item new_item, int n);
+};
 
 class Inventory {
     public:
-        int totalweight;   /* Total weight of all items in the inventory */
-        Item slots[256];   /* Array containing items */
-        int quantity[256]; /* Array containing quantity of items */
+        int totalweight;
+        std::vector<Entry> slots;
 
         Inventory();
-        int additem(Item item, int quantity);    /* Returns slot item was added to */
-        int removeitem(Item item, int quantity); /* Returns slot item was removed from */
+        void additem(Item item, int n);
+        void removeitem(Item item, int n);
 };
 
 class EquipSlot {

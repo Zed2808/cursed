@@ -237,13 +237,17 @@ void draw_character_inventory(Character character) {
 
     mvwprintw(win_character_inventory, 0, 11, "%6d", character.inventory.totalweight);
 
-    mvwprintw(win_character_inventory, 1, 1, "SLOT 1");
-    mvwprintw(win_character_inventory, 2, 1, "Name: %s", character.inventory.slots[0].name.c_str());
-    mvwprintw(win_character_inventory, 3, 1, "Quantity: %d", character.inventory.quantity[0]);
+    if(character.inventory.slots.size() > 0) {
+        mvwprintw(win_character_inventory, 1, 1, "SLOT 1");
+        mvwprintw(win_character_inventory, 2, 1, "Name: %s", character.inventory.slots[0].item.name.c_str());
+        mvwprintw(win_character_inventory, 3, 1, "Quantity: %d", character.inventory.slots[0].quantity);
 
-    mvwprintw(win_character_inventory, 5, 1, "SLOT 2");
-    mvwprintw(win_character_inventory, 6, 1, "Name: %s", character.inventory.slots[1].name.c_str());
-    mvwprintw(win_character_inventory, 7, 1, "Quantity: %d", character.inventory.quantity[1]);
+        if(character.inventory.slots.size() > 1) {
+            mvwprintw(win_character_inventory, 5, 1, "SLOT 2");
+            mvwprintw(win_character_inventory, 6, 1, "Name: %s", character.inventory.slots[1].item.name.c_str());
+            mvwprintw(win_character_inventory, 7, 1, "Quantity: %d", character.inventory.slots[1].quantity);
+        }
+    }
 
     /* Refresh window */
     wrefresh(win_character_inventory);
