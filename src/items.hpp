@@ -10,10 +10,9 @@ class Item {
         Item();
         std::string name;
         unsigned char id;
+        unsigned char item_type;
         int weight;
 };
-
-
 
 /* Weapons */
 class Weapon : public Item {
