@@ -34,8 +34,8 @@ BattleAxe::BattleAxe() {
     name = "Battle Axe";
     id = 0x03;
     weight = 8;
-    primary = Slash();  // TODO: Replace these with battle axe specific attacks
-    secondary = Stab();
+    primary = Slash();
+    secondary = Chop();
 }
 
 /* 4 - Mace */
@@ -43,8 +43,8 @@ Mace::Mace() {
     name = "Mace";
     id = 0x04;
     weight = 6;
-    primary = Slash();  // TODO: These too...
-    secondary = Stab();
+    primary = Slash();
+    secondary = Smash();
 }
 
 /* 5 - Fork */
@@ -52,6 +52,6 @@ Fork::Fork() {
     name = "Fork";
     id = 0x05;
     weight = 1;
-    primary = Slash();  // TODO: And these...
+    primary = Slash();
     secondary = Stab();
 }
