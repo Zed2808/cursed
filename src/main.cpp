@@ -92,7 +92,7 @@ int main() {
 
         // I: open inventory
         if(input == 'i') {
-            draw_character_inventory(player);
+            draw_player_inventory(player);
         }
 
         // H: print help

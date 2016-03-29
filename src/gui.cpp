@@ -229,7 +229,7 @@ void draw_character_stats(Character character) {
  *   win_character_inventory: window on which to draw character's inventory
  *   character: character whose inventory should be drawn
  */
-void draw_character_inventory(Character character) {
+void draw_player_inventory(Player player) {
     unsigned int INVHEIGHT = LINES - LOGHEIGHT - 2;
     WINDOW *win_inventory = create_newwin(INVHEIGHT, INVWIDTH, 1, 1);
 
@@ -245,32 +245,32 @@ void draw_character_inventory(Character character) {
     /* Until user presses escape */
     while(input != 'i') {
         /* Until all entries are printed OR out of lines */
-        if(character.inventory.slots.size() > INVHEIGHT-2) {
+        if(player.inventory.slots.size() > INVHEIGHT-2) {
             /* Scroll with arrow keys */
             if(input == KEY_UP && scroll > 0) {
                 scroll--;
             }
 
-            if(input == KEY_DOWN && scroll < INVHEIGHT - character.inventory.slots.size()) {
+            if(input == KEY_DOWN && scroll < INVHEIGHT - player.inventory.slots.size()) {
                 scroll++;
             }
 
             limit = INVHEIGHT-2;
         } else {
-            limit = character.inventory.slots.size();
+            limit = player.inventory.slots.size();
         }
 
         /* Clear window & redraw border */
         werase(win_inventory);
         box(win_inventory, 0, 0);
         wattron(win_inventory, A_BOLD);
-        mvwprintw(win_inventory, 0, 1, "%s", character.name.c_str());
+        mvwprintw(win_inventory, 0, 1, "%s", player.name.c_str());
         wattroff(win_inventory, A_BOLD);
-        mvwprintw(win_inventory, 0, INVWIDTH-12, "%3d/%3d lbs", character.inventory.totalweight, character.get_carryweight());
+        mvwprintw(win_inventory, 0, INVWIDTH-12, "%3d/%3d lbs", player.inventory.totalweight, player.get_carryweight());
 
         /* Print until limit is reached */
         for(int i = 0; i < limit; i++) {
-            mvwprintw(win_inventory, i+1, 2, "%d %s", character.inventory.slots[i+scroll].quantity, character.inventory.slots[i+scroll].item.name.c_str());
+            mvwprintw(win_inventory, i+1, 2, "%d %s", player.inventory.slots[i+scroll].quantity, player.inventory.slots[i+scroll].item.name.c_str());
         }
 
         /* Refresh window */
