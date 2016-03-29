@@ -37,3 +37,21 @@ BattleAxe::BattleAxe() {
     primary = Slash();  // TODO: Replace these with battle axe specific attacks
     secondary = Stab();
 }
+
+/* 4 - Mace */
+Mace::Mace() {
+    name = "Mace";
+    id = 0x04;
+    weight = 6;
+    primary = Slash();  // TODO: These too...
+    secondary = Stab();
+}
+
+/* 5 - Fork */
+Fork::Fork() {
+    name = "Fork";
+    id = 0x05;
+    weight = 1;
+    primary = Slash();  // TODO: And these...
+    secondary = Stab();
+}

@@ -35,4 +35,16 @@ class BattleAxe : public Weapon {
         BattleAxe();
 };
 
+/* Mace */
+class Mace : public Weapon {
+    public:
+        Mace();
+};
+
+/* Fork */
+class Fork : public Weapon {
+    public:
+        Fork();
+};
+
 #endif
