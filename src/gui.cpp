@@ -243,7 +243,7 @@ void draw_character_inventory(Character character) {
     int limit;
 
     /* Until user presses escape */
-    while(input != 27) {
+    while(input != 'i') {
         /* Until all entries are printed OR out of lines */
         if(character.inventory.slots.size() > INVHEIGHT-2) {
             /* Scroll with arrow keys */
@@ -317,7 +317,12 @@ void set_character_name(Character &character) {
 
     WINDOW *win_name = create_newwin(4, 39, (LINES-4)/2, (COLS-36)/2);
     wattron(win_name, A_BOLD);
-    mvwprintw(win_name, 1, 1, "Enter %s's name (up to 24 chars).", character.str_id.c_str());
+
+    if(character.str_id == "player") {
+        mvwprintw(win_name, 1, 1, "Enter your name.");
+    } else {
+        mvwprintw(win_name, 1, 1, "Enter %s's name (up to 24 chars).", character.str_id.c_str());
+    }
     wattroff(win_name, A_BOLD);
     curs_set(1);
     mvwgetnstr(win_name, 2, 1, name, 24);

@@ -61,13 +61,16 @@ int main() {
     // Load map
     Map current_map = Map();
     load_map(current_map, "testmap");
-    log.write("Loaded testmap");
+    log.write("Loaded testmap.");
 
     // Place Player onto map
     current_map.place_character(2, 2, player);
 
     // Display current_map
     draw_map(current_map);
+
+    // Display log
+    log.write("Press 'h' for help.");
     draw_log(log);
 
     // Get player input
@@ -90,6 +93,11 @@ int main() {
         // I: open inventory
         if(input == 'i') {
             draw_character_inventory(player);
+        }
+
+        // H: print help
+        if(input == 'h') {
+            log.write("Quit game: esc\n  Open/close inventory: i\n  Move character: arrow keys");
         }
 
         // Draw the map and log windows
