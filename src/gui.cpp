@@ -228,29 +228,32 @@ void draw_character_stats(Character character) {
  *   character: character whose inventory should be drawn
  */
 void draw_character_inventory(Character character) {
-    WINDOW *win_character_inventory = create_newwin(9, 18, (LINES-9)/2, (COLS-18)/2);
+    WINDOW *win_inventory = create_newwin(9, 42, (LINES-9)/2, (COLS-42)/2);
 
-    /* Print name of character */
-    wattron(win_character_inventory, A_BOLD);
-    mvwprintw(win_character_inventory, 0, 1, "Inventory");
-    wattroff(win_character_inventory, A_BOLD);
+    /* Print "<character>'s inventory" */
+    wattron(win_inventory, A_BOLD);
+    mvwprintw(win_inventory, 0, 1, "%s's Inventory", character.name.c_str());
+    wattroff(win_inventory, A_BOLD);
 
-    mvwprintw(win_character_inventory, 0, 11, "%6d", character.inventory.totalweight);
+    /* Print current inventory weight/max carrying capacity */
+    mvwprintw(win_inventory, 0, 34, "%3d/%3d", character.inventory.totalweight, character.get_carryweight());
 
     if(character.inventory.slots.size() > 0) {
-        mvwprintw(win_character_inventory, 1, 1, "SLOT 1");
-        mvwprintw(win_character_inventory, 2, 1, "Name: %s", character.inventory.slots[0].item.name.c_str());
-        mvwprintw(win_character_inventory, 3, 1, "Quantity: %d", character.inventory.slots[0].quantity);
+        mvwprintw(win_inventory, 1, 1, "SLOT 1");
+        mvwprintw(win_inventory, 2, 1, "Name: %s", character.inventory.slots[0].item.name.c_str());
+        mvwprintw(win_inventory, 3, 1, "Quantity: %d", character.inventory.slots[0].quantity);
 
         if(character.inventory.slots.size() > 1) {
-            mvwprintw(win_character_inventory, 5, 1, "SLOT 2");
-            mvwprintw(win_character_inventory, 6, 1, "Name: %s", character.inventory.slots[1].item.name.c_str());
-            mvwprintw(win_character_inventory, 7, 1, "Quantity: %d", character.inventory.slots[1].quantity);
+            mvwprintw(win_inventory, 5, 1, "SLOT 2");
+            mvwprintw(win_inventory, 6, 1, "Name: %s", character.inventory.slots[1].item.name.c_str());
+            mvwprintw(win_inventory, 7, 1, "Quantity: %d", character.inventory.slots[1].quantity);
         }
     }
 
     /* Refresh window */
-    wrefresh(win_character_inventory);
+    wrefresh(win_inventory);
+    getch();
+    destroy_win(win_inventory);
 }
 
 /*
@@ -499,7 +502,7 @@ void draw_log(Log log) {
  */
 bool confirm_exit() {
     /* Create exit confirmation window */
-    WINDOW *win_confirm_exit = create_newwin(5, 20, LINES/2-3, COLS/2-10);
+    WINDOW *win_confirm_exit = create_newwin(5, 20, (LINES-5)/2, (COLS-20)/2);
 
     /* Key pressed by user */
     int input;

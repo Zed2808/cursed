@@ -31,23 +31,9 @@ int main() {
     // Set player's main attributes
     set_main_attributes(player);
 
-    // Display & modify player inventory
+    // Add base stuff to player inventory
     player.inventory.additem(Shortsword(), 19);
     player.inventory.additem(BattleAxe(), 7);
-    draw_character_inventory(player);
-    getch();
-
-    player.inventory.additem(Shortsword(), 3);
-    draw_character_inventory(player);
-    getch();
-
-    player.inventory.removeitem(Shortsword(), 7);
-    draw_character_inventory(player);
-    getch();
-
-    player.inventory.removeitem(BattleAxe(), 9);
-    draw_character_inventory(player);
-    getch();
 
     /* BEGIN OLD TESTING STUFF
 
@@ -90,17 +76,26 @@ int main() {
     bool exit = false;
     while(true) {
         // Escape: exit game confirmation
-        if(input == 27) exit = confirm_exit();
-        if(exit) break;
+        if(input == 27) {
+            exit = confirm_exit();
+        }
 
         // Arrow keys: move player character
         if(input == KEY_UP || input == KEY_DOWN || input == KEY_LEFT || input == KEY_RIGHT) {
             current_map.move_character(player, input);
         }
 
+        // I: open inventory
+        if(input == 'i') {
+            draw_character_inventory(player);
+        }
+
         // Draw the map and log windows
         draw_map(current_map);
         draw_log(log);
+
+        // Exit if exit flag was set
+        if(exit) break;
 
         // Get new input
         input = getch();
