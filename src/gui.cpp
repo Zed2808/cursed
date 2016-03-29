@@ -12,6 +12,8 @@
 #include "character.hpp"
 #include "log.hpp"
 
+#define LOGHEIGHT 12
+
 /*
  * Function: init_gui
  *
@@ -469,11 +471,11 @@ void draw_map(Map map) {
  */
 void draw_log(Log log) {
     /* Create outer window with border */
-    WINDOW *win_log_border = newwin(12, COLS, LINES-12, 0);
+    WINDOW *win_log_border = newwin(LOGHEIGHT, COLS-2, LINES-LOGHEIGHT-1, 1);
     box(win_log_border, 0, 0);
 
     /* Create inner borderless window to write to */
-    WINDOW *win_log = newwin(10, COLS-4, LINES-11, 2);
+    WINDOW *win_log = newwin(10, COLS-6, LINES-LOGHEIGHT, 2);
 
     int curs_y;
     int curs_x;
