@@ -32,8 +32,8 @@ int main() {
     set_main_attributes(player);
 
     // Add base stuff to player inventory
-    player.inventory.additem(Shortsword(), 1);
     player.inventory.additem(BattleAxe(), 1);
+    player.inventory.additem(Shortsword(), 1);
     player.inventory.additem(Mace(), 1);
     player.inventory.additem(Fork(), 8);
 

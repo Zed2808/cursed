@@ -30,7 +30,12 @@ Inventory::Inventory() {
  *
  */
 void Inventory::additem(Item item, int n) {
-    bool item_added = false;
+    /* If no entries exist, simply push new entry */
+    if(slots.size() == 0) {
+        slots.push_back(Entry(item, n));
+        totalweight += item.weight * n;
+        return;
+    }
 
     /* Iterate through entries searching for existing entry for item */
     for(unsigned int i = 0; i < slots.size(); i++) {
@@ -38,16 +43,38 @@ void Inventory::additem(Item item, int n) {
         if(slots[i].item.id == item.id) {
             slots[i].quantity += n;
             totalweight += item.weight * n;
-
-            item_added = true;
+            return;
         }
     }
 
-    /* If existing entry was not found, create new entry for item */
-    if(!item_added) {
-        slots.push_back(Entry(item, n));
-        totalweight += item.weight * n;
-    }
+    /* Iterate through existing entries to place new entry alphabetically */
+    std::vector<Entry>::iterator it = slots.begin();
+
+    /* Convert item name to lowercase */
+    std::string lowercase_item = item.name;
+    std::transform(lowercase_item.begin(), lowercase_item.end(), lowercase_item.begin(), ::tolower);
+
+    /* Create string to store lower case entry name */
+    std::string lowercase_entry;
+
+    /* Must run at least once in case there's only one entry (slots.begin() == slots.end()) */
+    do {
+        Entry entry = *it;
+        /* Convert entry name to lowercase (in ASCII A != a) */
+        lowercase_entry = entry.item.name;
+        std::transform(lowercase_entry.begin(), lowercase_entry.end(), lowercase_entry.begin(), ::tolower);
+        /* If new item should come before entry at it */
+        if(lowercase_item < lowercase_entry) {
+            slots.insert(it, Entry(item, n));
+            totalweight += item.weight * n;
+            return;
+        }
+        it++;
+    } while(it != slots.end());
+
+    /* Item to add comes last alphabetically */
+    slots.push_back(Entry(item, n));
+    totalweight += item.weight * n;
 }
 
 /* Function: removeitem
