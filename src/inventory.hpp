@@ -6,11 +6,11 @@
 
 class Entry {
     public:
-        Item item;
+        Item * item;
         int quantity;
 
         Entry();
-        Entry(Item new_item, int n);
+        Entry(Item * new_item, int n);
 };
 
 class Inventory {
@@ -19,17 +19,17 @@ class Inventory {
         std::vector<Entry> slots;
 
         Inventory();
-        void additem(Item item, int n);
-        void removeitem(Item item, int n);
+        void additem(Item * item, int n);
+        void removeitem(Item * item, int n);
 };
 
 class EquipSlot {
     public:
-        Item equipped;
+        Item * equipped;
 
         EquipSlot();
-        void equip(Inventory &inventory, Item item); /* Moves 1 of item from inventory to EquipSlot */
-        void unequip(Inventory &inventory);          /* Moves item in equip slot back to inventory */
+        void equip(Inventory &inventory, Item * item); /* Moves 1 of item from inventory to EquipSlot */
+        void unequip(Inventory &inventory);            /* Moves item in equip slot back to inventory */
 };
 
 #endif

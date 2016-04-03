@@ -278,7 +278,7 @@ void draw_player_inventory(Player player) {
             if(i == highlight - scroll) {
                 wattron(win_inventory, A_REVERSE);
             }
-            mvwprintw(win_inventory, i+1, 2, "%d %s ", player.inventory.slots[i+scroll].quantity, player.inventory.slots[i+scroll].item.name.c_str());
+            mvwprintw(win_inventory, i+1, 2, "%d %s ", player.inventory.slots[i+scroll].quantity, player.inventory.slots[i+scroll].item->name.c_str());
             wattroff(win_inventory, A_REVERSE);
         }
 
@@ -308,7 +308,7 @@ void draw_character_equipslot(Character character) {
     mvwprintw(win_character_equipslot, 0, 1, "Equip Slot");
     wattroff(win_character_equipslot, A_BOLD);
 
-    mvwprintw(win_character_equipslot, 1, 1, "%s", character.equipslot.equipped.name.c_str());
+    mvwprintw(win_character_equipslot, 1, 1, "%s", character.equipslot.equipped->name.c_str());
 
     /* Refresh window */
     wrefresh(win_character_equipslot);

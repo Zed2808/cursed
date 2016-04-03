@@ -6,11 +6,11 @@
  * Entry
  */
 Entry::Entry() {
-    item = Item();
+    item = new Item();
     quantity = 0;
 }
 
-Entry::Entry(Item new_item, int n) {
+Entry::Entry(Item * new_item, int n) {
     item = new_item;
     quantity = n;
 }
@@ -29,20 +29,20 @@ Inventory::Inventory() {
  *   n: number of item to add
  *
  */
-void Inventory::additem(Item item, int n) {
+void Inventory::additem(Item * item, int n) {
     /* If no entries exist, simply push new entry */
     if(slots.size() == 0) {
         slots.push_back(Entry(item, n));
-        totalweight += item.weight * n;
+        totalweight += item->weight * n;
         return;
     }
 
     /* Iterate through entries searching for existing entry for item */
     for(unsigned int i = 0; i < slots.size(); i++) {
         /* Existing entry found for item at slots[i] */
-        if(slots[i].item.id == item.id) {
+        if(slots[i].item->id == item->id) {
             slots[i].quantity += n;
-            totalweight += item.weight * n;
+            totalweight += item->weight * n;
             return;
         }
     }
@@ -51,7 +51,7 @@ void Inventory::additem(Item item, int n) {
     std::vector<Entry>::iterator it = slots.begin();
 
     /* Convert item name to lowercase */
-    std::string lowercase_item = item.name;
+    std::string lowercase_item = item->name;
     std::transform(lowercase_item.begin(), lowercase_item.end(), lowercase_item.begin(), ::tolower);
 
     /* Create string to store lower case entry name */
@@ -61,12 +61,12 @@ void Inventory::additem(Item item, int n) {
     do {
         Entry entry = *it;
         /* Convert entry name to lowercase (in ASCII A != a) */
-        lowercase_entry = entry.item.name;
+        lowercase_entry = entry.item->name;
         std::transform(lowercase_entry.begin(), lowercase_entry.end(), lowercase_entry.begin(), ::tolower);
         /* If new item should come before entry at it */
         if(lowercase_item < lowercase_entry) {
             slots.insert(it, Entry(item, n));
-            totalweight += item.weight * n;
+            totalweight += item->weight * n;
             return;
         }
         it++;
@@ -74,7 +74,7 @@ void Inventory::additem(Item item, int n) {
 
     /* Item to add comes last alphabetically */
     slots.push_back(Entry(item, n));
-    totalweight += item.weight * n;
+    totalweight += item->weight * n;
 }
 
 /* Function: removeitem
@@ -85,17 +85,18 @@ void Inventory::additem(Item item, int n) {
  *
  *   Returns slot in inventory item was removed from
  */
-void Inventory::removeitem(Item item, int n) {
+void Inventory::removeitem(Item * item, int n) {
     /* Iterate through entries searching for existing entry for item */
     for(unsigned int i = 0; i < slots.size(); i++) {
         /* Existing entry found for item */
-        if(slots[i].item.id == item.id) {
+        if(slots[i].item->id == item->id) {
             /* Removing more of an item than is listed in entry */
             if(n >= slots[i].quantity) {
-                totalweight -= item.weight * slots[i].quantity; /* Only decrement totalweight by weight of items being removed */
-                slots.erase(slots.begin() + i);                 /* Remove entire entry at */
+                totalweight -= item->weight * slots[i].quantity; /* Only decrement totalweight by weight of items being removed */
+                delete[] slots[i].item;                          /* Delete item before deleting entry */
+                slots.erase(slots.begin() + i);                  /* Remove entire entry at */
             } else {
-                totalweight -= item.weight * n;
+                totalweight -= item->weight * n;
                 slots[i].quantity -= n;
             }
         }
@@ -106,7 +107,7 @@ void Inventory::removeitem(Item item, int n) {
  * EquipSlot
  */
 EquipSlot::EquipSlot() {
-    equipped = Item();
+    equipped = new Item();
 }
 
 /* Function: equip
@@ -115,8 +116,9 @@ EquipSlot::EquipSlot() {
  *   inventory: inventory to remove item from
  *   item: item to equip from inventory
  */
-void EquipSlot::equip(Inventory &inventory, Item item) {
+void EquipSlot::equip(Inventory &inventory, Item * item) {
     inventory.removeitem(item, 1);
+    delete[] equipped;
     equipped = item;
 }
 
@@ -127,5 +129,5 @@ void EquipSlot::equip(Inventory &inventory, Item item) {
  */
 void EquipSlot::unequip(Inventory &inventory) {
     inventory.additem(equipped, 1);
-    equipped = Item();
+    equipped = new Item();
 }
