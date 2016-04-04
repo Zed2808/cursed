@@ -6,6 +6,7 @@
  * Item types:
  * 00 Test/other
  * 01 Weapon
+ * 02 Armor
  */
 
 /* 0 - Default Item */
@@ -64,4 +65,13 @@ Fork::Fork() {
     weight = 1;
     primary = Slash();
     secondary = Stab();
+}
+
+/* 6 - Iron Helmet */
+IronHelmet::IronHelmet() {
+    name = "Iron Helmet";
+    id = 0x06;
+    item_type = 0x02;
+    weight 2;
+    armor = 2;
 }

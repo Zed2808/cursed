@@ -22,28 +22,41 @@ class Weapon : public Item {
         Attack secondary;
 };
 
-/* Shortsword */
+/* Armor */
+class Armor : public Item {
+    public:
+        Armor();
+        int armor;
+};
+
+/* Weapon - Shortsword */
 class Shortsword : public Weapon {
     public:
         Shortsword();
 };
 
-/* Battle Axe */
+/* Weapon - Battle Axe */
 class BattleAxe : public Weapon {
     public:
         BattleAxe();
 };
 
-/* Mace */
+/* Weapon - Mace */
 class Mace : public Weapon {
     public:
         Mace();
 };
 
-/* Fork */
+/* Weapon - Fork */
 class Fork : public Weapon {
     public:
         Fork();
+};
+
+/* Armor - Iron Helmet */
+class IronHelmet : public Armor {
+    public:
+        IronHelmet();
 };
 
 #endif

@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "interaction.hpp"
 #include "maps.hpp"
 #include "npcs.hpp"
 #include "tile.hpp"
@@ -56,7 +57,7 @@ void Map::move_character(Character &character, int key) {
     switch(key) {
         case KEY_UP:
             if(char_up.name != "") {
-                // Interact
+                interact(character, char_up);
             } else if(character.row > 0 && tile_up.walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row - 1, character.col, character);
@@ -64,7 +65,7 @@ void Map::move_character(Character &character, int key) {
             break;
         case KEY_DOWN:
             if(char_down.name != "") {
-                // Interact
+                interact(character, char_down);
             } else if(character.row < TEMPMAPHEIGHT - 1 && tile_down.walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row + 1, character.col, character);
@@ -72,7 +73,7 @@ void Map::move_character(Character &character, int key) {
             break;
         case KEY_LEFT:
             if(char_left.name != "") {
-                // Interact
+                interact(character, char_left);
             } else if(character.col > 0 && tile_left.walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row, character.col - 1, character);
@@ -80,7 +81,7 @@ void Map::move_character(Character &character, int key) {
             break;
         case KEY_RIGHT:
             if(char_right.name != "") {
-                // Interact
+                interact(character, char_right);
             } else if(character.col < TEMPMAPWIDTH - 1 && tile_right.walkable) {
                 characters[character.row][character.col] = Character();
                 place_character(character.row, character.col + 1, character);

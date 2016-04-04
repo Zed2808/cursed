@@ -3,7 +3,7 @@
 
 Character::Character() {
     name = "";
-    num_id = 0xff;
+    id = 0xff;
     str_id = "void";
     level = 0;
     hostile = false;
@@ -17,6 +17,8 @@ Character::Character() {
     mana = 0;
     maxstamina = 0;
     stamina = 0;
+    carryweight = 0;
+    armor = 0;
 }
 
 /* Sets & Gets for main attributes */
@@ -98,4 +100,8 @@ int Character::get_maxstamina() {
 
 int Character::get_carryweight() {
     return carryweight;
+}
+
+int Character::get_armor() {
+    return armor;
 }

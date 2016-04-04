@@ -3,7 +3,7 @@
 
 Player::Player() {
     name = "Player";
-    num_id = 0x00;
+    id = 0x00;
     str_id = "player";
     level = 1;
     symbol = '@';

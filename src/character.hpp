@@ -20,13 +20,14 @@ class Character {
         int maxmana;
         int maxstamina;
         int carryweight;
+        int armor;
 
     public:
         Character();
 
         /* Basic Info */
         std::string name;
-        unsigned char num_id;
+        unsigned char id;
         std::string str_id;
         int level;
         bool hostile;
@@ -81,6 +82,7 @@ class Character {
         int get_maxmana();
         int get_maxstamina();
         int get_carryweight();
+        int get_armor();
 };
 
 #endif

@@ -6,7 +6,7 @@
  */
 Wolf::Wolf(int l) {
     name = "Wolf";
-    num_id = 0x01;
+    id = 0x01;
     str_id = "wolf";
     level = l;
     hostile = true;
@@ -25,7 +25,7 @@ Wolf::Wolf(int l) {
  */
 Rat::Rat(int l) {
     name = "Rat";
-    num_id = 0x02;
+    id = 0x02;
     str_id = "rat";
     level = l;
     hostile = true;

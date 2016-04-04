@@ -107,6 +107,8 @@ void Inventory::removeitem(Item item, int n) {
  */
 EquipSlot::EquipSlot() {
     equipped = Item();
+    attack1 = Attack();
+    attack2 = Attack();
 }
 
 /* Function: equip
@@ -115,9 +117,11 @@ EquipSlot::EquipSlot() {
  *   inventory: inventory to remove item from
  *   item: item to equip from inventory
  */
-void EquipSlot::equip(Inventory &inventory, Item item) {
-    inventory.removeitem(item, 1);
-    equipped = item;
+void EquipSlot::equip(Inventory &inventory, Weapon weapon) {
+    inventory.removeitem(weapon, 1);
+    equipped = weapon;
+    attack1 = weapon.primary;
+    attack2 = weapon.secondary;
 }
 
 /* Function: unequip
@@ -128,4 +132,6 @@ void EquipSlot::equip(Inventory &inventory, Item item) {
 void EquipSlot::unequip(Inventory &inventory) {
     inventory.additem(equipped, 1);
     equipped = Item();
+    attack1 = Attack();
+    attack2 = Attack();
 }

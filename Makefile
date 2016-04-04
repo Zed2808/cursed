@@ -12,7 +12,7 @@ CFLAGS = -Wall -c
 INCLUDES =
 LFLAGS =
 LIBS =
-OBJS = obj/attacks.o obj/character.o obj/gui.o obj/inventory.o obj/items.o obj/log.o obj/main.o obj/maps.o obj/npcs.o obj/player.o obj/tile.o
+OBJS = obj/attacks.o obj/character.o obj/gui.o obj/interaction.o obj/inventory.o obj/items.o obj/log.o obj/main.o obj/maps.o obj/npcs.o obj/player.o obj/tile.o
 ifeq ($(OS),Windows_NT)
 	LFLAGS += -static-libgcc -static-libstdc++
 	LIBS += -lpdcurses
@@ -35,6 +35,9 @@ obj/character.o: src/character.cpp src/character.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 obj/gui.o: src/gui.cpp src/gui.hpp
+	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
+
+obj/interaction.o: src/interaction.cpp src/interaction.hpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -o $@
 
 obj/inventory.o: src/inventory.cpp src/inventory.hpp
