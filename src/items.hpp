@@ -27,6 +27,7 @@ class Weapon : public Item {
 class Armor : public Item {
     public:
         Armor();
+        unsigned char armor_piece;
         int armor;
 };
 

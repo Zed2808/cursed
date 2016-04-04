@@ -221,13 +221,13 @@ void draw_character_stats(Character character) {
 }
 
 /*
- * draw_player_inventory
+ * player_inventory
  *
- *   Draws inventory of player
+ *   Draws inventory of player and handles player input
  *
  *   player: player object
  */
-void draw_player_inventory(Player player) {
+void player_inventory(Player &player) {
     unsigned int INVHEIGHT = LINES - LOGHEIGHT - 2;
     int INFOWIDTH = 34;
     int INFOHEIGHT;
@@ -310,11 +310,11 @@ void draw_player_inventory(Player player) {
             Weapon * weapon = dynamic_cast<Weapon*>(item);
             mvwprintw(win_info, 2, 1, "%s", weapon->primary.name.c_str());
             mvwprintw(win_info, 3, 1, "Damage: %d", weapon->primary.damage);
-            mvwprintw(win_info, 4, 1, "Penetration: %d%", weapon->primary.penetration * 100);
+            mvwprintw(win_info, 4, 1, "Penetration: %.0f%%", weapon->primary.penetration * 100.0);
             mvwprintw(win_info, 5, 1, "Range: %d spaces", weapon->primary.range);
             mvwprintw(win_info, 7, 1, "%s", weapon->secondary.name.c_str());
             mvwprintw(win_info, 8, 1, "Damage: %d", weapon->secondary.damage);
-            mvwprintw(win_info, 9, 1, "Penetration: %d%", weapon->secondary.penetration * 100);
+            mvwprintw(win_info, 9, 1, "Penetration: %.0f%%", weapon->secondary.penetration * 100.0);
             mvwprintw(win_info, 10, 1, "Range: %d spaces", weapon->secondary.range);
         }
 
@@ -327,6 +327,7 @@ void draw_player_inventory(Player player) {
         /* Refresh windows */
         wrefresh(win_inventory);
         wrefresh(win_info);
+        draw_character_equipslot(player);
 
         /* Get player input */
         input = getch();
@@ -348,13 +349,15 @@ void draw_player_inventory(Player player) {
  *   character: character whose equipslot should be drawn
  */
 void draw_character_equipslot(Character character) {
-    WINDOW *win_character_equipslot = create_newwin(3, 18, (LINES-3), (COLS-18)/2);
+    const int EQUIPSLOT_HEIGHT = 3;
+    WINDOW *win_character_equipslot = create_newwin(3, 18, (LINES-LOGHEIGHT-EQUIPSLOT_HEIGHT-1), (COLS-18)/2);
+    Weapon * weapon = character.equipslot.equipped;
 
     wattron(win_character_equipslot, A_BOLD);
-    mvwprintw(win_character_equipslot, 0, 1, "Equip Slot");
+    mvwprintw(win_character_equipslot, 0, 1, "Equipped");
     wattroff(win_character_equipslot, A_BOLD);
 
-    mvwprintw(win_character_equipslot, 1, 1, "%s", character.equipslot.equipped->name.c_str());
+    mvwprintw(win_character_equipslot, 1, 1, "%s", weapon->name.c_str());
 
     /* Refresh window */
     wrefresh(win_character_equipslot);

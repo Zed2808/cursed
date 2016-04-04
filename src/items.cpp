@@ -9,6 +9,17 @@
  * 02 Armor
  */
 
+/*
+ * Armor pieces:
+ * 00 Helmet
+ * 01 Cuirass
+ * 02 Greaves
+ * 03 Gloves
+ * 04 Boots
+ * 05 Necklace
+ * 06 Ring
+ */
+
 /* 0 - Default Item */
 Item::Item() {
     name = "";
@@ -73,6 +84,7 @@ Armor::Armor() {
     id = 0x06;
     item_type = 0x02;
     weight = 0;
+    armor_piece = 0x00;
     armor = 0;
 }
 
@@ -82,5 +94,6 @@ IronHelmet::IronHelmet() {
     id = 0x07;
     item_type = 0x02;
     weight = 2;
+    armor_piece = 0x00;
     armor = 2;
 }

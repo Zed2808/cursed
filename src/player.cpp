@@ -10,6 +10,7 @@ Player::Player() {
     color_pair = 5;
     row = 0;
     col = 0;
+
     set_endurance(5);
     set_intelligence(5);
     set_agility(5);

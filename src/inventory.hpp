@@ -26,7 +26,7 @@ class Inventory {
 
 class EquipSlot {
     public:
-        Item * equipped;
+        Weapon * equipped;
         Attack attack1;
         Attack attack2;
 

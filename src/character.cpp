@@ -4,7 +4,7 @@
 Character::Character() {
     name = "";
     id = 0xff;
-    str_id = "void";
+    str_id = "";
     level = 0;
     hostile = false;
     symbol = ' ';

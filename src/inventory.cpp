@@ -107,7 +107,7 @@ void Inventory::removeitem(Item * item, int n) {
  * EquipSlot
  */
 EquipSlot::EquipSlot() {
-    equipped = new Item();
+    equipped = new Weapon();
     attack1 = Attack();
     attack2 = Attack();
 }
@@ -133,7 +133,7 @@ void EquipSlot::equip(Inventory &inventory, Weapon * weapon) {
  */
 void EquipSlot::unequip(Inventory &inventory) {
     inventory.additem(equipped, 1);
-    equipped = new Item();
+    equipped = new Weapon();
     attack1 = Attack();
     attack2 = Attack();
 }

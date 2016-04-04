@@ -87,7 +87,7 @@ int main() {
 
         // I: open inventory
         if(input == 'i') {
-            draw_player_inventory(player);
+            player_inventory(player);
         }
 
         // H: print help
@@ -95,9 +95,10 @@ int main() {
             log.write("Quit game: esc\n  Open/close inventory: i\n  Move character: arrow keys");
         }
 
-        // Draw the map and log windows
+        // Draw the rest of the windows
         draw_map(current_map);
         draw_log(log);
+        draw_character_equipslot(player);
 
         // Exit if exit flag was set
         if(exit) break;
