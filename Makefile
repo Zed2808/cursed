@@ -3,6 +3,7 @@
 # 'make clean'  removes all object and executable files
 # 'make run'    make && ./cursed
 # 'make fresh'  make clean && make && ./cursed
+# 'make debug'  compile with -g flag
 #
 
 
@@ -68,11 +69,11 @@ clean:
 	rm -rf $(OBJS) $(EXECUTABLE)
 	@echo ===== Objects files and executable successfully removed. =====
 
-run:
-	make
+run: all
 	./cursed
 
-fresh:
-	make clean
-	make
+fresh: clean all
 	./cursed
+
+debug: CFLAGS += -g
+debug: clean all
