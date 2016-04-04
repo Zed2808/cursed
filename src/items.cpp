@@ -67,11 +67,20 @@ Fork::Fork() {
     secondary = Stab();
 }
 
-/* 6 - Iron Helmet */
-IronHelmet::IronHelmet() {
-    name = "Iron Helmet";
+/* 6 - Default Armor */
+Armor::Armor() {
+    name = "";
     id = 0x06;
     item_type = 0x02;
-    weight 2;
+    weight = 0;
+    armor = 0;
+}
+
+/* 7 - Iron Helmet */
+IronHelmet::IronHelmet() {
+    name = "Iron Helmet";
+    id = 0x07;
+    item_type = 0x02;
+    weight = 2;
     armor = 2;
 }
