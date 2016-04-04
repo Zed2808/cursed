@@ -8,6 +8,7 @@
 class Item {
     public:
         Item();
+        virtual ~Item() {};
         std::string name;
         unsigned char id;
         unsigned char item_type;

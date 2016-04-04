@@ -10,7 +10,6 @@
 #include <string>
 #include "gui.hpp"
 #include "character.hpp"
-#include "log.hpp"
 
 #define LOGHEIGHT 12
 #define INVWIDTH 34
@@ -221,8 +220,17 @@ void draw_character_stats(Character character) {
     wrefresh(win_character_stats);
 }
 
+/*
+ * draw_player_inventory
+ *
+ *   Draws inventory of player
+ *
+ *   player: player object
+ */
 void draw_player_inventory(Player player) {
     unsigned int INVHEIGHT = LINES - LOGHEIGHT - 2;
+    int INFOWIDTH = 34;
+    int INFOHEIGHT;
     WINDOW *win_inventory = create_newwin(INVHEIGHT, INVWIDTH, 1, 1);
 
     /* When scrolling, used as an offset for vector index */
@@ -264,7 +272,7 @@ void draw_player_inventory(Player player) {
             limit = player.inventory.slots.size();
         }
 
-        /* Clear window & redraw border */
+        /* Clear inventory window & redraw border */
         werase(win_inventory);
         box(win_inventory, 0, 0);
         wattron(win_inventory, A_BOLD);
@@ -272,7 +280,7 @@ void draw_player_inventory(Player player) {
         wattroff(win_inventory, A_BOLD);
         mvwprintw(win_inventory, 0, INVWIDTH-12, "%3d/%3d lbs", player.inventory.totalweight, player.get_carryweight());
 
-        /* Print until limit is reached */
+        /* Write inventory window until limit is reached */
         for(unsigned int i = 0; i < limit; i++) {
             /* If for loop has reached item index highlight */
             if(i == highlight - scroll) {
@@ -282,11 +290,49 @@ void draw_player_inventory(Player player) {
             wattroff(win_inventory, A_REVERSE);
         }
 
-        /* Refresh window */
+        /* Set info box height based on item type */
+        switch(player.inventory.slots[highlight-scroll].item->item_type) {
+            case 0x01:
+                INFOHEIGHT = 12;
+                break;
+            default:
+                INFOHEIGHT = 3;
+                break;
+        }
+
+        /* Create info window (could change size: must create new window every time) */
+        WINDOW *win_info = create_newwin(INFOHEIGHT, INFOWIDTH, 1, INVWIDTH+2);
+
+        Item * item = player.inventory.slots[highlight-scroll].item;
+
+        /* If highlighted item is of item_type weapon */
+        if(item->item_type == 0x01) {
+            Weapon * weapon = dynamic_cast<Weapon*>(item);
+            mvwprintw(win_info, 2, 1, "%s", weapon->primary.name.c_str());
+            mvwprintw(win_info, 3, 1, "Damage: %d", weapon->primary.damage);
+            mvwprintw(win_info, 4, 1, "Penetration: %d%", weapon->primary.penetration * 100);
+            mvwprintw(win_info, 5, 1, "Range: %d spaces", weapon->primary.range);
+            mvwprintw(win_info, 7, 1, "%s", weapon->secondary.name.c_str());
+            mvwprintw(win_info, 8, 1, "Damage: %d", weapon->secondary.damage);
+            mvwprintw(win_info, 9, 1, "Penetration: %d%", weapon->secondary.penetration * 100);
+            mvwprintw(win_info, 10, 1, "Range: %d spaces", weapon->secondary.range);
+        }
+
+        /* Print generic item stats */
+        wattron(win_info, A_BOLD);
+        mvwprintw(win_info, 0, 1, "%s", item->name.c_str());
+        wattroff(win_info, A_BOLD);
+        mvwprintw(win_info, 0, INFOWIDTH-8, "%3d lbs", item->weight);
+
+        /* Refresh windows */
         wrefresh(win_inventory);
+        wrefresh(win_info);
 
         /* Get player input */
         input = getch();
+
+        /* Destroy info window */
+        destroy_win(win_info);
     }
 
     /* Destroy window */
