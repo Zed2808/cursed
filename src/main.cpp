@@ -66,16 +66,11 @@ int main() {
     // Place Player onto map
     current_map.place_character(2, 2, player);
 
-    // Display current_map
-    draw_map(current_map);
-
-    // Display log
     log.write("Press 'h' for help.");
-    draw_log(log);
 
-    // Get player input
+    /* Prepare for player input */
     keypad(stdscr, true);
-    int input = getch();
+    int input = 0;
 
     // Do stuff with player input
     bool exit = false;
