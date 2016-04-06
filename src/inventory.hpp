@@ -16,8 +16,8 @@ class Entry {
 
 class Inventory {
     public:
-        int totalweight;
         std::vector<Entry> slots;
+        int totalweight;
 
         Inventory();
         void additem(Item * item, int n);

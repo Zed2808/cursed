@@ -247,6 +247,19 @@ void player_inventory(Player &player) {
 
     /* Until user presses escape */
     while(input != 'i') {
+        /* Create copy of highlighted item */
+        Item * item = player.inventory.slots[highlight-scroll].item;
+
+        /* Equip highlighted item */
+        if(input == 'e') {
+            switch(item->item_type == 0x01) {
+                case 0x01:
+                    Weapon * weapon = dynamic_cast<Weapon*>(item);
+                    player.equipslot.equip(player.inventory, weapon);
+                    break;
+            }
+        }
+
         /* Highlight item */
         if(input == KEY_UP && highlight > 0) {
             highlight--;
@@ -271,6 +284,9 @@ void player_inventory(Player &player) {
         } else {
             limit = player.inventory.slots.size();
         }
+
+        /* Create copy of item again in case of scrolling */
+        item = player.inventory.slots[highlight-scroll].item;
 
         /* Clear inventory window & redraw border */
         werase(win_inventory);
@@ -302,8 +318,6 @@ void player_inventory(Player &player) {
 
         /* Create info window (could change size: must create new window every time) */
         WINDOW *win_info = create_newwin(INFOHEIGHT, INFOWIDTH, 1, INVWIDTH+2);
-
-        Item * item = player.inventory.slots[highlight-scroll].item;
 
         /* If highlighted item is of item_type weapon */
         if(item->item_type == 0x01) {

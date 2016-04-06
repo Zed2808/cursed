@@ -27,7 +27,6 @@ Inventory::Inventory() {
  *
  *   item: item to add
  *   n: number of item to add
- *
  */
 void Inventory::additem(Item * item, int n) {
     /* If no entries exist, simply push new entry */
@@ -90,11 +89,10 @@ void Inventory::removeitem(Item * item, int n) {
     for(unsigned int i = 0; i < slots.size(); i++) {
         /* Existing entry found for item */
         if(slots[i].item->id == item->id) {
-            /* Removing more of an item than is listed in entry */
+            /* Removing more or the same amount of an item than is listed in entry */
             if(n >= slots[i].quantity) {
                 totalweight -= item->weight * slots[i].quantity; /* Only decrement totalweight by weight of items being removed */
-                delete[] slots[i].item;                          /* Delete item before deleting entry */
-                slots.erase(slots.begin() + i);                  /* Remove entire entry at */
+                slots.erase(slots.begin() + i);                  /* Remove entire entry at i */
             } else {
                 totalweight -= item->weight * n;
                 slots[i].quantity -= n;
@@ -119,8 +117,11 @@ EquipSlot::EquipSlot() {
  *   item: item to equip from inventory
  */
 void EquipSlot::equip(Inventory &inventory, Weapon * weapon) {
+    /* Only move item back to inventory if it isn't default weapon */
+    if(equipped->id != 0x01) {
+        inventory.additem(equipped, 1);
+    }
     inventory.removeitem(weapon, 1);
-    delete[] equipped;
     equipped = weapon;
     attack1 = weapon->primary;
     attack2 = weapon->secondary;

@@ -7,20 +7,22 @@
 /* Item */
 class Item {
     public:
-        Item();
-        virtual ~Item() {};
         std::string name;
         unsigned char id;
         unsigned char item_type;
         int weight;
+
+        Item();
+        virtual ~Item() {};
 };
 
 /* Weapons */
 class Weapon : public Item {
     public:
-        Weapon();
         Attack primary;
         Attack secondary;
+
+        Weapon();
 };
 
 /* Armor */

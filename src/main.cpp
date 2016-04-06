@@ -43,19 +43,6 @@ int main() {
     draw_character_stats(player);
     getch();
 
-    // Display & modify player equipslot
-    player.equipslot.equip(player.inventory, Shortsword());
-    draw_character_equipslot(player);
-    draw_character_inventory(player);
-    getch();
-
-    player.equipslot.unequip(player.inventory);
-    draw_character_equipslot(player);
-    draw_character_inventory(player);
-    getch();
-
-    clear_to_border();
-
     */ //END OLD TESTING STUFF
 
     // Load map
