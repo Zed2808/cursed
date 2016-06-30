@@ -252,10 +252,14 @@ void player_inventory(Player &player) {
 
         /* Equip highlighted item */
         if(input == 'e') {
+            /* check highlighted item's type */
             switch(item->item_type == 0x01) {
+                /* weapon */
                 case 0x01:
                     Weapon * weapon = dynamic_cast<Weapon*>(item);
                     player.equipslot.equip(player.inventory, weapon);
+                    /* if equipping the last item in the inventory list, move highlight up one slot */
+                    if(highlight == player.inventory.slots.size()) highlight--;
                     break;
             }
         }
