@@ -253,7 +253,7 @@ void player_inventory(Player &player) {
         /* Equip highlighted item */
         if(input == 'e') {
             /* check highlighted item's type */
-            switch(item->item_type == 0x01) {
+            switch(item->item_type == ItemType::WEAPON) {
                 /* weapon */
                 case 0x01:
                     Weapon * weapon = dynamic_cast<Weapon*>(item);
@@ -312,7 +312,7 @@ void player_inventory(Player &player) {
 
         /* Set info box height based on item type */
         switch(player.inventory.slots[highlight-scroll].item->item_type) {
-            case 0x01:
+            case ItemType::WEAPON:
                 INFOHEIGHT = 12;
                 break;
             default:
@@ -324,7 +324,7 @@ void player_inventory(Player &player) {
         WINDOW *win_info = create_newwin(INFOHEIGHT, INFOWIDTH, 1, INVWIDTH+2);
 
         /* If highlighted item is of item_type weapon */
-        if(item->item_type == 0x01) {
+        if(item->item_type == ItemType::WEAPON) {
             Weapon * weapon = dynamic_cast<Weapon*>(item);
             mvwprintw(win_info, 2, 1, "%s", weapon->primary.name.c_str());
             mvwprintw(win_info, 3, 1, "Damage: %d", weapon->primary.damage);

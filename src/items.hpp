@@ -4,12 +4,29 @@
 #include <string>
 #include "attacks.hpp"
 
+enum class ItemType {
+    UNDEFINED,
+    WEAPON,
+    ARMOR
+};
+
+enum class ArmorSlot {
+    UNDEFINED,
+    HELMET,
+    CUIRASS,
+    GREAVES,
+    GLOVES,
+    BOOTS,
+    NECKLACE,
+    RING
+};
+
 /* Item */
 class Item {
     public:
         std::string name;
         unsigned char id;
-        unsigned char item_type;
+        ItemType item_type;
         int weight;
 
         Item();
@@ -29,7 +46,7 @@ class Weapon : public Item {
 class Armor : public Item {
     public:
         Armor();
-        unsigned char armor_piece;
+        ArmorSlot armor_slot;
         int armor;
 };
 
