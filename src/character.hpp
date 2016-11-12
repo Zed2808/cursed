@@ -45,7 +45,7 @@ class Character {
 
         /* Inventory stuff */
         Inventory inventory;
-        EquipSlot equipslot;
+        WeaponSlot weaponslot;
 
 
         /* Sets & Gets for current stats */

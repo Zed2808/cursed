@@ -24,15 +24,15 @@ class Inventory {
         void removeitem(Item * item, int n);
 };
 
-class EquipSlot {
+class WeaponSlot {
     public:
         Weapon * equipped;
         Attack attack1;
         Attack attack2;
 
-        EquipSlot();
-        void equip(Inventory &inventory, Weapon * Weapon); /* Moves 1 of item from inventory to EquipSlot */
-        void unequip(Inventory &inventory);                /* Moves item in equip slot back to inventory */
+        WeaponSlot();
+        void equip(Inventory &inventory, Weapon * Weapon); /* Moves 1 of item from inventory to WeaponSlot */
+        void unequip(Inventory &inventory);                /* Moves item in weapon slot back to inventory */
 };
 
 #endif

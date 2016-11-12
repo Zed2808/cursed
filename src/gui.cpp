@@ -257,7 +257,7 @@ void player_inventory(Player &player) {
                 /* weapon */
                 case 0x01:
                     Weapon * weapon = dynamic_cast<Weapon*>(item);
-                    player.equipslot.equip(player.inventory, weapon);
+                    player.weaponslot.equip(player.inventory, weapon);
                     /* if equipping the last item in the inventory list, move highlight up one slot */
                     if(highlight == player.inventory.slots.size()) highlight--;
                     break;
@@ -345,7 +345,7 @@ void player_inventory(Player &player) {
         /* Refresh windows */
         wrefresh(win_inventory);
         wrefresh(win_info);
-        draw_character_equipslot(player);
+        draw_character_weaponslot(player);
 
         /* Get player input */
         input = getch();
@@ -359,26 +359,26 @@ void player_inventory(Player &player) {
 }
 
 /*
- * draw_character_equipslot
+ * draw_character_weaponslot
  *
- *   Draws equipslot of character
+ *   Draws weaponslot of character
  *
- *   win_character_equipslot: window on which to draw character's equipslot
- *   character: character whose equipslot should be drawn
+ *   win_character_weaponslot: window on which to draw character's weaponslot
+ *   character: character whose weaponslot should be drawn
  */
-void draw_character_equipslot(Character character) {
+void draw_character_weaponslot(Character character) {
     const int EQUIPSLOT_HEIGHT = 3;
-    WINDOW *win_character_equipslot = create_newwin(3, 18, (LINES-LOGHEIGHT-EQUIPSLOT_HEIGHT-1), (COLS-18)/2);
-    Weapon * weapon = character.equipslot.equipped;
+    WINDOW *win_character_weaponslot = create_newwin(3, 18, (LINES-LOGHEIGHT-EQUIPSLOT_HEIGHT-1), (COLS-18)/2);
+    Weapon * weapon = character.weaponslot.equipped;
 
-    wattron(win_character_equipslot, A_BOLD);
-    mvwprintw(win_character_equipslot, 0, 1, "Equipped");
-    wattroff(win_character_equipslot, A_BOLD);
+    wattron(win_character_weaponslot, A_BOLD);
+    mvwprintw(win_character_weaponslot, 0, 1, "Equipped");
+    wattroff(win_character_weaponslot, A_BOLD);
 
-    mvwprintw(win_character_equipslot, 1, 1, "%s", weapon->name.c_str());
+    mvwprintw(win_character_weaponslot, 1, 1, "%s", weapon->name.c_str());
 
     /* Refresh window */
-    wrefresh(win_character_equipslot);
+    wrefresh(win_character_weaponslot);
 }
 
 /*

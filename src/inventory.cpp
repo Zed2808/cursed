@@ -102,21 +102,21 @@ void Inventory::removeitem(Item * item, int n) {
 }
 
 /*
- * EquipSlot
+ * WeaponSlot
  */
-EquipSlot::EquipSlot() {
+WeaponSlot::WeaponSlot() {
     equipped = new Weapon();
     attack1 = Attack();
     attack2 = Attack();
 }
 
 /* Function: equip
- *   Moves 1 of specified item from inventory to equip slot
+ *   Moves 1 of specified item from inventory to weapon slot
  *
  *   inventory: inventory to remove item from
  *   item: item to equip from inventory
  */
-void EquipSlot::equip(Inventory &inventory, Weapon * weapon) {
+void WeaponSlot::equip(Inventory &inventory, Weapon * weapon) {
     /* Only move item back to inventory if it isn't default weapon */
     if(equipped->id != 0x01) {
         inventory.additem(equipped, 1);
@@ -128,11 +128,11 @@ void EquipSlot::equip(Inventory &inventory, Weapon * weapon) {
 }
 
 /* Function: unequip
- *   Moves item from equip slot back into inventory
+ *   Moves item from weapon slot back into inventory
  *
  *   inventory: inventory to move item back into
  */
-void EquipSlot::unequip(Inventory &inventory) {
+void WeaponSlot::unequip(Inventory &inventory) {
     inventory.additem(equipped, 1);
     equipped = new Weapon();
     attack1 = Attack();

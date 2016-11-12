@@ -85,7 +85,7 @@ int main() {
         // Draw the rest of the windows
         draw_map(current_map);
         draw_log(log);
-        draw_character_equipslot(player);
+        draw_character_weaponslot(player);
 
         // Exit if exit flag was set
         if(exit) break;

@@ -13,7 +13,7 @@ void interact(Character &character, Character &target) {
 
 void attack(Character &attacker, Character &defender) {
     // TODO: Check for range first
-    Attack attack = attacker.equipslot.attack1;
+    Attack attack = attacker.weaponslot.attack1;
     int damage = ceil(attack.damage - (attack.penetration * defender.get_armor()));
     defender.health -= damage;
 }
