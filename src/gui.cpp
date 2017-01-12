@@ -146,7 +146,7 @@ void clear_to_border() {
  *   character: character whose stats should be drawn
  */
 void draw_character_stats(Character character) {
-    WINDOW *win_character_stats = create_newwin(5, 39, LINES-5, 0);
+    WINDOW *win_character_stats = create_newwin(5, 39, LINES-6, COLS/2);
 
     /* Print name */
     wattron(win_character_stats, A_BOLD);
@@ -578,11 +578,11 @@ void draw_map(Map map) {
  */
 void draw_log(Log log) {
     /* Create outer window with border */
-    WINDOW *win_log_border = newwin(LOGHEIGHT, COLS-2, LINES-LOGHEIGHT-1, 1);
+    WINDOW *win_log_border = newwin(LOGHEIGHT, (COLS-2)/2, LINES-LOGHEIGHT-1, 1);
     box(win_log_border, 0, 0);
 
     /* Create inner borderless window to write to */
-    WINDOW *win_log = newwin(10, COLS-6, LINES-LOGHEIGHT, 2);
+    WINDOW *win_log = newwin(LOGHEIGHT-2, (COLS-2)/2-2, LINES-LOGHEIGHT, 2);
 
     int curs_y;
     int curs_x;

@@ -28,13 +28,13 @@ int main() {
     player.inventory.additem(new Mace(), 1);
     player.inventory.additem(new Fork(), 8);
 
-    /* BEGIN OLD TESTING STUFF
+    // BEGIN OLD TESTING STUFF
 
     // Display player stats window
     draw_character_stats(player);
     getch();
 
-    */ //END OLD TESTING STUFF
+    //END OLD TESTING STUFF
 
     // Load map
     map = Map();
