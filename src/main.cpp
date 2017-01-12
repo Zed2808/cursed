@@ -7,29 +7,20 @@
 #endif
 
 #include <ctime>
+#include "flow.hpp"
 #include "gui.hpp"
 #include "player.hpp"
-#include "npcs.hpp"
-#include "maps.hpp"
 #include "log.hpp"
+#include "maps.hpp"
+#include "npcs.hpp"
 
 Log log;
+Player player;
+Map map;
 
 int main() {
-    // Initialize custom GUI stuff
-    init_gui();
-
-    // Draw splash thingy
-    //splash();
-
-    // Create player object
-    Player player;
-
-    // Set player's name
-    set_character_name(player);
-
-    // Set player's main attributes
-    set_main_attributes(player);
+    // Initialize game
+    init_game();
 
     // Add base stuff to player inventory
     player.inventory.additem(new BattleAxe(), 1);
@@ -46,55 +37,24 @@ int main() {
     */ //END OLD TESTING STUFF
 
     // Load map
-    Map current_map = Map();
-    load_map(current_map, "testmap");
+    map = Map();
+    load_map(map, "testmap");
     log.write("Loaded testmap.");
 
     // Place Player onto map
-    current_map.place_character(2, 2, player);
+    map.place_character(2, 2, player);
 
     log.write("Press 'h' for help.");
 
-    /* Prepare for player input */
-    keypad(stdscr, true);
+    /* Get player input */
     int input = 0;
 
-    // Do stuff with player input
-    bool exit = false;
     while(true) {
-        // Escape: exit game confirmation
-        if(input == 27) {
-            exit = confirm_exit();
-        }
+        /* Update game state */
+        if(update_game(input)) break;
 
-        // Arrow keys: move player character
-        if(input == KEY_UP || input == KEY_DOWN || input == KEY_LEFT || input == KEY_RIGHT) {
-            current_map.move_character(player, input);
-        }
-
-        // I: open inventory
-        if(input == 'i') {
-            player_inventory(player);
-        }
-
-        // H: print help
-        if(input == 'h') {
-            log.write("Quit game: esc\n  Open/close inventory: i\n  Move character: arrow keys");
-        }
-
-        // Draw the rest of the windows
-        draw_map(current_map);
-        draw_log(log);
-        draw_character_weaponslot(player);
-
-        // Exit if exit flag was set
-        if(exit) break;
-
-        // Get new input
         input = getch();
     }
-
-    endwin();
 
     return 0;
 }
