@@ -237,7 +237,7 @@ void player_inventory(Player &player) {
     unsigned int scroll = 0;
 
     /* Key input by user */
-    int input;
+    int input = 0;
 
     /* How many entries to write */
     unsigned int limit;
@@ -253,14 +253,12 @@ void player_inventory(Player &player) {
         /* Equip highlighted item */
         if(input == 'e') {
             /* check highlighted item's type */
-            switch(item->item_type == ItemType::WEAPON) {
-                /* weapon */
-                case 0x01:
-                    Weapon * weapon = dynamic_cast<Weapon*>(item);
-                    player.weaponslot.equip(player.inventory, weapon);
-                    /* if equipping the last item in the inventory list, move highlight up one slot */
-                    if(highlight == player.inventory.slots.size()) highlight--;
-                    break;
+            if(item->item_type == ItemType::WEAPON) {
+                Weapon * weapon = dynamic_cast<Weapon*>(item);
+                player.weaponslot.equip(player.inventory, weapon);
+                /* if equipping the last item in the inventory list, move highlight up one slot */
+                if(highlight == player.inventory.slots.size()) highlight--;
+                break;
             }
         }
 
@@ -417,7 +415,7 @@ void set_character_name(Character &character) {
  */
 void set_main_attributes(Character &character) {
     WINDOW *win = create_newwin(11, 26, (LINES-9)/2, (COLS-19)/2);
-    int input;
+    int input = 0;
     int index = 0;
     int points = 10;
     int attributes[7] = {5, 5, 5, 5, 5, 5, 5};
@@ -590,7 +588,7 @@ void draw_log(Log log) {
     int curs_x;
 
     /* Iterate through each log entry */
-    for(std::list<std::string>::iterator it = log.log.begin(); it != log.log.end(); it++) {
+    for(std::list<std::string>::iterator it = log.log.begin(); it != log.log.end(); ++it) {
         std::string s = *it;
         getyx(win_log, curs_y, curs_x);
 
