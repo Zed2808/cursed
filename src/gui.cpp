@@ -146,7 +146,14 @@ void clear_to_border() {
  *   character: character whose stats should be drawn
  */
 void draw_character_stats(Character character) {
-    WINDOW *win_character_stats = create_newwin(5, 39, LINES-6, COLS/2);
+    WINDOW *win_character_stats;
+
+    /* Change position of window if drawing player's stats */
+    if(character.id == 0x00) {
+        win_character_stats = create_newwin(5, 39, LINES-6, COLS/2);
+    } else {
+        win_character_stats = create_newwin(5, 39, LINES-6, COLS-40);
+    }
 
     /* Print name */
     wattron(win_character_stats, A_BOLD);
