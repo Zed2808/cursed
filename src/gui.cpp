@@ -258,7 +258,6 @@ void player_inventory(Player &player) {
                 player.weaponslot.equip(player.inventory, weapon);
                 /* if equipping the last item in the inventory list, move highlight up one slot */
                 if(highlight == player.inventory.slots.size()) highlight--;
-                break;
             }
         }
 
